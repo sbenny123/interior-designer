@@ -10,13 +10,14 @@ import android.provider.Settings;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.interiordesign.main.MainActivity;
+
 /**
  * Helper to ask user for camera permission.
  */
 public class CameraPermissionHelper {
     private final static int CAMERA_REQUEST_CODE = 0; // ID to identify a camera permission request
     private final static String CAMERA_PERMISSION = Manifest.permission.CAMERA; // Permission to use camera
-
 
     /**
      *  Check if camera permission has already been granted.
