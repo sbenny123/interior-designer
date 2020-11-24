@@ -1,0 +1,4 @@
+include ':virocore-release-v_1_17_0'
+include ':virocore-release-v_1_17_0'
+include ':app'
+rootProject.name = "Horizon Interior Designer"
