@@ -16,8 +16,8 @@ import com.viro.core.ViroViewARCore;
 public class MainActivity extends Activity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    protected ViroView viroView; // Used to render 3D content
-    private ARScene arScene; // Allows real and virtual world to be rendered on the camera
+    protected ViroView viroView; // Used to render AR scenes using ARCore API.
+    private ARScene arScene; // Allows real and virtual world to be rendered in front of camera's live feed.
 
     @Override
     /**
@@ -27,54 +27,54 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         viroView = new ViroViewARCore(this, new ViroViewARCore.StartupListener() {
+            /**
+             * Actions to take when ARCore has been installed and initialised,
+             * and the rendering surface has been created.
+             *
+             */
             @Override
             public void onSuccess() {
                 arScene = new ARScene();
 
-                SampleARSceneListener arSceneListener = new SampleARSceneListener(new Runnable() {
+              /*  SampleARSceneListener arSceneListener = new SampleARSceneListener(new Runnable() {
                     @Override
                     public void run() {
                     }
-                });
-                arScene.setListener(arSceneListener);
+                });*/
+              //  arScene.setListener(arSceneListener);
+
                 viroView.setScene(arScene);
             }
 
+            /**
+             * Actions to take when view has failed to initialise.
+             * @param startupError
+             * @param s
+             */
             @Override
             public void onFailure(ViroViewARCore.StartupError startupError, String s) {
 
             }
         });
+
+        setContentView(viroView); // Set's view as activity's content.
     }
 
-    // You can use the ARSceneListener to respond to AR events, including the detection of
-    // anchors
-    private class SampleARSceneListener implements ARScene.Listener {
+
+    /**
+     * Responds to AR events like detection of anchors.
+     */
+    private class ARSceneListener implements ARScene.Listener {
         private Runnable mOnTrackingInitializedRunnable;
         private boolean mInitialized;
-        public SampleARSceneListener(Runnable onTrackingInitializedRunnable) {
+        public ARSceneListener(Runnable onTrackingInitializedRunnable) {
             mOnTrackingInitializedRunnable = onTrackingInitializedRunnable;
             mInitialized = false;
         }
 
-        @Override
-        public void onTrackingUpdated(ARScene.TrackingState trackingState,
-                                      ARScene.TrackingStateReason trackingStateReason) {
-            if (trackingState == ARScene.TrackingState.NORMAL && !mInitialized) {
-                mInitialized = true;
-                if (mOnTrackingInitializedRunnable != null) {
-                    mOnTrackingInitializedRunnable.run();
-                }
-            }
-        }
 
         @Override
-        public void onTrackingInitialized() {
-            // this method is deprecated.
-        }
-
-        @Override
-        public void onAmbientLightUpdate(float lightIntensity, Vector color) {
+        public void onAmbientLightUpdate(float intensity, Vector color) {
             // no-op
         }
 
@@ -84,14 +84,30 @@ public class MainActivity extends Activity {
         }
 
         @Override
+        public void onAnchorRemoved(ARAnchor anchor, ARNode arNode) {
+            // no-op
+        }
+
+        @Override
         public void onAnchorUpdated(ARAnchor anchor, ARNode arNode) {
             // no-op
         }
 
         @Override
-        public void onAnchorRemoved(ARAnchor anchor, ARNode arNode) {
-            // no-op
+        public void onTrackingInitialized() {
+            // this method is deprecated.
         }
+
+        @Override
+        public void onTrackingUpdated(ARScene.TrackingState state, ARScene.TrackingStateReason reason) {
+            if (state == ARScene.TrackingState.NORMAL && !mInitialized) {
+                mInitialized = true;
+                if (mOnTrackingInitializedRunnable != null) {
+                    mOnTrackingInitializedRunnable.run();
+                }
+            }
+        }
+
     }
 
     @Override
