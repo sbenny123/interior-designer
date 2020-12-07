@@ -55,76 +55,13 @@ public class ItemARActivity extends Activity {
             public void onSuccess() {
                 arScene = new ARScene();
 
-                arScene.setListener(new ARScene.Listener() {
-                                        @Override
-                                        public void onTrackingInitialized() {
-
-                                        }
-
-                                        @Override
-                                        public void onTrackingUpdated(ARScene.TrackingState trackingState, ARScene.TrackingStateReason trackingStateReason) {
-
-                                        }
-
-                                        @Override
-                                        public void onAmbientLightUpdate(float v, Vector vector) {
-
-                                        }
-
-                                        @Override
-                                        public void onAnchorFound(ARAnchor arAnchor, ARNode arNode) {
-                                            if (arAnchor.getType() == ARAnchor.Type.PLANE) {
-                                                DirectionalLight light = new DirectionalLight();
-                                                light.setColor(Color.WHITE);
-                                                light.setDirection(new Vector(0, -1, 0));
-                                                light.setShadowOrthographicPosition(new Vector(0, 4, 0));
-                                                light.setShadowOrthographicSize(10);
-                                                light.setShadowNearZ(1);
-                                                light.setShadowFarZ(4);
-                                                light.setCastsShadow(true);
-
-                                                Object3D itemModel = load3DModel();
-
-                                                Material material = new Material();
-                                                material.setLightingModel(Material.LightingModel.LAMBERT);
-                                                material.setShadowMode(Material.ShadowMode.TRANSPARENT);
-
-                                                Quad quad = new Quad(2, 2);
-                                                quad.setMaterials(Arrays.asList(material));
-
-                                                Node quadNode = new Node();
-                                                quadNode.setPosition(new Vector(0, -0.1, 0));
-                                                quadNode.setRotation(new Vector((float) -Math.PI / 2.0f, 0, 0));
-                                                quadNode.setGeometry(quad);
-
-                                                arNode.addLight(light);
-                                                arNode.addChildNode(itemModel);
-                                            }
-
-
-                                        }
-
-                                        @Override
-                                        public void onAnchorUpdated(ARAnchor arAnchor, ARNode arNode) {
-
-                                        }
-
-                                        @Override
-                                        public void onAnchorRemoved(ARAnchor arAnchor, ARNode arNode) {
-
-                                        }
-                                    });
-              /*  SampleARSceneListener arSceneListener = new SampleARSceneListener(new Runnable() {
+                ARSceneListener arSceneListener = new ARSceneListener(new Runnable() {
                     @Override
                     public void run() {
+
                     }
-                });*/
-              //  arScene.setListener(arSceneListener);
-
-                //AmbientLight mMainLight = new AmbientLight(Color.WHITE, 1000.0f);
-                //arScene.getRootNode().addLight(mMainLight);
-
-
+                });
+                arScene.setListener(arSceneListener);
 
                 viroView.setScene(arScene);
             }
@@ -150,11 +87,11 @@ public class ItemARActivity extends Activity {
     private class ARSceneListener implements ARScene.Listener {
         private Runnable mOnTrackingInitializedRunnable;
         private boolean mInitialized;
+
         public ARSceneListener(Runnable onTrackingInitializedRunnable) {
             mOnTrackingInitializedRunnable = onTrackingInitializedRunnable;
             mInitialized = false;
         }
-
 
         @Override
         public void onAmbientLightUpdate(float intensity, Vector color) {
