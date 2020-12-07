@@ -7,31 +7,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.example.horizoninteriordesigner.model.Item;
 import com.viro.core.ARAnchor;
-import com.viro.core.ARHitTestListener;
-import com.viro.core.ARHitTestResult;
 import com.viro.core.ARNode;
 import com.viro.core.ARScene;
 import com.viro.core.AmbientLight;
-import com.viro.core.AnimationTimingFunction;
-import com.viro.core.AnimationTransaction;
 import com.viro.core.AsyncObject3DListener;
-import com.viro.core.DirectionalLight;
-import com.viro.core.Material;
-import com.viro.core.Node;
 import com.viro.core.Object3D;
-import com.viro.core.Quad;
-import com.viro.core.Spotlight;
-import com.viro.core.Surface;
-import com.viro.core.Text;
 import com.viro.core.Vector;
-import com.viro.core.ViroContext;
 import com.viro.core.ViroView;
 import com.viro.core.ViroViewARCore;
 
 import java.lang.ref.WeakReference;
-import java.util.Arrays;
 
 
 public class ItemARActivity extends Activity {
@@ -57,8 +43,13 @@ public class ItemARActivity extends Activity {
             public void onSuccess() {
                 arScene = new ARScene();
 
-                ARSceneListener arSceneListener = new ARSceneListener(this, viroView);
+                load3DModel();
+
+                ARSceneListener arSceneListener = new ARSceneListener(ItemARActivity.this, viroView);
                 arScene.setListener(arSceneListener);
+
+                // Add a light to the scene so our models show up
+                arScene.getRootNode().addLight(new AmbientLight(Color.WHITE, 1000f));
 
                 viroView.setScene(arScene);
             }
@@ -76,7 +67,6 @@ public class ItemARActivity extends Activity {
 
         setContentView(viroView); // Set's view as activity's content.
     }
-
 
     /**
      * Responds to AR events like detection of anchors.
@@ -118,10 +108,12 @@ public class ItemARActivity extends Activity {
         @Override
         public void onTrackingUpdated(ARScene.TrackingState state, ARScene.TrackingStateReason reason) {
             if (state == ARScene.TrackingState.NORMAL && !mInitialized) {
-                mInitialized = true;
-                if (mOnTrackingInitializedRunnable != null) {
-                    mOnTrackingInitializedRunnable.run();
+                Activity activity = mCurrentActivityWeak.get();
+                if (activity == null) {
+                    return;
                 }
+
+                mInitialized = true;
             }
         }
 
@@ -130,7 +122,7 @@ public class ItemARActivity extends Activity {
 
 
 
-    private Object3D load3DModel() {
+    private void load3DModel() {
         Object3D itemModel = new Object3D();
 
         // Load 3D model using URI
@@ -146,7 +138,7 @@ public class ItemARActivity extends Activity {
             }
         });
 
-       return itemModel;
+       arScene.getRootNode().addChildNode(itemModel);
     }
 
     @Override
