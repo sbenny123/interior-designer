@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.example.horizoninteriordesigner.model.Item;
 import com.viro.core.ARAnchor;
@@ -29,6 +30,7 @@ import com.viro.core.ViroContext;
 import com.viro.core.ViroView;
 import com.viro.core.ViroViewARCore;
 
+import java.lang.ref.WeakReference;
 import java.util.Arrays;
 
 
@@ -55,12 +57,7 @@ public class ItemARActivity extends Activity {
             public void onSuccess() {
                 arScene = new ARScene();
 
-                ARSceneListener arSceneListener = new ARSceneListener(new Runnable() {
-                    @Override
-                    public void run() {
-
-                    }
-                });
+                ARSceneListener arSceneListener = new ARSceneListener(this, viroView);
                 arScene.setListener(arSceneListener);
 
                 viroView.setScene(arScene);
@@ -85,11 +82,11 @@ public class ItemARActivity extends Activity {
      * Responds to AR events like detection of anchors.
      */
     private class ARSceneListener implements ARScene.Listener {
-        private Runnable mOnTrackingInitializedRunnable;
+        private WeakReference<Activity> mCurrentActivityWeak;
         private boolean mInitialized;
 
-        public ARSceneListener(Runnable onTrackingInitializedRunnable) {
-            mOnTrackingInitializedRunnable = onTrackingInitializedRunnable;
+        public ARSceneListener(Activity activity, View view) {
+            mCurrentActivityWeak = new WeakReference<Activity>(activity);
             mInitialized = false;
         }
 
@@ -134,18 +131,18 @@ public class ItemARActivity extends Activity {
 
 
     private Object3D load3DModel() {
-        final Object3D itemModel = new Object3D();
+        Object3D itemModel = new Object3D();
 
         // Load 3D model using URI
-       itemModel.loadModel(viroView.getViroContext(), Uri.parse("file:///android_asset/object_lamp.vrx"), Object3D.Type.FBX, new AsyncObject3DListener() {
+       itemModel.loadModel(viroView.getViroContext(), Uri.parse("file:///android_asset/Couch.obj"), Object3D.Type.OBJ, new AsyncObject3DListener() {
             @Override
             public void onObject3DLoaded(Object3D object3D, Object3D.Type type) {
-                Log.i("Viro", "Model success");
+                Log.i("Viro", "Model successfully loaded");
             }
 
             @Override
             public void onObject3DFailed(String error) {
-                Log.e("Viro","Model load failed : " + error);
+                Log.e("Viro","Failed to load model: " + error);
             }
         });
 
