@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Horizon_Interior_Designer.iml" filepath="$PROJECT_DIR$/.idea/modules/Horizon_Interior_Designer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Horizon_Interior_Designer.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Horizon_Interior_Designer.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/arcore_client/Horizon_Interior_Designer.arcore_client.iml" filepath="$PROJECT_DIR$/.idea/modules/arcore_client/Horizon_Interior_Designer.arcore_client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gvr_common/Horizon_Interior_Designer.gvr_common.iml" filepath="$PROJECT_DIR$/.idea/modules/gvr_common/Horizon_Interior_Designer.gvr_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/viro_core/Horizon_Interior_Designer.viro_core.iml" filepath="$PROJECT_DIR$/.idea/modules/viro_core/Horizon_Interior_Designer.viro_core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/virocore-release-v_1_17_0/Horizon_Interior_Designer.virocore-release-v_1_17_0.iml" filepath="$PROJECT_DIR$/.idea/modules/virocore-release-v_1_17_0/Horizon_Interior_Designer.virocore-release-v_1_17_0.iml" />
+    </modules>
+  </component>
+</project>

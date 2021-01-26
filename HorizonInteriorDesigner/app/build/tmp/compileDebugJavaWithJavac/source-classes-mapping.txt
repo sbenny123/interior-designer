@@ -1,0 +1,11 @@
+com/example/horizoninteriordesigner/model/Item.java
+ com.example.horizoninteriordesigner.model.Item
+com/example/horizoninteriordesigner/helpers/CameraPermissionHelper.java
+ com.example.horizoninteriordesigner.helpers.CameraPermissionHelper
+com/example/horizoninteriordesigner/BuildConfig.java
+ com.example.horizoninteriordesigner.BuildConfig
+com/example/horizoninteriordesigner/main/ItemARActivity.java
+ com.example.horizoninteriordesigner.main.ItemARActivity
+ com.example.horizoninteriordesigner.main.ItemARActivity$1
+ com.example.horizoninteriordesigner.main.ItemARActivity$2
+ com.example.horizoninteriordesigner.main.ItemARActivity$ARSceneListener
