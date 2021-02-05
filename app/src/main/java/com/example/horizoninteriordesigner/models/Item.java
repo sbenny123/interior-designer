@@ -5,10 +5,10 @@ package com.example.horizoninteriordesigner.models;
  */
 public class Item {
     public final String name;
-    public final String modelUri;
+    public final String uri;
 
-    public Item(String aName, String aModelUri){
-        name = aName;
-        modelUri = aModelUri;
+    public Item(String name, String uri){
+        this.name = name;
+        this.uri = uri;
     }
 }

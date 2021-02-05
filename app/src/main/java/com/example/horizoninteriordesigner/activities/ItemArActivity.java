@@ -6,28 +6,44 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.horizoninteriordesigner.models.Item;
+import com.example.horizoninteriordesigner.*;
 import com.viro.core.ARAnchor;
+import com.viro.core.ARHitTestListener;
+import com.viro.core.ARHitTestResult;
 import com.viro.core.ARNode;
 import com.viro.core.ARScene;
 import com.viro.core.AmbientLight;
 import com.viro.core.AsyncObject3DListener;
+import com.viro.core.DragListener;
+import com.viro.core.GesturePinchListener;
+import com.viro.core.GestureRotateListener;
 import com.viro.core.Node;
 import com.viro.core.Object3D;
+import com.viro.core.PinchState;
+import com.viro.core.RotateState;
 import com.viro.core.Vector;
+import com.viro.core.ViroView;
 import com.viro.core.ViroViewARCore;
 
 
 public class ItemArActivity extends Activity {
 
     private static final String TAG = ItemArActivity.class.getSimpleName();
-    private ViroViewARCore viroView; // Used to render AR scenes using ARCore API.
+    private ViroView viroView; // Used to render AR scenes using ARCore API.
     private ARScene arScene; // Allows real and virtual world to be rendered in front of camera's live feed.
+
+    private static final float MIN_DISTANCE = 0.2f;
+    private static final float MAX_DISTANCE = 10f;
 
     private Item item = null; // Selected item's details from collection including its Uri
     private Node itemModelNode = null; // Group node container for 3D object item, its lighting, shadow etc.
     private Node crosshairModel = null;
+
+    //private ARHitListener arHitTestListener = null;
 
 
     @Override
@@ -57,6 +73,7 @@ public class ItemArActivity extends Activity {
         });
 
         setContentView(viroView); // Set's view as activity's content.
+        View.inflate(this, R.layout.item_ar_activity, ((ViewGroup) viroView)); // Shows main AR camera page
     }
 
 
@@ -145,8 +162,7 @@ public class ItemArActivity extends Activity {
         ambientLight.setInfluenceBitMask(3); // Used to make light apply to a specific node
         arScene.getRootNode().addLight(ambientLight);
 
-        // Loads the item into the scene
-        load3DModel(arScene);
+        add3DModel(arScene);
 
         viroView.setScene(arScene);
     }
@@ -154,32 +170,41 @@ public class ItemArActivity extends Activity {
 
     /**
      *
-     * @param arScene
      */
-    private void load3DModel(ARScene arScene) {
+    private void add3DModel(ARScene arScene) {
 
         itemModelNode = new Node();
         arScene.getRootNode().addChildNode(itemModelNode);
 
-        // Create 3D object of item and attach to item's group node
         final Object3D itemModel = new Object3D();
         itemModelNode.addChildNode(itemModel);
-        itemModelNode.setPosition(new Vector(0,-1,-1.5));
+        itemModelNode.setPosition(new Vector(0, -1, -1.5));
         itemModelNode.setScale(new Vector(0.9, 0.9, 0.9));
 
 
-        // Load 3D model using URI
+        itemModel.setDragListener(new DragListener() {
+            @Override
+            public void onDrag(int source, Node node, Vector worldLocation, Vector localLocation) {
+
+            }
+        });
+
+        // Load the Android model asynchronously.
         itemModel.loadModel(viroView.getViroContext(), Uri.parse("file:///android_asset/object_lamp.vrx"), Object3D.Type.FBX, new AsyncObject3DListener() {
             @Override
-            public void onObject3DLoaded(Object3D object3D, Object3D.Type type) {
+            public void onObject3DLoaded(final Object3D object, final Object3D.Type type) {
                 Log.i("Viro", "Model successfully loaded");
             }
 
             @Override
             public void onObject3DFailed(String error) {
-                Log.e("Viro","Failed to load model: " + error);
+                Log.e("Viro", "Failed to lo" +
+                        "ad model: " + error);
             }
         });
+
+        // Make the item draggable
+        itemModel.setDragType(Node.DragType.FIXED_TO_WORLD);
 
         itemModelNode.addChildNode(itemModel);
     }
