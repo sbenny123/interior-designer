@@ -66,7 +66,7 @@ public class ArCameraActivity extends Activity {
         });
 
         setContentView(viroView); // Set's view as activity's content.
-        View.inflate(this, R.layout.item_ar_activity, ((ViewGroup) viroView)); // Shows main AR camera page
+        View.inflate(this, R.layout.ar_camera_activity, ((ViewGroup) viroView)); // Shows main AR camera page
     }
 
 
