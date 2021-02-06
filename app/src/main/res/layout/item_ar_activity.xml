@@ -4,26 +4,29 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <RelativeLayout
-        android:layout_gravity="bottom|end"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_gravity="bottom|end"
         android:gravity="center">
+
+        <!-- Icon made by Freepik from www.flaticon.com -->
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_save_photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:contentDescription="TODO"
+            android:contentDescription="Take a photo"
             app:srcCompat="@android:drawable/ic_menu_camera" />
 
-        <!-- "Icon made by Freepik from www.flaticon.com" -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_add_items"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="129dp"
+            android:layout_toRightOf="@id/btn_save_photo"
             android:clickable="true"
+            android:contentDescription="Add items"
             app:srcCompat="@drawable/couch_icon" />
 
     </RelativeLayout>

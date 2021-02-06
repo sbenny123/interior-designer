@@ -7,32 +7,25 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.horizoninteriordesigner.models.Item;
 import com.example.horizoninteriordesigner.*;
 import com.viro.core.ARAnchor;
-import com.viro.core.ARHitTestListener;
-import com.viro.core.ARHitTestResult;
 import com.viro.core.ARNode;
 import com.viro.core.ARScene;
 import com.viro.core.AmbientLight;
 import com.viro.core.AsyncObject3DListener;
 import com.viro.core.DragListener;
-import com.viro.core.GesturePinchListener;
-import com.viro.core.GestureRotateListener;
 import com.viro.core.Node;
 import com.viro.core.Object3D;
-import com.viro.core.PinchState;
-import com.viro.core.RotateState;
 import com.viro.core.Vector;
 import com.viro.core.ViroView;
 import com.viro.core.ViroViewARCore;
 
 
-public class ItemArActivity extends Activity {
+public class ArCameraActivity extends Activity {
 
-    private static final String TAG = ItemArActivity.class.getSimpleName();
+    private static final String TAG = ArCameraActivity.class.getSimpleName();
     private ViroView viroView; // Used to render AR scenes using ARCore API.
     private ARScene arScene; // Allows real and virtual world to be rendered in front of camera's live feed.
 
