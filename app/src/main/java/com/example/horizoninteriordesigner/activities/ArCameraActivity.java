@@ -1,6 +1,5 @@
 package com.example.horizoninteriordesigner.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -14,8 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.horizoninteriordesigner.models.Item;
 import com.example.horizoninteriordesigner.*;
-import com.viro.core.ARAnchor;
-import com.viro.core.ARNode;
 import com.viro.core.ARScene;
 import com.viro.core.AmbientLight;
 import com.viro.core.AsyncObject3DListener;
@@ -70,7 +67,7 @@ public class ArCameraActivity extends AppCompatActivity {
         });
 
         setContentView(viroView); // Set's view as activity's content.
-        View.inflate(this, R.layout.ar_camera_activity, ((ViewGroup) viroView)); // Shows main AR camera page
+        View.inflate(this, R.layout.activity_ar_camera, ((ViewGroup) viroView)); // Shows main AR camera page
     }
 
 

@@ -32,5 +32,7 @@
             android:clickable="true"
             android:contentDescription="Add items"
             app:srcCompat="@drawable/couch_icon" />
+
     </RelativeLayout>
+
 </FrameLayout>

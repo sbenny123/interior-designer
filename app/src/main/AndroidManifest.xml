@@ -2,20 +2,41 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.horizoninteriordesigner">
 
-    <!-- Get permission to use camera -->
-    <uses-permission android:name="android.permission.CAMERA" /> <!-- Limit app visibility in Google Play Store to only ARCore supported devices -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-feature android:name="android.hardware.type.watch" /> <!-- Get permission to use camera -->
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/main_icon"
         android:label="@string/app_name"
-        android:theme="@style/Theme.HorizonInteriorDesigner" >
-    <!-- android:icon="@mipmap/ic_launcher" -->
+        android:theme="@style/Theme.HorizonInteriorDesigner">
+        <uses-library
+            android:name="com.google.android.wearable"
+            android:required="true" />
 
+        <!--
+               Set to true if your app is Standalone, that is, it does not require the handheld
+               app to run.
+        -->
+        <meta-data
+            android:name="com.google.android.wearable.standalone"
+            android:value="true" />
+
+        <activity
+            android:name=".activities.ItemSelectionActivity"
+            android:label="@string/title_activity_item_selection">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- android:icon="@mipmap/ic_launcher" -->
         <meta-data
             android:name="com.viromedia.API_KEY"
             android:value="YOUR_API_KEY_HERE" />
-
         <!--
             "Google Play Services for AR" (ARCore) is to be installed,
             as the app does not include any non-AR features.
@@ -25,12 +46,14 @@
             android:value="required" />
 
         <activity
-            android:name="com.example.horizoninteriordesigner.activities.ArCameraActivity"
+            android:name=".activities.ArCameraActivity"
             android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
