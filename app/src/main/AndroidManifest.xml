@@ -10,20 +10,11 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.HorizonInteriorDesigner">
 
-
-        <activity
-            android:name=".activities.ItemSelection.ItemSelectionActivity"
-            android:label="@string/title_activity_item_selection">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <!-- android:icon="@mipmap/ic_launcher" -->
         <meta-data
             android:name="com.viromedia.API_KEY"
             android:value="YOUR_API_KEY_HERE" />
+
         <!--
             "Google Play Services for AR" (ARCore) is to be installed,
             as the app does not include any non-AR features.
@@ -37,10 +28,15 @@
             android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activities.ItemSelection.ItemSelectionActivity"
+            android:label="@string/title_activity_item_selection">
+        </activity>
+
     </application>
 
 </manifest>

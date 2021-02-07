@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.horizoninteriordesigner.activities.ItemSelection.ItemSelectionActivity;
 import com.example.horizoninteriordesigner.models.Item;
 import com.example.horizoninteriordesigner.*;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.viro.core.ARScene;
 import com.viro.core.AmbientLight;
 import com.viro.core.AsyncObject3DListener;
@@ -113,6 +114,7 @@ public class ArCameraActivity extends AppCompatActivity {
         arScene.getRootNode().addLight(ambientLight);
 
         add3DModel(arScene);
+
         initialiseButtons();
 
 
@@ -124,7 +126,7 @@ public class ArCameraActivity extends AppCompatActivity {
      *
      */
     private void initialiseButtons() {
-        Button selectItemsBtn = findViewById(R.id.btn_select_items);
+        FloatingActionButton selectItemsBtn = findViewById(R.id.btn_select_items);
 
         selectItemsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,7 +166,7 @@ public class ArCameraActivity extends AppCompatActivity {
         });
 
         // Load the Android model asynchronously.
-        itemModel.loadModel(viroView.getViroContext(), Uri.parse("file:///android_asset/object_lamp.vrx"), Object3D.Type.FBX, new AsyncObject3DListener() {
+        itemModel.loadModel(viroView.getViroContext(), Uri.parse("file:///android_asset/model.obj"), Object3D.Type.OBJ, new AsyncObject3DListener() {
             @Override
             public void onObject3DLoaded(final Object3D object, final Object3D.Type type) {
                 Log.i("Viro", "Model successfully loaded");
@@ -172,8 +174,7 @@ public class ArCameraActivity extends AppCompatActivity {
 
             @Override
             public void onObject3DFailed(String error) {
-                Log.e("Viro", "Failed to lo" +
-                        "ad model: " + error);
+                Log.e("Viro", "Failed to load model: " + error);
             }
         });
 
