@@ -4,6 +4,6 @@
     android:id="@+id/item_select_land"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.horizoninteriordesigner.activities.ItemSelectionActivity">
+    tools:context="com.example.horizoninteriordesigner.activities.ItemSelection.ItemSelectionActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

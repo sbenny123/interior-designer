@@ -4,7 +4,7 @@
     android:id="@+id/item_select_port"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.horizoninteriordesigner.activities.ItemSelectionActivity">
+    tools:context="com.example.horizoninteriordesigner.activities.ItemSelection.ItemSelectionActivity">
 
     <GridView
         android:id="@+id/items_grid"

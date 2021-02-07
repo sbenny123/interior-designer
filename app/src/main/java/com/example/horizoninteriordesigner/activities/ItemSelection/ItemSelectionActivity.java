@@ -1,4 +1,4 @@
-package com.example.horizoninteriordesigner.activities;
+package com.example.horizoninteriordesigner.activities.ItemSelection;
 
 import android.os.Bundle;
 

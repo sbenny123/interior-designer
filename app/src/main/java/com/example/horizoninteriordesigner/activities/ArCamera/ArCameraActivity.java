@@ -1,4 +1,4 @@
-package com.example.horizoninteriordesigner.activities;
+package com.example.horizoninteriordesigner.activities.ArCamera;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.horizoninteriordesigner.activities.ItemSelection.ItemSelectionActivity;
 import com.example.horizoninteriordesigner.models.Item;
 import com.example.horizoninteriordesigner.*;
 import com.viro.core.ARScene;
