@@ -1,12 +1,16 @@
 package com.example.horizoninteriordesigner.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.horizoninteriordesigner.models.Item;
 import com.example.horizoninteriordesigner.*;
@@ -23,7 +27,7 @@ import com.viro.core.ViroView;
 import com.viro.core.ViroViewARCore;
 
 
-public class ArCameraActivity extends Activity {
+public class ArCameraActivity extends AppCompatActivity {
 
     private static final String TAG = ArCameraActivity.class.getSimpleName();
     private ViroView viroView; // Used to render AR scenes using ARCore API.
@@ -111,10 +115,34 @@ public class ArCameraActivity extends Activity {
         arScene.getRootNode().addLight(ambientLight);
 
         add3DModel(arScene);
+        initialiseButtons();
+
 
         viroView.setScene(arScene);
     }
 
+
+    /**
+     *
+     */
+    private void initialiseButtons() {
+        Button selectItemsBtn = findViewById(R.id.btn_select_items);
+
+        selectItemsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                launchItemSelectActivity();
+            }
+        });
+    }
+
+    /**
+     *
+     */
+    private void launchItemSelectActivity() {
+        Intent intent = new Intent(this, ItemSelectionActivity.class);
+        startActivity(intent);
+    }
 
     /**
      *
