@@ -97,51 +97,6 @@ public class ArCameraActivity extends Activity {
         viroView.onActivityStopped(this);
     }
 
-
-    /**
-     * Responds to AR events like detection of anchors.
-     */
-    private class ARSceneListener implements ARScene.Listener {
-        private boolean isInitialised;
-
-        public ARSceneListener(Activity activity, View view) {
-            isInitialised = false;
-        }
-
-        @Override
-        public void onAmbientLightUpdate(float intensity, Vector color) {
-            // no-op
-        }
-
-        @Override
-        public void onAnchorFound(ARAnchor anchor, ARNode arNode) {
-            // no-op
-        }
-
-        @Override
-        public void onAnchorRemoved(ARAnchor anchor, ARNode arNode) {
-            // no-op
-        }
-
-        @Override
-        public void onAnchorUpdated(ARAnchor anchor, ARNode arNode) {
-            // no-op
-        }
-
-        @Override
-        public void onTrackingInitialized() {
-            // this method is deprecated.
-        }
-
-        @Override
-        public void onTrackingUpdated(ARScene.TrackingState state, ARScene.TrackingStateReason reason) {
-            if (state == ARScene.TrackingState.NORMAL && !isInitialised) {
-                isInitialised = true;
-            }
-        }
-    }
-
-
     /**
      *
      */
