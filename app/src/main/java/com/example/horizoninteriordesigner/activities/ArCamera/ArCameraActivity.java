@@ -19,8 +19,10 @@ import com.viro.core.ARScene;
 import com.viro.core.AmbientLight;
 import com.viro.core.AsyncObject3DListener;
 import com.viro.core.DragListener;
+import com.viro.core.GestureRotateListener;
 import com.viro.core.Node;
 import com.viro.core.Object3D;
+import com.viro.core.RotateState;
 import com.viro.core.Vector;
 import com.viro.core.ViroView;
 import com.viro.core.ViroViewARCore;
@@ -29,6 +31,7 @@ import com.viro.core.ViroViewARCore;
 public class ArCameraActivity extends AppCompatActivity {
 
     private static final String TAG = ArCameraActivity.class.getSimpleName();
+
     private ViroView viroView; // Used to render AR scenes using ARCore API.
     private ARScene arScene; // Allows real and virtual world to be rendered in front of camera's live feed.
 
@@ -38,8 +41,6 @@ public class ArCameraActivity extends AppCompatActivity {
     private Item item = null; // Selected item's details from collection including its Uri
     private Node itemModelNode = null; // Group node container for 3D object item, its lighting, shadow etc.
     private Node crosshairModel = null;
-
-    //private ARHitListener arHitTestListener = null;
 
 
     @Override
@@ -155,18 +156,18 @@ public class ArCameraActivity extends AppCompatActivity {
         final Object3D itemModel = new Object3D();
         itemModelNode.addChildNode(itemModel);
         itemModelNode.setPosition(new Vector(0, -1, -1.5));
-        itemModelNode.setScale(new Vector(0.9, 0.9, 0.9));
+        itemModelNode.setScale(new Vector(0.1, 0.1, 0.1));
 
 
         itemModel.setDragListener(new DragListener() {
             @Override
             public void onDrag(int source, Node node, Vector worldLocation, Vector localLocation) {
-
+                // No-op
             }
         });
 
         // Load the Android model asynchronously.
-        itemModel.loadModel(viroView.getViroContext(), Uri.parse("file:///android_asset/model.obj"), Object3D.Type.OBJ, new AsyncObject3DListener() {
+        itemModel.loadModel(viroView.getViroContext(), Uri.parse("file:///android_asset/item_blue_couch.obj"), Object3D.Type.OBJ, new AsyncObject3DListener() {
             @Override
             public void onObject3DLoaded(final Object3D object, final Object3D.Type type) {
                 Log.i("Viro", "Model successfully loaded");

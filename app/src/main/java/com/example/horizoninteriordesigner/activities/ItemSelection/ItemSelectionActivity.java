@@ -24,8 +24,9 @@ public class ItemSelectionActivity extends AppCompatActivity {
         itemsGridView = findViewById(R.id.grid_view_items);
 
         ArrayList<Item> itemArrayList = new ArrayList<Item>();
-        itemArrayList.add(new Item("1", "Chair", Uri.parse("file:///android_asset/model.obj")));
-
+        itemArrayList.add(new Item("1", "Desk", Uri.parse("file:///android_asset/Desk_01.obj"), R.drawable.desk_icon));
+        itemArrayList.add(new Item("2", "Office chair", Uri.parse("file:///android_asset/item_office_chair.obj"), R.drawable.item_office_chair));
+        
         ItemSelectionAdapter itemSelectionAdapter = new ItemSelectionAdapter(this, itemArrayList);
         itemsGridView.setAdapter(itemSelectionAdapter);
     }

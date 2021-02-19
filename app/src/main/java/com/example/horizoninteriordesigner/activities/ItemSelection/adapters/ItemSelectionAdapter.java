@@ -38,7 +38,7 @@ public class ItemSelectionAdapter extends ArrayAdapter<Item> {
         ImageView itemImageView = listitemView.findViewById(R.id.iv_item);
         TextView itemTextView = listitemView.findViewById(R.id.tv_item);
 
-        itemImageView.setImageURI(item.getUri());
+        itemImageView.setImageResource(item.getResId());
         itemTextView.setText(item.getName());
 
         return listitemView;
