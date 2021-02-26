@@ -8,12 +8,14 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.horizoninteriordesigner.activities.ItemSelection.ItemSelectionActivity;
 import com.example.horizoninteriordesigner.models.Item;
 import com.example.horizoninteriordesigner.*;
+import com.example.horizoninteriordesigner.models.ItemDB;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.viro.core.ARScene;
 import com.viro.core.AmbientLight;
@@ -31,6 +33,7 @@ import com.viro.core.ViroViewARCore;
 public class ArCameraActivity extends AppCompatActivity {
 
     private static final String TAG = ArCameraActivity.class.getSimpleName();
+    final public static String ITEM_KEY = "item_key";
 
     private ViroView viroView; // Used to render AR scenes using ARCore API.
     private ARScene arScene; // Allows real and virtual world to be rendered in front of camera's live feed.
@@ -38,9 +41,8 @@ public class ArCameraActivity extends AppCompatActivity {
     private static final float MIN_DISTANCE = 0.2f;
     private static final float MAX_DISTANCE = 10f;
 
-    private Item item = null; // Selected item's details from collection including its Uri
+    private Item selectedItem; // Selected item's details from collection including its Uri
     private Node itemModelNode = null; // Group node container for 3D object item, its lighting, shadow etc.
-    private Node crosshairModel = null;
 
 
     @Override
@@ -70,7 +72,21 @@ public class ArCameraActivity extends AppCompatActivity {
         });
 
         setContentView(viroView); // Set's view as activity's content.
-        View.inflate(this, R.layout.activity_ar_camera, ((ViewGroup) viroView)); // Shows main AR camera page
+
+        Intent intent = getIntent();
+        String itemId = intent.getStringExtra(ITEM_KEY);
+
+        if (itemId != null && !itemId.isEmpty()) {
+            ItemDbApplication itemDbApplication = (ItemDbApplication)this.getApplication();
+            ItemDB itemDB = itemDbApplication.getItemDB();
+
+            selectedItem = itemDB.getItemById(itemId);
+
+            Toast.makeText(this, "Selected item is " + selectedItem.getName(), Toast.LENGTH_SHORT).show();
+        }
+
+        // Show main AR camera page
+        View.inflate(this, R.layout.activity_ar_camera, ((ViewGroup) viroView));
     }
 
 
@@ -114,7 +130,9 @@ public class ArCameraActivity extends AppCompatActivity {
         ambientLight.setInfluenceBitMask(3); // Used to make light apply to a specific node
         arScene.getRootNode().addLight(ambientLight);
 
-        add3DModel(arScene);
+        if (selectedItem != null) {
+            add3DModel(arScene);
+        }
 
         initialiseButtons();
 
@@ -167,7 +185,7 @@ public class ArCameraActivity extends AppCompatActivity {
         });
 
         // Load the Android model asynchronously.
-        itemModel.loadModel(viroView.getViroContext(), Uri.parse("file:///android_asset/item_blue_couch.obj"), Object3D.Type.OBJ, new AsyncObject3DListener() {
+        itemModel.loadModel(viroView.getViroContext(), selectedItem.getUri(), Object3D.Type.OBJ, new AsyncObject3DListener() {
             @Override
             public void onObject3DLoaded(final Object3D object, final Object3D.Type type) {
                 Log.i("Viro", "Model successfully loaded");

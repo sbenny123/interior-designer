@@ -18,11 +18,21 @@ import com.example.horizoninteriordesigner.models.Item;
 import java.util.ArrayList;
 
 
-public class ItemSelectionAdapter extends ArrayAdapter<Item> {
+public class ItemSelectionAdapter extends ArrayAdapter {
+
+    private ArrayList<Item> itemArrayList;
 
     public ItemSelectionAdapter(@NonNull Context context, ArrayList<Item> itemArrayList) {
         super(context, 0, itemArrayList);
+
+        this.itemArrayList = itemArrayList;
     }
+
+
+    @Nullable
+    @Override
+    public Item getItem(int position) { return itemArrayList.get(position); }
+
 
     @NonNull
     @Override
