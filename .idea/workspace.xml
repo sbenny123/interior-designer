@@ -43,11 +43,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2e279938-3916-4ccf-933c-f31040dcd49d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/horizoninteriordesigner/activities/ArCamera/ArCameraActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/horizoninteriordesigner/activities/ArCamera/ArCameraActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/horizoninteriordesigner/activities/ItemSelection/ItemSelectionActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/horizoninteriordesigner/activities/ItemSelection/ItemSelectionActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/horizoninteriordesigner/activities/ItemSelection/adapters/ItemSelectionAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/horizoninteriordesigner/activities/ItemSelection/adapters/ItemSelectionAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/horizoninteriordesigner/models/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/horizoninteriordesigner/models/Item.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/horizoninteriordesigner/models/ItemDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/horizoninteriordesigner/models/ItemDB.java" afterDir="false" />
     </list>
@@ -56,7 +52,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[f72d99b]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />

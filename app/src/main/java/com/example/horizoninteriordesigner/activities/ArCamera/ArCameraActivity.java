@@ -16,6 +16,7 @@ import com.example.horizoninteriordesigner.activities.ItemSelection.ItemSelectio
 import com.example.horizoninteriordesigner.models.Item;
 import com.example.horizoninteriordesigner.*;
 import com.example.horizoninteriordesigner.models.ItemDB;
+import com.example.horizoninteriordesigner.models.ItemModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.viro.core.ARScene;
 import com.viro.core.AmbientLight;
@@ -29,6 +30,9 @@ import com.viro.core.Vector;
 import com.viro.core.ViroView;
 import com.viro.core.ViroViewARCore;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class ArCameraActivity extends AppCompatActivity {
 
@@ -41,6 +45,7 @@ public class ArCameraActivity extends AppCompatActivity {
     private static final float MIN_DISTANCE = 0.2f;
     private static final float MAX_DISTANCE = 10f;
 
+    private List<ItemModel> itemModelsList;
     private Item selectedItem; // Selected item's details from collection including its Uri
     private Node itemModelNode = null; // Group node container for 3D object item, its lighting, shadow etc.
 
@@ -51,6 +56,8 @@ public class ArCameraActivity extends AppCompatActivity {
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        itemModelsList = new ArrayList<ItemModel>();
 
         viroView = new ViroViewARCore(this, new ViroViewARCore.StartupListener() {
             /**
@@ -129,13 +136,9 @@ public class ArCameraActivity extends AppCompatActivity {
         ambientLight.setIntensity(400); // Measure of brightness, 1000 is default
         ambientLight.setInfluenceBitMask(3); // Used to make light apply to a specific node
         arScene.getRootNode().addLight(ambientLight);
-
-        if (selectedItem != null) {
-            add3DModel(arScene);
-        }
+        
 
         initialiseButtons();
-
 
         viroView.setScene(arScene);
     }

@@ -39,5 +39,4 @@ public class Item {
     }
 
     public int getResId() { return resId; }
-
 }
