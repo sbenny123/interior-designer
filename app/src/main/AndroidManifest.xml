@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.horizoninteriordesigner">
+    package="com.example.horizoninteriordesigner"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.CAMERA" /> <!-- Get permission to use camera -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+
+    <uses-feature android:glEsVersion="0x00030000" android:required="true" />
+
 
     <application
         android:name=".ItemDbApplication"
@@ -18,11 +23,17 @@
 
         <!--
             "Google Play Services for AR" (ARCore) is to be installed,
-            as the app does not include any non-AR features.
+            as the app requires AR features.
         -->
         <meta-data
             android:name="com.google.ar.core"
-            android:value="required" />
+            android:value="required"
+            />
+
+        <meta-data
+            tools:replace="android:value"
+            android:name="com.google.ar.core.min_apk_version"
+            android:value="210210000" />
 
         <activity
             android:name=".activities.ArCamera.ArCameraActivity"

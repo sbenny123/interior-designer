@@ -18,8 +18,10 @@ public class ItemDB {
     public ArrayList<Item> getItems() { return itemArrayList; }
 
     private void setItems() {
-        itemArrayList.add(new Item("Desk", Uri.parse("file:///android_asset/Desk_01.obj"), R.drawable.desk_icon));
-        itemArrayList.add(new Item("Office chair", Uri.parse("file:///android_asset/item_office_chair.obj"), R.drawable.item_office_chair));
+        itemArrayList.add(new Item("Wooden chair", Uri.parse("file:///android_asset/CHAHIN_WOODEN_CHAIR.gltf"), R.drawable.wooden_chair));
+        itemArrayList.add(new Item("Office chair", Uri.parse("file:///android_asset/model.gltf"), R.drawable.office_chair));
+        itemArrayList.add(new Item("Lamp", Uri.parse("file:///android_asset/Standing_lamp_01.gltf"), R.drawable.standing_lamp));
+        itemArrayList.add(new Item("Table", Uri.parse("file:///android_asset/Table_Large_Rectangular_01.gltf"), R.drawable.rectangle_table));
     }
 
     /**

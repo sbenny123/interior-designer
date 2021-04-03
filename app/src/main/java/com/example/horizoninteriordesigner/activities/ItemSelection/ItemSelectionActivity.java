@@ -8,15 +8,15 @@ import android.widget.GridView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.horizoninteriordesigner.*;
+import com.example.horizoninteriordesigner.ItemDbApplication;
+import com.example.horizoninteriordesigner.R;
 import com.example.horizoninteriordesigner.activities.ArCamera.ArCameraActivity;
 import com.example.horizoninteriordesigner.activities.ItemSelection.adapters.ItemSelectionAdapter;
 import com.example.horizoninteriordesigner.models.Item;
-import com.example.horizoninteriordesigner.models.ItemDB;
 
 import java.util.ArrayList;
 
-import static com.example.horizoninteriordesigner.activities.ArCamera.ArCameraActivity.ITEM_KEY;
+//import static com.example.horizoninteriordesigner.activities.ArCamera.ArCameraActivity.ITEM_KEY;
 
 
 public class ItemSelectionActivity extends AppCompatActivity {
@@ -44,7 +44,7 @@ public class ItemSelectionActivity extends AppCompatActivity {
                 Intent intent = new Intent(ItemSelectionActivity.this, ArCameraActivity.class);
                 Item selectedItem = itemSelectionAdapter.getItem(position);
 
-                intent.putExtra(ITEM_KEY, selectedItem.getId());
+                //intent.putExtra(ITEM_KEY, selectedItem.getId());
                 startActivity(intent);
             }
         });
