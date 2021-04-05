@@ -6,48 +6,38 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.ArraySet;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.horizoninteriordesigner.R;
-import com.google.android.filament.gltfio.Animator;
-import com.google.android.filament.gltfio.FilamentAsset;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
 import com.google.ar.sceneform.AnchorNode;
-import com.google.ar.sceneform.Node;
-import com.google.ar.sceneform.math.Vector3;
-import com.google.ar.sceneform.rendering.Color;
-import com.google.ar.sceneform.rendering.Material;
+import com.google.ar.sceneform.Sceneform;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.rendering.Renderable;
-import com.google.ar.sceneform.rendering.ViewRenderable;
+import com.google.ar.sceneform.rendering.Texture;
 import com.google.ar.sceneform.ux.ArFragment;
+import com.google.ar.sceneform.ux.BaseArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
 
 import java.lang.ref.WeakReference;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-
-import static java.util.concurrent.TimeUnit.SECONDS;
 
 
-public class ArCameraActivity extends AppCompatActivity {
+public class ArCameraActivity extends AppCompatActivity implements BaseArFragment.OnTapArPlaneListener {
     private static final String TAG = ArCameraActivity.class.getSimpleName();
    // final public static String ITEM_KEY = "item_key";
     private static final double MIN_OPENGL_VERSION = 3.0;
 
     private ArFragment arFragment;
     private Renderable renderable;
+    private Texture texture;
 
-    private static class AnimationInstance {
+   /* private static class AnimationInstance {
         Animator animator;
         Long startTime;
         float duration;
@@ -59,9 +49,9 @@ public class ArCameraActivity extends AppCompatActivity {
             this.duration = animator.getAnimationDuration(index);
             this.index = index;
         }
-    }
+    }*/
 
-    private final Set<AnimationInstance> animators = new ArraySet<>();
+   /* private final Set<AnimationInstance> animators = new ArraySet<>();
 
     private final List<Color> colors =
             Arrays.asList(
@@ -73,115 +63,102 @@ public class ArCameraActivity extends AppCompatActivity {
                     new Color(0, 1, 1, 1),
                     new Color(1, 0, 1, 1),
                     new Color(1, 1, 1, 1));
-    private int nextColor = 0;
+    private int nextColor = 0;*/
 
     @Override
-    @SuppressWarnings({"AndroidApiChecker", "FutureReturnValueIgnored"})
     // CompletableFuture requires api level 24
     // FutureReturnValueIgnored is not valid
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-    /*if (!checkIsSupportedDeviceOrFinish(this)) {
-      return;
-    }*/
 
         setContentView(R.layout.activity_ar_camera);
-        arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment);
+        getSupportFragmentManager().addFragmentOnAttachListener((fragmentManager, fragment) -> {
+            if (fragment.getId() == R.id.arFragment) {
+                arFragment = (ArFragment) fragment;
+                arFragment.setOnTapArPlaneListener(ArCameraActivity.this);
+            }
+        });
 
+        if (savedInstanceState == null) {
+            if (Sceneform.isSupported(this)) {
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.arFragment, ArFragment.class, null)
+                        .commit();
+            }
+        }
+
+        loadModel();
+        //loadTexture();
+    }
+
+    public void loadModel() {
         WeakReference<ArCameraActivity> weakActivity = new WeakReference<>(this);
-
         ModelRenderable.builder()
-                .setSource(
-                        this,
-                        Uri.parse(
-                                "https://storage.googleapis.com/ar-answers-in-search-models/static/Tiger/model.glb"))
+                .setSource(this, Uri.parse("models/sofa.glb"))
                 .setIsFilamentGltf(true)
                 .build()
-                .thenAccept(
-                        modelRenderable -> {
-                            Toast toast =
-                                    Toast.makeText(this, "Model rendered", Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
+                .thenAccept(renderable -> {
+                    ArCameraActivity activity = weakActivity.get();
+                    if (activity != null) {
+                        activity.renderable = renderable;
+                    }
+                })
+                .exceptionally(
+                        throwable -> {
+                            Toast.makeText(this, "Unable to load renderable", Toast.LENGTH_LONG).show();
+                            return null;
+                        });
+    }
 
+    public void loadTexture() {
+        WeakReference<ArCameraActivity> weakActivity = new WeakReference<>(this);
+        Texture.builder()
+                .setSampler(Texture.Sampler.builder()
+                        .setMinFilter(Texture.Sampler.MinFilter.LINEAR_MIPMAP_LINEAR)
+                        .setMagFilter(Texture.Sampler.MagFilter.LINEAR)
+                        .setWrapMode(Texture.Sampler.WrapMode.REPEAT)
+                        .build())
+                .setSource(this, Uri.parse("textures/parquet.jpg"))
+                .setUsage(Texture.Usage.COLOR)
+                .build()
+                .thenAccept(
+                        texture -> {
                             ArCameraActivity activity = weakActivity.get();
                             if (activity != null) {
-                                activity.renderable = modelRenderable;
+                                activity.texture = texture;
                             }
                         })
                 .exceptionally(
                         throwable -> {
-                            Toast toast1 =
-                                    Toast.makeText(this, "Unable to load Tiger renderable", Toast.LENGTH_LONG);
-                            toast1.setGravity(Gravity.CENTER, 0, 0);
-                            toast1.show();
+                            Toast.makeText(this, "Unable to load texture", Toast.LENGTH_LONG).show();
                             return null;
                         });
-
-        arFragment.setOnTapArPlaneListener(
-                (HitResult hitResult, Plane plane, MotionEvent motionEvent) -> {
-                    if (renderable == null) {
-                        return;
-                    }
-
-                    // Create the Anchor.
-                    Anchor anchor = hitResult.createAnchor();
-                    AnchorNode anchorNode = new AnchorNode(anchor);
-                    anchorNode.setParent(arFragment.getArSceneView().getScene());
-
-                    // Create the transformable model and add it to the anchor.
-                    TransformableNode model = new TransformableNode(arFragment.getTransformationSystem());
-                    model.setParent(anchorNode);
-                    model.setRenderable(renderable);
-                    model.select();
-
-                    FilamentAsset filamentAsset = model.getRenderableInstance().getFilamentAsset();
-                    if (filamentAsset.getAnimator().getAnimationCount() > 0) {
-                        animators.add(new AnimationInstance(filamentAsset.getAnimator(), 0, System.nanoTime()));
-                    }
-
-                    Color color = colors.get(nextColor);
-                    nextColor++;
-                    for (int i = 0; i < renderable.getSubmeshCount(); ++i) {
-                        Material material = renderable.getMaterial(i);
-                        material.setFloat4("baseColorFactor", color);
-                    }
-
-                    Node tigerTitleNode = new Node();
-                    tigerTitleNode.setParent(model);
-                    tigerTitleNode.setEnabled(false);
-                    tigerTitleNode.setLocalPosition(new Vector3(0.0f, 1.0f, 0.0f));
-                    ViewRenderable.builder()
-                            .setView(this, R.layout.tiger_card_view)
-                            .build()
-                            .thenAccept(
-                                    (renderable) -> {
-                                        tigerTitleNode.setRenderable(renderable);
-                                        tigerTitleNode.setEnabled(true);
-                                    })
-                            .exceptionally(
-                                    (throwable) -> {
-                                        throw new AssertionError("Could not load card view.", throwable);
-                                    }
-                            );
-                });
-
-        arFragment
-                .getArSceneView()
-                .getScene()
-                .addOnUpdateListener(
-                        frameTime -> {
-                            Long time = System.nanoTime();
-                            for (AnimationInstance animator : animators) {
-                                animator.animator.applyAnimation(
-                                        animator.index,
-                                        (float) ((time - animator.startTime) / (double) SECONDS.toNanos(1))
-                                                % animator.duration);
-                                animator.animator.updateBoneMatrices();
-                            }
-                        });
     }
+
+    @Override
+    public void onTapPlane(HitResult hitResult, Plane plane, MotionEvent motionEvent) {
+        if (renderable == null) {
+            Toast.makeText(this, "Loading...", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Create the Anchor.
+        Anchor anchor = hitResult.createAnchor();
+        AnchorNode anchorNode = new AnchorNode(anchor);
+        anchorNode.setParent(arFragment.getArSceneView().getScene());
+
+        // Create the transformable model and add it to the anchor.
+        TransformableNode model = new TransformableNode(arFragment.getTransformationSystem());
+        model.setParent(anchorNode);
+        model.setRenderable(renderable);
+        model.select();
+
+        //RenderableInstance renderableInstance = model.getRenderableInstance();
+        //renderableInstance.getMaterial().setInt("baseColorIndex", 0);
+        //renderableInstance.getMaterial().setTexture("baseColorMap", texture);
+    }
+
 
     /**
      * Returns false and displays an error message if Sceneform can not run, true if Sceneform can run

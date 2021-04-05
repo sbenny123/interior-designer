@@ -1,12 +1,12 @@
 include ':app'
 rootProject.name = "Horizon Interior Designer"
 
-include ':viro_core'
-include ':gvr_common'
-include ':arcore_client'
+//include ':viro_core'
+//include ':gvr_common'
+//include ':arcore_client'
 
-include ':sceneform'
-project(':sceneform').projectDir=new File('sceneformsrc/sceneform')
+//include ':sceneform'
+//project(':sceneform').projectDir=new File('sceneformsrc/sceneform')
 
-include ':sceneformux'
-project(':sceneformux').projectDir=new File('sceneformux/ux')
+//include ':sceneformux'
+//project(':sceneformux').projectDir=new File('sceneformux/ux')
