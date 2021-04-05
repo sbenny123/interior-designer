@@ -3,16 +3,20 @@ package com.example.horizoninteriordesigner.activities.ArCamera;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.horizoninteriordesigner.R;
+import com.example.horizoninteriordesigner.activities.ItemSelection.ItemSelectionActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
@@ -71,8 +75,9 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         setContentView(R.layout.activity_ar_camera);
+        initialiseButtons();
+
         getSupportFragmentManager().addFragmentOnAttachListener((fragmentManager, fragment) -> {
             if (fragment.getId() == R.id.arFragment) {
                 arFragment = (ArFragment) fragment;
@@ -189,6 +194,28 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
         return true;
     }
 
+    /**
+     *
+     */
+    private void initialiseButtons() {
+        FloatingActionButton selectItemsBtn = findViewById(R.id.btn_select_items);
+
+        selectItemsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                launchItemSelectActivity();
+            }
+        });
+    }
+
+    /**
+     *
+     */
+    private void launchItemSelectActivity() {
+        Intent intent = new Intent(this, ItemSelectionActivity.class);
+        startActivity(intent);
+    }
+
     /*private static final String TAG = ArCameraActivity.class.getSimpleName();
     final public static String ITEM_KEY = "item_key";
 
@@ -236,52 +263,6 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
         // Show main AR camera page
         View.inflate(this, R.layout.activity_ar_camera, ((ViewGroup) viroView)); */
 
-      /*  setContentView(R.layout.activity_ar_camera);
-        arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment);
-
-        WeakReference<ArCameraActivity> weakActivity = new WeakReference<>(this);
-
-        ModelRenderable.builder()
-                .setSource(
-                        this,
-                        Uri.parse(
-                                "file:///android_asset/CHAHIN_WOODEN_CHAIR.gltf"))
-                .setIsFilamentGltf(true)
-                .build()
-                .thenAccept(
-                        modelRenderable -> {
-                            ArCameraActivity activity = weakActivity.get();
-                            if (activity != null) {
-                                activity.renderable = modelRenderable;
-                            }
-                        })
-                .exceptionally(
-                        throwable -> {
-                            Toast toast =
-                                    Toast.makeText(this, "Unable to load chair renderable", Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
-                            return null;
-                        });
-
-        arFragment.setOnTapArPlaneListener(
-                (HitResult hitResult, Plane plane, MotionEvent motionEvent) -> {
-                    if (renderable == null) {
-                        return;
-                    }
-
-                    // Create the Anchor.
-                    Anchor anchor = hitResult.createAnchor();
-                    AnchorNode anchorNode = new AnchorNode(anchor);
-                    anchorNode.setParent(arFragment.getArSceneView().getScene());
-
-                    // Create the transformable model and add it to the anchor.
-                    TransformableNode model = new TransformableNode(arFragment.getTransformationSystem());
-                    model.setParent(anchorNode);
-                    model.setRenderable(renderable);
-                    model.select();
-                });
-    }*/
 
     /**
      *
