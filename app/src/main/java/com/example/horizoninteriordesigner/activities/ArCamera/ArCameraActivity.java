@@ -19,7 +19,6 @@ import com.example.horizoninteriordesigner.R;
 import com.example.horizoninteriordesigner.activities.ItemSelection.ItemSelectionActivity;
 import com.example.horizoninteriordesigner.models.Item;
 import com.example.horizoninteriordesigner.models.ItemDB;
-import com.example.horizoninteriordesigner.models.ItemModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.HitResult;
@@ -34,6 +33,7 @@ import com.google.ar.sceneform.ux.BaseArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -47,7 +47,8 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
     private Texture texture;
 
     private Item selectedItem; // Selected item's details from collection including its Uri
-    private List<ItemModel> itemModelsList;
+
+    private List<AnchorNode> anchorNodeList;
 
 
     @Override
@@ -56,8 +57,10 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ItemDbApplication itemDbApplication = (ItemDbApplication)this.getApplication();
-        itemModelsList = itemDbApplication.getItemModelDB();
+        anchorNodeList = new ArrayList<AnchorNode>();
+
+        //ItemDbApplication itemDbApplication = (ItemDbApplication)this.getApplication();
+        //itemModelsList = itemDbApplication.getItemModelDB();
 
         setContentView(R.layout.activity_ar_camera);
         initialiseButtons();
@@ -150,6 +153,18 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
             return;
         }
 
+        if (anchorNodeList.size() > 0) {
+            AnchorNode nodeToRemove = anchorNodeList.get(0);
+
+            arFragment.getArSceneView().getScene().removeChild(nodeToRemove);
+            nodeToRemove.getAnchor().detach();
+            nodeToRemove.setParent(null);
+            nodeToRemove = null;
+            Toast.makeText(ArCameraActivity.this, "Test Delete - anchorNode removed", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(ArCameraActivity.this, "Test Delete - markAnchorNode was null", Toast.LENGTH_SHORT).show();
+        }
+
         // Create the Anchor.
         Anchor anchor = hitResult.createAnchor();
         AnchorNode anchorNode = new AnchorNode(anchor);
@@ -161,9 +176,7 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
         model.setRenderable(renderable);
         model.select();
 
-        //RenderableInstance renderableInstance = model.getRenderableInstance();
-        //renderableInstance.getMaterial().setInt("baseColorIndex", 0);
-        //renderableInstance.getMaterial().setTexture("baseColorMap", texture);
+        anchorNodeList.add(anchorNode);
     }
 
 

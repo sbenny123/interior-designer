@@ -40,24 +40,4 @@ public class ItemDbApplication extends Application {
 
         return itemModelsList;
     }
-
-    /*public ARScene getArScene() {
-        if (arScene == null) {
-            arScene = new ARScene();
-
-            AmbientLight ambientLight = new AmbientLight(); // Light to illuminate node containing item
-
-            // Add lighting to scene to make 3D object appear
-            ambientLight.setColor(Color.WHITE);
-            ambientLight.setIntensity(400); // Measure of brightness, 1000 is default
-            ambientLight.setInfluenceBitMask(3); // Used to make light apply to a specific node
-            arScene.getRootNode().addLight(ambientLight);
-        }
-
-        return arScene;
-    }
-
-    public ViroView getViroView() {
-        return viroView;
-    }*/
 }
