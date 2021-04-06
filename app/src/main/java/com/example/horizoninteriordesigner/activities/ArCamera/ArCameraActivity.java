@@ -14,8 +14,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.horizoninteriordesigner.ItemDbApplication;
 import com.example.horizoninteriordesigner.R;
 import com.example.horizoninteriordesigner.activities.ItemSelection.ItemSelectionActivity;
+import com.example.horizoninteriordesigner.models.Item;
+import com.example.horizoninteriordesigner.models.ItemDB;
+import com.example.horizoninteriordesigner.models.ItemModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.HitResult;
@@ -30,50 +34,30 @@ import com.google.ar.sceneform.ux.BaseArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
 
 
 public class ArCameraActivity extends AppCompatActivity implements BaseArFragment.OnTapArPlaneListener {
     private static final String TAG = ArCameraActivity.class.getSimpleName();
-   // final public static String ITEM_KEY = "item_key";
+    final public static String ITEM_KEY = "item_key";
     private static final double MIN_OPENGL_VERSION = 3.0;
 
     private ArFragment arFragment;
     private Renderable renderable;
     private Texture texture;
 
-   /* private static class AnimationInstance {
-        Animator animator;
-        Long startTime;
-        float duration;
-        int index;
+    private Item selectedItem; // Selected item's details from collection including its Uri
+    private List<ItemModel> itemModelsList;
 
-        AnimationInstance(Animator animator, int index, Long startTime) {
-            this.animator = animator;
-            this.startTime = startTime;
-            this.duration = animator.getAnimationDuration(index);
-            this.index = index;
-        }
-    }*/
-
-   /* private final Set<AnimationInstance> animators = new ArraySet<>();
-
-    private final List<Color> colors =
-            Arrays.asList(
-                    new Color(0, 0, 0, 1),
-                    new Color(1, 0, 0, 1),
-                    new Color(0, 1, 0, 1),
-                    new Color(0, 0, 1, 1),
-                    new Color(1, 1, 0, 1),
-                    new Color(0, 1, 1, 1),
-                    new Color(1, 0, 1, 1),
-                    new Color(1, 1, 1, 1));
-    private int nextColor = 0;*/
 
     @Override
     // CompletableFuture requires api level 24
     // FutureReturnValueIgnored is not valid
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ItemDbApplication itemDbApplication = (ItemDbApplication)this.getApplication();
+        itemModelsList = itemDbApplication.getItemModelDB();
 
         setContentView(R.layout.activity_ar_camera);
         initialiseButtons();
@@ -93,14 +77,32 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
             }
         }
 
-        loadModel();
+        addNewModel();
+      //  loadModel();
         //loadTexture();
     }
 
-    public void loadModel() {
+
+    private void addNewModel() {
+        Intent intent = getIntent();
+        String itemId = intent.getStringExtra(ITEM_KEY);
+
+        if (itemId != null && !itemId.isEmpty()) {
+            ItemDbApplication itemDbApplication = (ItemDbApplication)this.getApplication();
+            ItemDB itemDB = itemDbApplication.getItemDB();
+
+            selectedItem = itemDB.getItemById(itemId);
+
+            //ItemModel itemModel = new ItemModel(selectedItem.getUri());
+            //itemModelsList.add(itemModel);
+            loadModel(selectedItem.getUri());
+        }
+    }
+
+    public void loadModel(Uri itemUri) {
         WeakReference<ArCameraActivity> weakActivity = new WeakReference<>(this);
         ModelRenderable.builder()
-                .setSource(this, Uri.parse("models/sofa.glb"))
+                .setSource(this, itemUri)
                 .setIsFilamentGltf(true)
                 .build()
                 .thenAccept(renderable -> {

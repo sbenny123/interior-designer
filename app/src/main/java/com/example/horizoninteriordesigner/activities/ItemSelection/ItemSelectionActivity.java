@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,7 +16,9 @@ import com.example.horizoninteriordesigner.models.Item;
 
 import java.util.ArrayList;
 
-//import static com.example.horizoninteriordesigner.activities.ArCamera.ArCameraActivity.ITEM_KEY;
+import static com.example.horizoninteriordesigner.activities.ArCamera.ArCameraActivity.ITEM_KEY;
+
+
 
 
 public class ItemSelectionActivity extends AppCompatActivity {
@@ -26,7 +27,7 @@ public class ItemSelectionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
         setContentView(R.layout.activity_item_selection);
         itemsGridView = findViewById(R.id.grid_view_items);
 
@@ -45,7 +46,7 @@ public class ItemSelectionActivity extends AppCompatActivity {
                 Intent intent = new Intent(ItemSelectionActivity.this, ArCameraActivity.class);
                 Item selectedItem = itemSelectionAdapter.getItem(position);
 
-                //intent.putExtra(ITEM_KEY, selectedItem.getId());
+                intent.putExtra(ITEM_KEY, selectedItem.getId());
                 startActivity(intent);
             }
         });
