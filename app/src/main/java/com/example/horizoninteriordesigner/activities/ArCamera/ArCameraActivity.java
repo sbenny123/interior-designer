@@ -20,7 +20,6 @@ import com.example.horizoninteriordesigner.activities.ItemSelection.ItemSelectio
 import com.example.horizoninteriordesigner.models.Item;
 import com.example.horizoninteriordesigner.models.ItemDB;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.ar.core.Anchor;
 import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
 import com.google.ar.sceneform.AnchorNode;
@@ -30,10 +29,8 @@ import com.google.ar.sceneform.rendering.Renderable;
 import com.google.ar.sceneform.rendering.Texture;
 import com.google.ar.sceneform.ux.ArFragment;
 import com.google.ar.sceneform.ux.BaseArFragment;
-import com.google.ar.sceneform.ux.TransformableNode;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -48,7 +45,7 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
 
     private Item selectedItem; // Selected item's details from collection including its Uri
 
-    private List<AnchorNode> anchorNodeList;
+    private List<AnchorNode> modelList;
 
 
     @Override
@@ -62,11 +59,6 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
         setContentView(R.layout.activity_ar_camera);
         initialiseButtons();
 
-        anchorNodeList = new ArrayList<AnchorNode>();
-
-        //ItemDbApplication itemDbApplication = (ItemDbApplication)this.getApplication();
-        //itemModelsList = itemDbApplication.getItemModelDB();
-
         getSupportFragmentManager().addFragmentOnAttachListener((fragmentManager, fragment) -> {
             if (fragment.getId() == R.id.arFragment) {
                 arFragment = (ArFragment) fragment;
@@ -75,6 +67,7 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
         });
 
         if (savedInstanceState == null) {
+            Log.i(TAG, "Saved state is null");
             if (Sceneform.isSupported(this)) {
                 getSupportFragmentManager().beginTransaction()
                         .add(R.id.arFragment, ArFragment.class, null)
@@ -82,11 +75,21 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
             }
         }
 
+        getPreviousModels();
         addNewModel();
-      //  loadModel();
         //loadTexture();
+
     }
 
+
+    private void getPreviousModels() {
+        ItemDbApplication itemDbApplication = (ItemDbApplication)this.getApplication();
+        modelList = itemDbApplication.getModels();
+
+        for (int i = 0; i < modelList.size(); i++) {
+
+        }
+    }
 
     private void addNewModel() {
         Intent intent = getIntent();
@@ -98,8 +101,6 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
 
             selectedItem = itemDB.getItemById(itemId);
 
-            //ItemModel itemModel = new ItemModel(selectedItem.getUri());
-            //itemModelsList.add(itemModel);
             loadModel(selectedItem.getUri());
         }
     }
@@ -148,14 +149,17 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
                         });
     }
 
+    private void addNodeToScene() {
+    }
+
     @Override
     public void onTapPlane(HitResult hitResult, Plane plane, MotionEvent motionEvent) {
         if (renderable == null) {
-            Toast.makeText(this, "Loading...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Select a model", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (anchorNodeList.size() > 0) {
+       /* if (anchorNodeList.size() > 0) {
             AnchorNode nodeToRemove = anchorNodeList.get(0);
 
             arFragment.getArSceneView().getScene().removeChild(nodeToRemove);
@@ -165,9 +169,9 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
             Toast.makeText(ArCameraActivity.this, "Test Delete - anchorNode removed", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(ArCameraActivity.this, "Test Delete - markAnchorNode was null", Toast.LENGTH_SHORT).show();
-        }
+        }*/
 
-        // Create the Anchor.
+      /*  // Create the Anchor.
         Anchor anchor = hitResult.createAnchor();
         AnchorNode anchorNode = new AnchorNode(anchor);
         anchorNode.setParent(arFragment.getArSceneView().getScene());
@@ -176,9 +180,9 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
         TransformableNode model = new TransformableNode(arFragment.getTransformationSystem());
         model.setParent(anchorNode);
         model.setRenderable(renderable);
-        model.select();
+        model.select(); */
 
-        anchorNodeList.add(anchorNode);
+        //anchorNodeList.add(renderable);
     }
 
 

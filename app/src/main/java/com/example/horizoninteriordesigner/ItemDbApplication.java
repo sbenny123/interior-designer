@@ -3,7 +3,7 @@ package com.example.horizoninteriordesigner;
 import android.app.Application;
 
 import com.example.horizoninteriordesigner.models.ItemDB;
-import com.example.horizoninteriordesigner.models.ItemModel;
+import com.google.ar.sceneform.AnchorNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class ItemDbApplication extends Application {
     private ItemDB itemDB;
-    private List<ItemModel> itemModelsList;
+    private List<AnchorNode> modelList;
 
 
     /**
@@ -33,11 +33,11 @@ public class ItemDbApplication extends Application {
      *
      * @return
      */
-    public List<ItemModel> getItemModelDB() {
-        if (itemModelsList == null) {
-            itemModelsList = new ArrayList<ItemModel>();
+    public List<AnchorNode> getModels() {
+        if (modelList == null) {
+            modelList = new ArrayList<AnchorNode>();
         }
 
-        return itemModelsList;
+        return modelList;
     }
 }
