@@ -52,18 +52,20 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
 
 
     @Override
-    // CompletableFuture requires api level 24
-    // FutureReturnValueIgnored is not valid
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (!checkIsSupportedDeviceOrFinish(this)) {
+            Toast.makeText(this, "This device is not supported", Toast.LENGTH_LONG).show();
+        }
+
+        setContentView(R.layout.activity_ar_camera);
+        initialiseButtons();
 
         anchorNodeList = new ArrayList<AnchorNode>();
 
         //ItemDbApplication itemDbApplication = (ItemDbApplication)this.getApplication();
         //itemModelsList = itemDbApplication.getItemModelDB();
-
-        setContentView(R.layout.activity_ar_camera);
-        initialiseButtons();
 
         getSupportFragmentManager().addFragmentOnAttachListener((fragmentManager, fragment) -> {
             if (fragment.getId() == R.id.arFragment) {
@@ -181,36 +183,36 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
 
 
     /**
-     * Returns false and displays an error message if Sceneform can not run, true if Sceneform can run
-     * on this device.
-     *
-     * <p>Sceneform requires Android N on the device as well as OpenGL 3.0 capabilities.
-     *
-     * <p>Finishes the activity if Sceneform can not run
+     * Checks if the device is compatible with Sceneform and ARCore.
+     * Returns true if compatible and false if not.
      */
     public static boolean checkIsSupportedDeviceOrFinish(final Activity activity) {
+
+        // Check Android version is compatible
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-            Log.e(TAG, "Sceneform requires Android N or later");
-            Toast.makeText(activity, "Sceneform requires Android N or later", Toast.LENGTH_LONG).show();
+            Log.e(TAG, "Android N or later is required");
             activity.finish();
             return false;
         }
+
+        // Check Device can work with OpenGL ES version
         String openGlVersionString =
                 ((ActivityManager) activity.getSystemService(Context.ACTIVITY_SERVICE))
                         .getDeviceConfigurationInfo()
                         .getGlEsVersion();
+
         if (Double.parseDouble(openGlVersionString) < MIN_OPENGL_VERSION) {
-            Log.e(TAG, "Sceneform requires OpenGL ES 3.0 later");
-            Toast.makeText(activity, "Sceneform requires OpenGL ES 3.0 or later", Toast.LENGTH_LONG)
-                    .show();
+            Log.e(TAG, "OpenGL ES 3.0 or later is required");
             activity.finish();
             return false;
         }
+
         return true;
     }
 
+
     /**
-     *
+     * Adds click listeners to the buttons so the correct pages are opened/actions are taken when pressed.
      */
     private void initialiseButtons() {
         FloatingActionButton selectItemsBtn = findViewById(R.id.btn_select_items);
@@ -223,8 +225,9 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
         });
     }
 
+
     /**
-     *
+     * Opens the item selection page.
      */
     private void launchItemSelectActivity() {
         Intent intent = new Intent(this, ItemSelectionActivity.class);
