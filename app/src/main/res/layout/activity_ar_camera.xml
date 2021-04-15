@@ -22,14 +22,6 @@
         android:gravity="center">
 
         <!-- Icon made by Freepik from www.flaticon.com -->
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_delete_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:contentDescription="Delete item"
-            android:focusable="true"
-            app:srcCompat="@android:drawable/ic_menu_delete" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_select_items"
@@ -47,6 +39,7 @@
             android:clickable="true"
             android:contentDescription="Take a photo"
             android:focusable="true"
+            android:visibility="invisible"
             app:srcCompat="@android:drawable/ic_menu_camera" />
 
     </RelativeLayout>

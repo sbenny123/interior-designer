@@ -26,6 +26,8 @@ import com.google.ar.core.Anchor;
 import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
 import com.google.ar.sceneform.AnchorNode;
+import com.google.ar.sceneform.HitTestResult;
+import com.google.ar.sceneform.Node;
 import com.google.ar.sceneform.Sceneform;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.rendering.Renderable;
@@ -187,16 +189,26 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
 
         // Create the transformable model and add it to the anchor.
         TransformableNode model = new TransformableNode(arFragment.getTransformationSystem());
-
-
-
         model.setParent(anchorNode);
         model.setRenderable(renderable);
         model.select();
+        model.setOnTapListener((HitTestResult hitTestResult, MotionEvent modelMotionEvent) -> {
+            if (hitTestResult.getNode() != null) {
+                Log.i(TAG, "Node is not null");
 
+                Node modelNode = hitTestResult.getNode();
+
+                Renderable selectedRenderable = modelNode.getRenderable().makeCopy();
+
+                //selectedRenderable.setMaterial();
+                //selectedRenderable.getMaterial().setFloat3("baseColourTint", new Color(android.graphics.Color.rgb(255, 0, 0)));
+
+               // modelNode.setRenderable(selectedRenderable);
+            }
+        });
+        
         modelList.add(anchorNode);
     }
-
 
     /**
      * Checks if the device is compatible with Sceneform and ARCore.
@@ -232,16 +244,12 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
      */
     private void initialiseButtons() {
         FloatingActionButton selectItemsBtn = findViewById(R.id.btn_select_items);
-        FloatingActionButton
         selectItemsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 launchItemSelectActivity();
             }
         });
-
-
-
     }
 
 
@@ -252,116 +260,5 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
         Intent intent = new Intent(this, ItemSelectionActivity.class);
         startActivity(intent);
     }
-
-
-   /* protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);*/
-
-        //ItemDbApplication itemDbApplication = (ItemDbApplication)this.getApplication();
-        //itemModelsList = itemDbApplication.getItemModelDB();
-
-        /*viroView = new ViroViewARCore(this, new ViroViewARCore.StartupListener() {
-            /**
-             * Actions to take when ARCore has been installed and initialised,
-             * and the rendering surface has been created.
-             */
-            /*@Override
-            public void onSuccess() {
-                displayARScene();
-            }*/
-
-            /**
-             * Actions to take when view has failed to initialise.
-             */
-            /*@Override
-            public void onFailure(ViroViewARCore.StartupError startupError, String errorMsg) {
-                Log.e(TAG, "Failed to display AR scene: " + errorMsg);
-            }
-        });
-
-        setContentView(viroView); // Set's view as activity's content.
-
-        // Show main AR camera page
-        View.inflate(this, R.layout.activity_ar_camera, ((ViewGroup) viroView)); */
-
-
-    /**
-     *
-     */
-   /* private void displayARScene() {
-        arScene = new ARScene();
-
-        AmbientLight ambientLight = new AmbientLight(); // Light to illuminate node containing item
-
-        // Add lighting to scene to make 3D object appear
-        ambientLight.setColor(Color.WHITE);
-        ambientLight.setIntensity(400); // Measure of brightness, 1000 is default
-        ambientLight.setInfluenceBitMask(3); // Used to make light apply to a specific node
-        arScene.getRootNode().addLight(ambientLight);
-
-        addNewModel(arScene);
-        initialiseButtons();
-
-        viroView.setScene(arScene);
-    }*/
-
-
-    /**
-     *
-     */
-    /*private void addNewModel(ARScene arScene) {
-        Intent intent = getIntent();
-        String itemId = intent.getStringExtra(ITEM_KEY);
-
-        if (itemId != null && !itemId.isEmpty()) {
-            ItemDbApplication itemDbApplication = (ItemDbApplication)this.getApplication();
-            ItemDB itemDB = itemDbApplication.getItemDB();
-
-            selectedItem = itemDB.getItemById(itemId);
-
-            ItemModel itemModel = new ItemModel(selectedItem.getUri());
-            itemModel.add3DModel(viroView, arScene);
-            itemModelsList.add(itemModel);
-        }
-    }*/
-
-    /**
-     *
-     */
-    /*private void add3DModel(ARScene arScene) {
-        itemModelNode = new Node();
-        arScene.getRootNode().addChildNode(itemModelNode);
-
-        final Object3D itemModel = new Object3D();
-        itemModelNode.addChildNode(itemModel);
-        itemModelNode.setPosition(new Vector(0, -1, -1.5));
-        itemModelNode.setScale(new Vector(0.1, 0.1, 0.1));
-
-
-        itemModel.setDragListener(new DragListener() {
-            @Override
-            public void onDrag(int source, Node node, Vector worldLocation, Vector localLocation) {
-                // No-op
-            }
-        });
-
-        // Load the Android model asynchronously.
-        itemModel.loadModel(viroView.getViroContext(), selectedItem.getUri(), Object3D.Type.OBJ, new AsyncObject3DListener() {
-            @Override
-            public void onObject3DLoaded(final Object3D object, final Object3D.Type type) {
-                Log.i("Viro", "Model successfully loaded");
-            }
-
-            @Override
-            public void onObject3DFailed(String error) {
-                Log.e("Viro", "Failed to load model: " + error);
-            }
-        });
-
-        // Make the item draggable
-        itemModel.setDragType(Node.DragType.FIXED_TO_WORLD);
-
-        itemModelNode.addChildNode(itemModel);
-    }*/
 }
 
