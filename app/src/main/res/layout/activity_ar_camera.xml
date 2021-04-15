@@ -10,7 +10,9 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/arFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" >
+
+    </androidx.fragment.app.FragmentContainerView>
 
     <RelativeLayout
         android:id="@+id/bottom_frame_controls"
@@ -21,22 +23,31 @@
 
         <!-- Icon made by Freepik from www.flaticon.com -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_save_photo"
+            android:id="@+id/btn_delete_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:contentDescription="Take a photo"
-            app:srcCompat="@android:drawable/ic_menu_camera" />
+            android:contentDescription="Delete item"
+            android:focusable="true"
+            app:srcCompat="@android:drawable/ic_menu_delete" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_select_items"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="129dp"
-            android:layout_toRightOf="@id/btn_save_photo"
             android:clickable="true"
             android:contentDescription="Add items"
+            android:focusable="true"
             app:srcCompat="@drawable/couch_icon" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_save_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:contentDescription="Take a photo"
+            android:focusable="true"
+            app:srcCompat="@android:drawable/ic_menu_camera" />
 
     </RelativeLayout>
 

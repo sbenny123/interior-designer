@@ -12,7 +12,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.horizoninteriordesigner.ItemDbApplication;
 import com.example.horizoninteriordesigner.R;
@@ -20,6 +22,7 @@ import com.example.horizoninteriordesigner.activities.ItemSelection.ItemSelectio
 import com.example.horizoninteriordesigner.models.Item;
 import com.example.horizoninteriordesigner.models.ItemDB;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.ar.core.Anchor;
 import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
 import com.google.ar.sceneform.AnchorNode;
@@ -29,6 +32,7 @@ import com.google.ar.sceneform.rendering.Renderable;
 import com.google.ar.sceneform.rendering.Texture;
 import com.google.ar.sceneform.ux.ArFragment;
 import com.google.ar.sceneform.ux.BaseArFragment;
+import com.google.ar.sceneform.ux.TransformableNode;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -52,6 +56,8 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
         if (!checkIsSupportedDeviceOrFinish(this)) {
             Toast.makeText(this, "This device is not supported", Toast.LENGTH_LONG).show();
         }
@@ -59,7 +65,8 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
         setContentView(R.layout.activity_ar_camera);
         initialiseButtons();
 
-        getSupportFragmentManager().addFragmentOnAttachListener((fragmentManager, fragment) -> {
+
+        fragmentManager.addFragmentOnAttachListener((afragmentManager, fragment) -> {
             if (fragment.getId() == R.id.arFragment) {
                 arFragment = (ArFragment) fragment;
                 arFragment.setOnTapArPlaneListener(ArCameraActivity.this);
@@ -69,8 +76,8 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
         if (savedInstanceState == null) {
             Log.i(TAG, "Saved state is null");
             if (Sceneform.isSupported(this)) {
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.arFragment, ArFragment.class, null)
+               fragmentManager.beginTransaction()
+                        .replace(R.id.arFragment, ArFragment.class, null)
                         .commit();
             }
         }
@@ -81,14 +88,16 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
 
     }
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+
 
     private void getPreviousModels() {
         ItemDbApplication itemDbApplication = (ItemDbApplication)this.getApplication();
         modelList = itemDbApplication.getModels();
-
-        for (int i = 0; i < modelList.size(); i++) {
-
-        }
     }
 
     private void addNewModel() {
@@ -171,18 +180,21 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
             Toast.makeText(ArCameraActivity.this, "Test Delete - markAnchorNode was null", Toast.LENGTH_SHORT).show();
         }*/
 
-      /*  // Create the Anchor.
+        // Create the Anchor.
         Anchor anchor = hitResult.createAnchor();
         AnchorNode anchorNode = new AnchorNode(anchor);
         anchorNode.setParent(arFragment.getArSceneView().getScene());
 
         // Create the transformable model and add it to the anchor.
         TransformableNode model = new TransformableNode(arFragment.getTransformationSystem());
+
+
+
         model.setParent(anchorNode);
         model.setRenderable(renderable);
-        model.select(); */
+        model.select();
 
-        //anchorNodeList.add(renderable);
+        modelList.add(anchorNode);
     }
 
 
@@ -220,13 +232,16 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
      */
     private void initialiseButtons() {
         FloatingActionButton selectItemsBtn = findViewById(R.id.btn_select_items);
-
+        FloatingActionButton
         selectItemsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 launchItemSelectActivity();
             }
         });
+
+
+
     }
 
 
@@ -238,23 +253,7 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
         startActivity(intent);
     }
 
-    /*private static final String TAG = ArCameraActivity.class.getSimpleName();
-    final public static String ITEM_KEY = "item_key";
 
-    private ArFragment arFragment;
-    private Renderable renderable;*/
-
-   // private ViroView viroView; // Used to render AR scenes using ARCore API.
-   // private ARScene arScene; // Allows real and virtual world to be rendered in front of camera's live feed.
-
-    //private List<ItemModel> itemModelsList;
-    //private Item selectedItem; // Selected item's details from collection including its Uri
-
-  //  @Override
-   // @SuppressWarnings({"AndroidApiChecker", "FutureReturnValueIgnored"})
-    /**
-     *
-     */
    /* protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);*/
 
@@ -324,29 +323,6 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
             itemModel.add3DModel(viroView, arScene);
             itemModelsList.add(itemModel);
         }
-    }*/
-
-
-    /**
-     *
-     */
-    /*private void initialiseButtons() {
-        FloatingActionButton selectItemsBtn = findViewById(R.id.btn_select_items);
-
-        selectItemsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                launchItemSelectActivity();
-            }
-        });
-    }*/
-
-    /**
-     *
-     */
-    /*private void launchItemSelectActivity() {
-        Intent intent = new Intent(this, ItemSelectionActivity.class);
-        startActivity(intent);
     }*/
 
     /**
