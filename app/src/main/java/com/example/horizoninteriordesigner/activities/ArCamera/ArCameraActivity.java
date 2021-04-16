@@ -29,11 +29,9 @@ import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.HitTestResult;
 import com.google.ar.sceneform.Node;
 import com.google.ar.sceneform.Scene;
-import com.google.ar.sceneform.SceneView;
 import com.google.ar.sceneform.Sceneform;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.rendering.Renderable;
-import com.google.ar.sceneform.rendering.Texture;
 import com.google.ar.sceneform.ux.ArFragment;
 import com.google.ar.sceneform.ux.BaseArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
@@ -49,10 +47,11 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
 
     private ArFragment arFragment;
     private Renderable renderable;
-    private Texture texture;
+    //private Texture texture;
 
     private Item selectedItem; // Selected item's details from collection including its Uri
 
+    private List<Anchor> anchorList;
     private List<AnchorNode> modelList;
 
 
@@ -60,37 +59,40 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager(); // Performs actions on app's fragments
 
         if (!checkIsSupportedDeviceOrFinish(this)) {
             Toast.makeText(this, "This device is not supported", Toast.LENGTH_LONG).show();
         }
 
+
         setContentView(R.layout.activity_ar_camera);
         initialiseButtons();
-
-
-        fragmentManager.addFragmentOnAttachListener((afragmentManager, fragment) -> {
-            if (fragment.getId() == R.id.arFragment) {
-                arFragment = (ArFragment) fragment;
-                arFragment.setOnTapArPlaneListener(ArCameraActivity.this);
-                arFragment.setOnSessionInitializationListener((session -> {
-                    SceneView sceneView = arFragment.getArSceneView();
-
-                    getPreviousModels();
-                }));
-               // addNewModel();
-            }
-        });
 
         if (savedInstanceState == null) {
             Log.i(TAG, "Saved state is null");
             if (Sceneform.isSupported(this)) {
                fragmentManager.beginTransaction()
-                        .replace(R.id.arFragment, ArFragment.class, null)
-                        .commit();
+                       .add(R.id.arFragment, ArFragment.class, null)
+                       //.addToBackStack(null)
+                       .commit();
             }
+
         }
+        /*else {
+            arFragment = (ArFragment) getSupportFragmentManager().getFragment(savedInstanceState, "arFragment");
+        }*/
+
+        fragmentManager.addFragmentOnAttachListener((afragmentManager, fragment) -> {
+            if (fragment.getId() == R.id.arFragment) {
+                arFragment = (ArFragment) fragment;
+                arFragment.setOnTapArPlaneListener(ArCameraActivity.this);
+                /*arFragment.setOnSessionInitializationListener((session -> {
+                    SceneView sceneView = arFragment.getArSceneView();
+                    // getPreviousModels();
+                }));*/
+            }
+        });
 
         addNewModel();
         //loadTexture();
@@ -99,24 +101,37 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
+
+        getSupportFragmentManager().putFragment(outState, "arFragment", arFragment);
     }
 
 
 
     private void getPreviousModels() {
         ItemDbApplication itemDbApplication = (ItemDbApplication)this.getApplication();
-        modelList = itemDbApplication.getModels();
+        //modelList = itemDbApplication.getModels();
+        anchorList = itemDbApplication.getAnchors();
 
          Scene scene = arFragment.getArSceneView().getScene();
 
-       for (int i = 0; i < modelList.size(); i++) {
-           modelList.get(i).setParent(scene);
-           scene.addChild(modelList.get(i));
+       /*for (int i = 0; i < modelList.size(); i++) {
+           // modelList.get(i).setParent(scene);
+          // scene.addChild(modelList.get(i));
+        }*/
+
+        for (int i = 0; i < anchorList.size(); i++) {
+            AnchorNode anchorNode = new AnchorNode(anchorList.get(i));
+            anchorNode.setParent(arFragment.getArSceneView().getScene());
+
+            // Create the transformable model and add it to the anchor.
+            TransformableNode model = new TransformableNode(arFragment.getTransformationSystem());
+            model.setParent(anchorNode);
+            model.setRenderable(renderable);
+            model.select();
         }
     }
 
     private void addNewModel() {
-        ArFragment fragmen1 = arFragment;
         Intent intent = getIntent();
         String itemId = intent.getStringExtra(ITEM_KEY);
 
@@ -220,6 +235,7 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
         });
 
         modelList.add(anchorNode);
+       // anchorList.add(anchor);
     }
 
     /**

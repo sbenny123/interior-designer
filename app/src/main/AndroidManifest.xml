@@ -38,8 +38,7 @@
             android:value="210210000" />
 
         <activity
-            android:name=".activities.ArCamera.ArCameraActivity"
-            android:configChanges="orientation|screenSize">
+            android:name=".activities.ArCamera.ArCameraActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
