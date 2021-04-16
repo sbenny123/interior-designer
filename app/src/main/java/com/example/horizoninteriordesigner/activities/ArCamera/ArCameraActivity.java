@@ -28,7 +28,10 @@ import com.google.ar.core.Plane;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.HitTestResult;
 import com.google.ar.sceneform.Node;
+<<<<<<< HEAD
 import com.google.ar.sceneform.Scene;
+=======
+>>>>>>> parent of b7d3931 (Add previous nodes to scene)
 import com.google.ar.sceneform.Sceneform;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.rendering.Renderable;
@@ -87,6 +90,7 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
             if (fragment.getId() == R.id.arFragment) {
                 arFragment = (ArFragment) fragment;
                 arFragment.setOnTapArPlaneListener(ArCameraActivity.this);
+<<<<<<< HEAD
                 /*arFragment.setOnSessionInitializationListener((session -> {
                     SceneView sceneView = arFragment.getArSceneView();
                     // getPreviousModels();
@@ -94,8 +98,24 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
             }
         });
 
+=======
+            }
+        });
+
+        if (savedInstanceState == null) {
+            Log.i(TAG, "Saved state is null");
+            if (Sceneform.isSupported(this)) {
+               fragmentManager.beginTransaction()
+                        .replace(R.id.arFragment, ArFragment.class, null)
+                        .commit();
+            }
+        }
+
+        getPreviousModels();
+>>>>>>> parent of b7d3931 (Add previous nodes to scene)
         addNewModel();
         //loadTexture();
+
     }
 
     @Override
@@ -109,6 +129,7 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
 
     private void getPreviousModels() {
         ItemDbApplication itemDbApplication = (ItemDbApplication)this.getApplication();
+<<<<<<< HEAD
         //modelList = itemDbApplication.getModels();
         anchorList = itemDbApplication.getAnchors();
 
@@ -129,6 +150,9 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
             model.setRenderable(renderable);
             model.select();
         }
+=======
+        modelList = itemDbApplication.getModels();
+>>>>>>> parent of b7d3931 (Add previous nodes to scene)
     }
 
     private void addNewModel() {
@@ -164,7 +188,7 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
                         });
     }
 
-    /*public void loadTexture() {
+    public void loadTexture() {
         WeakReference<ArCameraActivity> weakActivity = new WeakReference<>(this);
         Texture.builder()
                 .setSampler(Texture.Sampler.builder()
@@ -187,8 +211,10 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
                             Toast.makeText(this, "Unable to load texture", Toast.LENGTH_LONG).show();
                             return null;
                         });
-    }*/
+    }
 
+    private void addNodeToScene() {
+    }
 
     @Override
     public void onTapPlane(HitResult hitResult, Plane plane, MotionEvent motionEvent) {
@@ -233,7 +259,7 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
                // modelNode.setRenderable(selectedRenderable);
             }
         });
-
+        
         modelList.add(anchorNode);
        // anchorList.add(anchor);
     }

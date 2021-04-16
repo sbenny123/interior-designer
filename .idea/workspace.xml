@@ -52,7 +52,10 @@
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/horizoninteriordesigner/ItemDbApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/horizoninteriordesigner/ItemDbApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/horizoninteriordesigner/activities/ArCamera/ArCameraActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/horizoninteriordesigner/activities/ArCamera/ArCameraActivity.java" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout-land/activity_ar_camera.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout-land/activity_ar_camera.xml" afterDir="false" />
+=======
+>>>>>>> parent of b7d3931 (Add previous nodes to scene)
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_ar_camera.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_ar_camera.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -301,6 +304,7 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1615306541139" />
+<<<<<<< HEAD
     <state width="1491" height="360" key="GridCell.Tab.0.bottom" timestamp="1618602870578">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -337,6 +341,44 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1491" height="360" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618602870579" />
+=======
+    <state width="1491" height="144" key="GridCell.Tab.0.bottom" timestamp="1618483936943">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1491" height="144" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483936943" />
+    <state width="1875" height="280" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612970359640" />
+    <state width="1491" height="144" key="GridCell.Tab.0.center" timestamp="1618483936943">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1491" height="144" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483936943" />
+    <state width="1875" height="280" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612970359640" />
+    <state width="1491" height="144" key="GridCell.Tab.0.left" timestamp="1618483936943">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1491" height="144" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483936943" />
+    <state width="1875" height="280" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612970359639" />
+    <state width="1491" height="144" key="GridCell.Tab.0.right" timestamp="1618483936943">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1491" height="144" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483936943" />
+    <state width="1875" height="280" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612970359640" />
+    <state width="1491" height="481" key="GridCell.Tab.1.bottom" timestamp="1618483940406">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1491" height="481" key="GridCell.Tab.1.bottom/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483940406" />
+    <state width="1491" height="481" key="GridCell.Tab.1.center" timestamp="1618483940406">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1491" height="481" key="GridCell.Tab.1.center/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483940406" />
+    <state width="1491" height="481" key="GridCell.Tab.1.left" timestamp="1618483940406">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1491" height="481" key="GridCell.Tab.1.left/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483940406" />
+    <state width="1491" height="481" key="GridCell.Tab.1.right" timestamp="1618483940406">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1491" height="481" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483940406" />
+>>>>>>> parent of b7d3931 (Add previous nodes to scene)
     <state x="277" y="57" key="SettingsEditor" timestamp="1614885231782">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -358,6 +400,7 @@
     </state>
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1612527531603" />
   </component>
+<<<<<<< HEAD
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -369,4 +412,6 @@
       </breakpoints>
     </breakpoint-manager>
   </component>
+=======
+>>>>>>> parent of b7d3931 (Add previous nodes to scene)
 </project>
