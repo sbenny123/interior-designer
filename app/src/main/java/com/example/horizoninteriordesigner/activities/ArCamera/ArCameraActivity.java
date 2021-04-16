@@ -28,6 +28,8 @@ import com.google.ar.core.Plane;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.HitTestResult;
 import com.google.ar.sceneform.Node;
+import com.google.ar.sceneform.Scene;
+import com.google.ar.sceneform.SceneView;
 import com.google.ar.sceneform.Sceneform;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.rendering.Renderable;
@@ -72,6 +74,12 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
             if (fragment.getId() == R.id.arFragment) {
                 arFragment = (ArFragment) fragment;
                 arFragment.setOnTapArPlaneListener(ArCameraActivity.this);
+                arFragment.setOnSessionInitializationListener((session -> {
+                    SceneView sceneView = arFragment.getArSceneView();
+
+                    getPreviousModels();
+                }));
+               // addNewModel();
             }
         });
 
@@ -84,10 +92,8 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
             }
         }
 
-        getPreviousModels();
         addNewModel();
         //loadTexture();
-
     }
 
     @Override
@@ -100,9 +106,17 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
     private void getPreviousModels() {
         ItemDbApplication itemDbApplication = (ItemDbApplication)this.getApplication();
         modelList = itemDbApplication.getModels();
+
+         Scene scene = arFragment.getArSceneView().getScene();
+
+       for (int i = 0; i < modelList.size(); i++) {
+           modelList.get(i).setParent(scene);
+           scene.addChild(modelList.get(i));
+        }
     }
 
     private void addNewModel() {
+        ArFragment fragmen1 = arFragment;
         Intent intent = getIntent();
         String itemId = intent.getStringExtra(ITEM_KEY);
 
@@ -135,7 +149,7 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
                         });
     }
 
-    public void loadTexture() {
+    /*public void loadTexture() {
         WeakReference<ArCameraActivity> weakActivity = new WeakReference<>(this);
         Texture.builder()
                 .setSampler(Texture.Sampler.builder()
@@ -158,10 +172,8 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
                             Toast.makeText(this, "Unable to load texture", Toast.LENGTH_LONG).show();
                             return null;
                         });
-    }
+    }*/
 
-    private void addNodeToScene() {
-    }
 
     @Override
     public void onTapPlane(HitResult hitResult, Plane plane, MotionEvent motionEvent) {
@@ -206,7 +218,7 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
                // modelNode.setRenderable(selectedRenderable);
             }
         });
-        
+
         modelList.add(anchorNode);
     }
 
