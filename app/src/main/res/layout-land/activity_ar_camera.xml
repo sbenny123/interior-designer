@@ -7,11 +7,17 @@
     android:layout_height="match_parent"
     tools:context="com.example.horizoninteriordesigner.activities.ArCamera.ArCameraActivity">
 
-    <androidx.fragment.app.FragmentContainerView
+   <!-- <androidx.fragment.app.FragmentContainerView
         android:id="@+id/arFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
-    </androidx.fragment.app.FragmentContainerView>
+    </androidx.fragment.app.FragmentContainerView> -->
+
+    <fragment
+        android:name="com.google.ar.sceneform.ux.ArFragment"
+        android:id="@+id/arFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <RelativeLayout
         android:id="@+id/bottom_frame_controls"

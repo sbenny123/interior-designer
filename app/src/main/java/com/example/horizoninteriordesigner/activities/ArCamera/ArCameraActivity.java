@@ -28,13 +28,11 @@ import com.google.ar.core.Plane;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.HitTestResult;
 import com.google.ar.sceneform.Node;
-<<<<<<< HEAD
 import com.google.ar.sceneform.Scene;
-=======
->>>>>>> parent of b7d3931 (Add previous nodes to scene)
 import com.google.ar.sceneform.Sceneform;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.rendering.Renderable;
+import com.google.ar.sceneform.rendering.Texture;
 import com.google.ar.sceneform.ux.ArFragment;
 import com.google.ar.sceneform.ux.BaseArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
@@ -50,7 +48,7 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
 
     private ArFragment arFragment;
     private Renderable renderable;
-    //private Texture texture;
+    private Texture texture;
 
     private Item selectedItem; // Selected item's details from collection including its Uri
 
@@ -72,35 +70,16 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
         setContentView(R.layout.activity_ar_camera);
         initialiseButtons();
 
-        if (savedInstanceState == null) {
-            Log.i(TAG, "Saved state is null");
-            if (Sceneform.isSupported(this)) {
-               fragmentManager.beginTransaction()
-                       .add(R.id.arFragment, ArFragment.class, null)
-                       //.addToBackStack(null)
-                       .commit();
-            }
+        arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.arFragment);
 
-        }
-        /*else {
-            arFragment = (ArFragment) getSupportFragmentManager().getFragment(savedInstanceState, "arFragment");
-        }*/
-
-        fragmentManager.addFragmentOnAttachListener((afragmentManager, fragment) -> {
+        arFragment.setOnTapArPlaneListener(ArCameraActivity.this);
+        /*fragmentManager.addFragmentOnAttachListener((afragmentManager, fragment) -> {
             if (fragment.getId() == R.id.arFragment) {
                 arFragment = (ArFragment) fragment;
                 arFragment.setOnTapArPlaneListener(ArCameraActivity.this);
-<<<<<<< HEAD
-                /*arFragment.setOnSessionInitializationListener((session -> {
-                    SceneView sceneView = arFragment.getArSceneView();
-                    // getPreviousModels();
-                }));*/
             }
         });
 
-=======
-            }
-        });
 
         if (savedInstanceState == null) {
             Log.i(TAG, "Saved state is null");
@@ -109,27 +88,25 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
                         .replace(R.id.arFragment, ArFragment.class, null)
                         .commit();
             }
-        }
+        }*/
 
-        getPreviousModels();
->>>>>>> parent of b7d3931 (Add previous nodes to scene)
-        addNewModel();
+        //getPreviousModels();
+        getModel();
         //loadTexture();
-
     }
 
-    @Override
+  /*  @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
         getSupportFragmentManager().putFragment(outState, "arFragment", arFragment);
-    }
+    }*/
 
 
 
     private void getPreviousModels() {
         ItemDbApplication itemDbApplication = (ItemDbApplication)this.getApplication();
-<<<<<<< HEAD
+
         //modelList = itemDbApplication.getModels();
         anchorList = itemDbApplication.getAnchors();
 
@@ -150,12 +127,11 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
             model.setRenderable(renderable);
             model.select();
         }
-=======
+
         modelList = itemDbApplication.getModels();
->>>>>>> parent of b7d3931 (Add previous nodes to scene)
     }
 
-    private void addNewModel() {
+    private void getModel() {
         Intent intent = getIntent();
         String itemId = intent.getStringExtra(ITEM_KEY);
 
@@ -165,11 +141,13 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
 
             selectedItem = itemDB.getItemById(itemId);
 
-            loadModel(selectedItem.getUri());
+            buildModel(selectedItem.getUri());
+        } else {
+            Log.i(TAG, "Item id is null");
         }
     }
 
-    public void loadModel(Uri itemUri) {
+    public void buildModel(Uri itemUri) {
         WeakReference<ArCameraActivity> weakActivity = new WeakReference<>(this);
         ModelRenderable.builder()
                 .setSource(this, itemUri)
@@ -213,17 +191,17 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
                         });
     }
 
-    private void addNodeToScene() {
-    }
 
     @Override
     public void onTapPlane(HitResult hitResult, Plane plane, MotionEvent motionEvent) {
+        Log.i(TAG, "Tapped on plane!");
+
         if (renderable == null) {
             Toast.makeText(this, "Select a model", Toast.LENGTH_SHORT).show();
             return;
         }
 
-       /* if (anchorNodeList.size() > 0) {
+      /*  if (anchorNodeList.size() > 0) {
             AnchorNode nodeToRemove = anchorNodeList.get(0);
 
             arFragment.getArSceneView().getScene().removeChild(nodeToRemove);
@@ -245,7 +223,7 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
         model.setParent(anchorNode);
         model.setRenderable(renderable);
         model.select();
-        model.setOnTapListener((HitTestResult hitTestResult, MotionEvent modelMotionEvent) -> {
+       /* model.setOnTapListener((HitTestResult hitTestResult, MotionEvent modelMotionEvent) -> {
             if (hitTestResult.getNode() != null) {
                 Log.i(TAG, "Node is not null");
 
@@ -258,9 +236,9 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
 
                // modelNode.setRenderable(selectedRenderable);
             }
-        });
+        });*/
         
-        modelList.add(anchorNode);
+        //modelList.add(anchorNode);
        // anchorList.add(anchor);
     }
 
