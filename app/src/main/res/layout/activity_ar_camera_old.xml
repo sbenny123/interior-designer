@@ -19,7 +19,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-        <!-- Icon made by Freepik from www.flaticon.com -->
+    <RelativeLayout
+        android:id="@+id/bottom_frame_controls"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom|end"
+        android:gravity="center">
+
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_select_items"
@@ -30,14 +36,16 @@
             android:focusable="true"
             app:srcCompat="@drawable/couch_icon" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_save_photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:contentDescription="Take a photo"
-        android:focusable="true"
-        android:visibility="invisible"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_save_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:contentDescription="Take a photo"
+            android:focusable="true"
+            android:visibility="invisible"
+            app:srcCompat="@android:drawable/ic_menu_camera" />
+
+    </RelativeLayout>
 
 </FrameLayout>
