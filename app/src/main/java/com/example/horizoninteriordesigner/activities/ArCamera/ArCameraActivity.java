@@ -2,6 +2,7 @@ package com.example.horizoninteriordesigner.activities.ArCamera;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,9 +14,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.horizoninteriordesigner.ItemDbApplication;
 import com.example.horizoninteriordesigner.R;
+import com.example.horizoninteriordesigner.activities.ArCamera.fragments.ItemSelectionFragment;
 import com.example.horizoninteriordesigner.models.Item;
 import com.example.horizoninteriordesigner.models.ItemDB;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -58,7 +61,7 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
         setContentView(R.layout.activity_ar_camera);
         initialiseButtons();
 
-        arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.arFragment);
+        arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_ar);
         arFragment.setOnTapArPlaneListener(ArCameraActivity.this);
 
         getModel();
@@ -181,10 +184,18 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
      */
     private void initialiseButtons() {
         FloatingActionButton selectItemsBtn = findViewById(R.id.btn_select_items);
+        FloatingActionButton takePhotoBtn = findViewById(R.id.btn_take_photo);
+
         selectItemsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                launchItemSelectActivity();
+                showItemSelectionFragment();
+            }
+        });
+
+        takePhotoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
             }
         });
     }
@@ -193,16 +204,11 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
     /**
      * Opens the item selection page.
      */
-    private void launchItemSelectActivity() {
-        // Initialises a version of the default items "database"
-        //ItemDbApplication itemDbApplication = (ItemDbApplication)this.getApplication();
-        //ArrayList<Item> itemArrayList = itemDbApplication.getItemDB().getItems();
-
-        //ItemSelectionAdapter itemSelectionAdapter = new ItemSelectionAdapter(this, itemArrayList);
-        //itemsGridView.setAdapter(itemSelectionAdapter);
-
-       // Intent intent = new Intent(this, ItemSelectionActivity.class);
-       // startActivity(intent);
+    private void showItemSelectionFragment() {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_item_select, new ItemSelectionFragment());
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }
 

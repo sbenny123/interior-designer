@@ -7,21 +7,15 @@
     android:layout_height="match_parent"
     tools:context="com.example.horizoninteriordesigner.activities.ArCamera.ArCameraActivity">
 
-   <!-- <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/arFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </androidx.fragment.app.FragmentContainerView> -->
-
     <fragment
         android:name="com.google.ar.sceneform.ux.ArFragment"
-        android:id="@+id/arFragment"
+        android:id="@+id/fragment_ar"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <!-- Icon made by Freepik from www.flaticon.com -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_save_photo"
+        android:id="@+id/btn_take_photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"

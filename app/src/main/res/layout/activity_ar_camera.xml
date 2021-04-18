@@ -7,37 +7,42 @@
     android:layout_height="match_parent"
     tools:context="com.example.horizoninteriordesigner.activities.ArCamera.ArCameraActivity">
 
-    <!-- <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/arFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </androidx.fragment.app.FragmentContainerView> -->
-
     <fragment
         android:name="com.google.ar.sceneform.ux.ArFragment"
-        android:id="@+id/arFragment"
+        android:id="@+id/fragment_ar"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-        <!-- Icon made by Freepik from www.flaticon.com -->
+    <FrameLayout
+        android:id="@+id/fragment_item_select"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_take_photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:contentDescription="Take a photo"
+            android:focusable="true"
+            app:srcCompat="@android:drawable/ic_menu_camera" />
+
+        <!-- Icon made by Freepik from www.flaticon.com -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_select_items"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:contentDescription="Add items"
             android:focusable="true"
+            android:layout_toRightOf="@id/btn_take_photo"
             app:srcCompat="@drawable/couch_icon" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_save_photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:contentDescription="Take a photo"
-        android:focusable="true"
-        android:visibility="invisible"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
+    </LinearLayout>
 
 </FrameLayout>
