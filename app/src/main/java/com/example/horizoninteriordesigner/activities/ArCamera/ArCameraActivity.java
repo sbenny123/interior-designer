@@ -61,10 +61,10 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
         setContentView(R.layout.activity_ar_camera);
         initialiseButtons();
 
-        arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_ar);
-        arFragment.setOnTapArPlaneListener(ArCameraActivity.this);
+        //arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_ar);
+        //arFragment.setOnTapArPlaneListener(ArCameraActivity.this);
 
-        getModel();
+        //getModel();
     }
 
     private void getModel() {
@@ -196,6 +196,15 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
         takePhotoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_holder, new ItemSelectionFragment());
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+                arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_ar);
+                arFragment.setOnTapArPlaneListener(ArCameraActivity.this);
+
+                //getModel();
             }
         });
     }
@@ -206,7 +215,7 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
      */
     private void showItemSelectionFragment() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_item_select, new ItemSelectionFragment());
+        fragmentTransaction.replace(R.id.fragment_holder, new ItemSelectionFragment());
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }

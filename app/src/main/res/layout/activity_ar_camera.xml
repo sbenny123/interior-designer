@@ -7,14 +7,14 @@
     android:layout_height="match_parent"
     tools:context="com.example.horizoninteriordesigner.activities.ArCamera.ArCameraActivity">
 
-    <fragment
+   <!-- <fragment
         android:name="com.google.ar.sceneform.ux.ArFragment"
         android:id="@+id/fragment_ar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" /> -->
 
     <FrameLayout
-        android:id="@+id/fragment_item_select"
+        android:id="@+id/fragment_holder"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </FrameLayout>
