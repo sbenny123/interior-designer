@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.horizoninteriordesigner"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.horizoninteriordesigner">
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera.ar" android:required="true" />
+
+    <uses-feature
+        android:name="android.hardware.camera.ar"
+        android:required="true" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <uses-feature android:glEsVersion="0x00030000" android:required="true" />
-
+    <uses-feature
+        android:glEsVersion="0x00030000"
+        android:required="true" />
 
     <application
         android:name=".ItemDbApplication"
@@ -17,39 +21,32 @@
         android:icon="@mipmap/main_icon"
         android:label="@string/app_name"
         android:theme="@style/Theme.HorizonInteriorDesigner">
-
         <!-- android:icon="@mipmap/ic_launcher" -->
         <meta-data
             android:name="com.viromedia.API_KEY"
             android:value="YOUR_API_KEY_HERE" />
-
         <!--
             "Google Play Services for AR" (ARCore) is to be installed,
             as the app requires AR features.
         -->
         <meta-data
             android:name="com.google.ar.core"
-            android:value="required"
-            />
-
+            android:value="required" />
         <meta-data
-            tools:replace="android:value"
             android:name="com.google.ar.core.min_apk_version"
-            android:value="210210000" />
+            android:value="210210000"
+            tools:replace="android:value" />
 
-        <activity
-            android:name=".Main.MainActivity">
+        <activity android:name=".Main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activities.ItemSelection.ItemSelectionActivity"
-            android:label="@string/title_activity_item_selection">
-        </activity>
-
+            android:label="@string/title_activity_item_selection"></activity>
     </application>
 
 </manifest>
