@@ -38,7 +38,7 @@
             android:value="210210000" />
 
         <activity
-            android:name=".activities.ArCamera.ArCameraActivity">
+            android:name=".ArView.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

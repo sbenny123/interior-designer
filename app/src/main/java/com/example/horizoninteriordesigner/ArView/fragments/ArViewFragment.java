@@ -1,4 +1,4 @@
-package com.example.horizoninteriordesigner.fragments;
+package com.example.horizoninteriordesigner.ArView.fragments;
 
 import android.os.Bundle;
 

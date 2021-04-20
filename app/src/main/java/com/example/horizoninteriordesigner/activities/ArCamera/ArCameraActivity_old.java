@@ -60,7 +60,7 @@ public class ArCameraActivity_old extends AppCompatActivity implements BaseArFra
         }
 
 
-        setContentView(R.layout.activity_ar_camera);
+        setContentView(R.layout.activity_main);
         initialiseButtons();
 
         arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.arFragment);
@@ -69,7 +69,7 @@ public class ArCameraActivity_old extends AppCompatActivity implements BaseArFra
         /*fragmentManager.addFragmentOnAttachListener((afragmentManager, fragment) -> {
             if (fragment.getId() == R.id.arFragment) {
                 arFragment = (ArFragment) fragment;
-                arFragment.setOnTapArPlaneListener(ArCameraActivity.this);
+                arFragment.setOnTapArPlaneListener(MainActivity.this);
             }
         });
 
@@ -211,9 +211,9 @@ public class ArCameraActivity_old extends AppCompatActivity implements BaseArFra
             nodeToRemove.getAnchor().detach();
             nodeToRemove.setParent(null);
             nodeToRemove = null;
-            Toast.makeText(ArCameraActivity.this, "Test Delete - anchorNode removed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "Test Delete - anchorNode removed", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(ArCameraActivity.this, "Test Delete - markAnchorNode was null", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "Test Delete - markAnchorNode was null", Toast.LENGTH_SHORT).show();
         }*/
 
         // Create the Anchor.

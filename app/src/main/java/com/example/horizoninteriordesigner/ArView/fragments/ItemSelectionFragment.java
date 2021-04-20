@@ -1,4 +1,4 @@
-package com.example.horizoninteriordesigner.activities.ArCamera.fragments;
+package com.example.horizoninteriordesigner.ArView.fragments;
 
 import android.os.Bundle;
 
@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.horizoninteriordesigner.ArView.adapters.ItemSelectionAdapter;
 import com.example.horizoninteriordesigner.R;
 import com.example.horizoninteriordesigner.models.Item;
 
@@ -23,8 +24,8 @@ public class ItemSelectionFragment extends Fragment {
     private ItemSelectionAdapter adapter;
     private ArrayList<Item> itemArrayList;
 
-    public ItemSelectionFragment() {
-        // Required empty public constructor
+    public ItemSelectionFragment(ArrayList<Item> itemArrayList) {
+        this.itemArrayList = itemArrayList;
     }
 
     @Override
@@ -33,20 +34,11 @@ public class ItemSelectionFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_item_selection, container, false);
 
-        /*if (getActivity() != null) {
-            // Initialises a version of the default items "database"
-            ItemDbApplication itemDbApplication = (ItemDbApplication) requireActivity().getApplication();
-            itemArrayList = itemDbApplication.getItemDB().getItems();
-        } else {
-            itemArrayList = new ArrayList<Item>();
-        }
-
-
         recyclerView = view.findViewById(R.id.rv_items);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
         adapter = new ItemSelectionAdapter(requireContext(), itemArrayList);
-        recyclerView.setAdapter(adapter);*/
+        recyclerView.setAdapter(adapter);
 
         return view;
     }

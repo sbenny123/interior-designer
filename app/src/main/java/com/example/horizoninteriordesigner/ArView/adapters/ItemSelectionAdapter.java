@@ -1,22 +1,15 @@
-package com.example.horizoninteriordesigner.activities.ArCamera.fragments;
+package com.example.horizoninteriordesigner.ArView.adapters;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.horizoninteriordesigner.R;
 import com.example.horizoninteriordesigner.models.Item;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ItemSelectionAdapter extends RecyclerView.Adapter<ItemSelectionAdapter.ItemViewHolder> {
     private Context context;

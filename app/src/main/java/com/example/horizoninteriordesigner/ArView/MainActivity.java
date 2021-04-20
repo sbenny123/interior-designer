@@ -1,8 +1,7 @@
-package com.example.horizoninteriordesigner.activities.ArCamera;
+package com.example.horizoninteriordesigner.ArView;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -18,7 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.horizoninteriordesigner.ItemDbApplication;
 import com.example.horizoninteriordesigner.R;
-import com.example.horizoninteriordesigner.activities.ArCamera.fragments.ItemSelectionFragment;
+import com.example.horizoninteriordesigner.ArView.fragments.ItemSelectionFragment;
 import com.example.horizoninteriordesigner.models.Item;
 import com.example.horizoninteriordesigner.models.ItemDB;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -37,8 +36,9 @@ import com.google.ar.sceneform.ux.TransformableNode;
 import java.lang.ref.WeakReference;
 
 
-public class ArCameraActivity extends AppCompatActivity implements BaseArFragment.OnTapArPlaneListener {
-    private static final String TAG = ArCameraActivity.class.getSimpleName();
+public class MainActivity extends AppCompatActivity implements BaseArFragment.OnTapArPlaneListener {
+    private static final String TAG = MainActivity.class.getSimpleName();
+
     final public static String ITEM_KEY = "item_key";
     private static final double MIN_OPENGL_VERSION = 3.0;
 
@@ -58,13 +58,13 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
             Toast.makeText(this, "This device is not supported", Toast.LENGTH_LONG).show();
         }
 
-        setContentView(R.layout.activity_ar_camera);
+        setContentView(R.layout.activity_main);
         initialiseButtons();
 
-        //arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_ar);
-        //arFragment.setOnTapArPlaneListener(ArCameraActivity.this);
+        arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_ar);
+        arFragment.setOnTapArPlaneListener(MainActivity.this);
 
-        //getModel();
+        getModel();
     }
 
     private void getModel() {
@@ -84,13 +84,13 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
     }
 
     public void buildModel(Uri itemUri) {
-        WeakReference<ArCameraActivity> weakActivity = new WeakReference<>(this);
+        WeakReference<MainActivity> weakActivity = new WeakReference<>(this);
         ModelRenderable.builder()
                 .setSource(this, itemUri)
                 .setIsFilamentGltf(true)
                 .build()
                 .thenAccept(renderable -> {
-                    ArCameraActivity activity = weakActivity.get();
+                    MainActivity activity = weakActivity.get();
                     if (activity != null) {
                         activity.renderable = renderable;
                     }
@@ -103,7 +103,7 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
     }
 
     public void loadTexture() {
-        WeakReference<ArCameraActivity> weakActivity = new WeakReference<>(this);
+        WeakReference<MainActivity> weakActivity = new WeakReference<>(this);
         Texture.builder()
                 .setSampler(Texture.Sampler.builder()
                         .setMinFilter(Texture.Sampler.MinFilter.LINEAR_MIPMAP_LINEAR)
@@ -115,7 +115,7 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
                 .build()
                 .thenAccept(
                         texture -> {
-                            ArCameraActivity activity = weakActivity.get();
+                            MainActivity activity = weakActivity.get();
                             if (activity != null) {
                                 activity.texture = texture;
                             }
@@ -196,15 +196,6 @@ public class ArCameraActivity extends AppCompatActivity implements BaseArFragmen
         takePhotoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_holder, new ItemSelectionFragment());
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-
-                arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_ar);
-                arFragment.setOnTapArPlaneListener(ArCameraActivity.this);
-
-                //getModel();
             }
         });
     }

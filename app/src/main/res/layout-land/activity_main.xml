@@ -5,7 +5,7 @@
     android:id="@+id/ar_camera_land"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.horizoninteriordesigner.activities.ArCamera.ArCameraActivity">
+    tools:context="com.example.horizoninteriordesigner.ArView.MainActivity">
 
     <fragment
         android:name="com.google.ar.sceneform.ux.ArFragment"

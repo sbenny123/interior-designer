@@ -8,15 +8,15 @@ import android.widget.GridView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.horizoninteriordesigner.ArView.MainActivity;
 import com.example.horizoninteriordesigner.ItemDbApplication;
 import com.example.horizoninteriordesigner.R;
-import com.example.horizoninteriordesigner.activities.ArCamera.ArCameraActivity;
 import com.example.horizoninteriordesigner.activities.ItemSelection.adapters.ItemSelectionAdapter;
 import com.example.horizoninteriordesigner.models.Item;
 
 import java.util.ArrayList;
 
-import static com.example.horizoninteriordesigner.activities.ArCamera.ArCameraActivity.ITEM_KEY;
+import static com.example.horizoninteriordesigner.ArView.MainActivity.ITEM_KEY;
 
 
 
@@ -43,7 +43,7 @@ public class ItemSelectionActivity extends AppCompatActivity {
         itemsGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(ItemSelectionActivity.this, ArCameraActivity.class);
+                Intent intent = new Intent(ItemSelectionActivity.this, MainActivity.class);
                 Item selectedItem = itemSelectionAdapter.getItem(position);
 
                 intent.putExtra(ITEM_KEY, selectedItem.getId());
