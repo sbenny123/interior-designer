@@ -40,7 +40,7 @@ public class ItemSelectionAdapter extends ArrayAdapter {
 
         if (listitemView == null) {
             // Layout Inflater inflates each item to be displayed in GridView.
-            listitemView = LayoutInflater.from(getContext()).inflate(R.layout.item_card, parent, false);
+            listitemView = LayoutInflater.from(getContext()).inflate(R.layout.card_item, parent, false);
         }
 
         Item item = getItem(position);

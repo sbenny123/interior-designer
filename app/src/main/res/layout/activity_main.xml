@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_port"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.horizoninteriordesigner.Main.MainActivity">
 
    <fragment
@@ -19,10 +20,9 @@
         android:layout_height="match_parent">
     </FrameLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_take_photo"
@@ -43,6 +43,6 @@
             android:focusable="true"
             android:layout_toRightOf="@id/btn_take_photo"
             app:srcCompat="@drawable/couch_icon" />
-    </LinearLayout>
+    </RelativeLayout>
 
-</FrameLayout>
+</RelativeLayout>
