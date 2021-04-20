@@ -1,4 +1,4 @@
-package com.example.horizoninteriordesigner.ArView;
+package com.example.horizoninteriordesigner.Main;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -17,7 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.horizoninteriordesigner.ItemDbApplication;
 import com.example.horizoninteriordesigner.R;
-import com.example.horizoninteriordesigner.ArView.fragments.ItemSelectionFragment;
+import com.example.horizoninteriordesigner.Main.fragments.ItemSelectionFragment;
 import com.example.horizoninteriordesigner.models.Item;
 import com.example.horizoninteriordesigner.models.ItemDB;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

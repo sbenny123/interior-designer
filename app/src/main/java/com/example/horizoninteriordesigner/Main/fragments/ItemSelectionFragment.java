@@ -1,4 +1,4 @@
-package com.example.horizoninteriordesigner.ArView.fragments;
+package com.example.horizoninteriordesigner.Main.fragments;
 
 import android.os.Bundle;
 
@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.horizoninteriordesigner.ArView.adapters.ItemSelectionAdapter;
+import com.example.horizoninteriordesigner.Main.adapters.ItemSelectionAdapter;
 import com.example.horizoninteriordesigner.R;
 import com.example.horizoninteriordesigner.models.Item;
 

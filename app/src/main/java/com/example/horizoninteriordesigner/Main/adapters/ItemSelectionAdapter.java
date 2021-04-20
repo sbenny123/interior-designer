@@ -1,4 +1,4 @@
-package com.example.horizoninteriordesigner.ArView.adapters;
+package com.example.horizoninteriordesigner.Main.adapters;
 
 import android.content.Context;
 import android.view.View;

@@ -1,8 +1,6 @@
-package com.example.horizoninteriordesigner.ArView.fragments;
+package com.example.horizoninteriordesigner.Main.fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
