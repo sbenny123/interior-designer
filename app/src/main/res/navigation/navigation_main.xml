@@ -9,7 +9,12 @@
         android:id="@+id/itemSelectionFragment"
         android:name="com.example.horizoninteriordesigner.activities.Main.fragments.ItemSelectionFragment"
         android:label="fragment_item_selection"
-        tools:layout="@layout/fragment_item_selection" />
+        tools:layout="@layout/fragment_item_selection" >
+        <action
+            android:id="@+id/action_itemSelectionFragment_to_arViewFragment2"
+            app:destination="@id/arViewFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/arViewFragment"
         android:name="com.example.horizoninteriordesigner.activities.Main.fragments.ArViewFragment"

@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +24,7 @@ import java.util.ArrayList;
 
 
 public class ItemSelectionFragment extends Fragment implements ItemSelectionAdapter.ItemClickListener {
+
     private RecyclerView recyclerView;
     private ItemSelectionAdapter adapter;
     private ArrayList<Item> itemArrayList;
@@ -53,6 +56,7 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
         recyclerView = view.findViewById(R.id.rv_items);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
+        //adapter = new ItemSelectionAdapter(getActivity(), this, itemArrayList);
         adapter = new ItemSelectionAdapter(getActivity(), this, itemArrayList);
         recyclerView.setAdapter(adapter);
 
@@ -60,12 +64,15 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
     }
 
     @Override
-    public void onItemClick(int position) {
-        Toast.makeText(getActivity(), itemArrayList.get(position).getName() + " has been selected", Toast.LENGTH_SHORT).show();
+    public void onItemClick(View view, int position) {
+
+        NavController navController = Navigation.findNavController(getActivity(), R.id.fragment_main_nav_host);
+
+       /* if (position == 1) {
+            navController.popBackStack(R.id.itemSelectionFragment, true);
+        }*/
+
+        navController.navigate(R.id.action_itemSelectionFragment_to_arViewFragment2);
+        //    Toast.makeText(getActivity(), itemArrayList.get(position).getName() + " has been selected", Toast.LENGTH_SHORT).show();
     }
-
-    /**   @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-    }**/
 }

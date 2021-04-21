@@ -30,7 +30,7 @@ public class ItemSelectionAdapter extends RecyclerView.Adapter<ItemSelectionAdap
      * Interface to handle onClick event for each item.
      */
     public interface ItemClickListener {
-        void onItemClick(int position);
+        void onItemClick(View view, int position);
     }
 
 
@@ -39,6 +39,11 @@ public class ItemSelectionAdapter extends RecyclerView.Adapter<ItemSelectionAdap
         this.onItemClickListener = onItemClickListener;
         this.itemArrayList = itemArrayList;
     }
+
+   /* public ItemSelectionAdapter(Context context, ArrayList<Item> itemArrayList) {
+        this.context = context;
+        this.itemArrayList = itemArrayList;
+    }*/
 
     /**
      * Inflates the layout to be used for each item.
@@ -85,7 +90,6 @@ public class ItemSelectionAdapter extends RecyclerView.Adapter<ItemSelectionAdap
      *
      */
     public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
         private ImageView itemIV;
         private TextView itemTV;
 
@@ -104,7 +108,7 @@ public class ItemSelectionAdapter extends RecyclerView.Adapter<ItemSelectionAdap
         public void onClick(View v) {
             int position = getAdapterPosition();
 
-            onItemClickListener.onItemClick(position);
+            onItemClickListener.onItemClick(v, position);
         }
     }
 
