@@ -59,12 +59,12 @@ public class MainActivity extends AppCompatActivity implements BaseArFragment.On
         }
 
         setContentView(R.layout.activity_main);
-        initialiseButtons();
+        //initialiseButtons();
 
-        arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_ar);
-        arFragment.setOnTapArPlaneListener(MainActivity.this);
+        //arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_ar);
+        //arFragment.setOnTapArPlaneListener(MainActivity.this);
 
-        getModel();
+        //getModel();
     }
 
     private void getModel() {
@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements BaseArFragment.On
     /**
      * Adds click listeners to the buttons so the correct pages are opened/actions are taken when pressed.
      */
-    private void initialiseButtons() {
+  /*  private void initialiseButtons() {
         FloatingActionButton selectItemsBtn = findViewById(R.id.btn_select_items);
         FloatingActionButton takePhotoBtn = findViewById(R.id.btn_take_photo);
 
@@ -198,17 +198,17 @@ public class MainActivity extends AppCompatActivity implements BaseArFragment.On
             public void onClick(View v) {
             }
         });
-    }
+    }*/
 
 
     /**
      * Opens the item selection page.
      */
     private void showItemSelectionFragment() {
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_holder, new ItemSelectionFragment());
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+       // FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+       // fragmentTransaction.replace(R.id.fragment_holder, new ItemSelectionFragment());
+       // fragmentTransaction.addToBackStack(null);
+       // fragmentTransaction.commit();
     }
 }
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_port"
@@ -10,46 +11,23 @@
 
     <fragment
         android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:defaultNavHost="true"
         app:navGraph="@navigation/navigation_main" />
 
-    <fragment
+    <!-- <fragment
         android:name="com.google.ar.sceneform.ux.ArFragment"
         android:id="@+id/fragment_ar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" /> -->
 
-    <FrameLayout
+   <!-- <FrameLayout
         android:id="@+id/fragment_holder"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </FrameLayout>
+    </FrameLayout> -->
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_take_photo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:contentDescription="Take a photo"
-            android:focusable="true"
-            app:srcCompat="@android:drawable/ic_menu_camera" />
-
-        <!-- Icon made by Freepik from www.flaticon.com -->
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_select_items"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:contentDescription="Add items"
-            android:focusable="true"
-            android:layout_toRightOf="@id/btn_take_photo"
-            app:srcCompat="@drawable/couch_icon" />
-    </RelativeLayout>
 
 </RelativeLayout>
