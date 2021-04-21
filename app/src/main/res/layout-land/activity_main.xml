@@ -5,7 +5,7 @@
     android:id="@+id/main_land"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.horizoninteriordesigner.Main.MainActivity">
+    tools:context="com.example.horizoninteriordesigner.activities.Main.MainActivity">
 
     <fragment
         android:name="com.google.ar.sceneform.ux.ArFragment"

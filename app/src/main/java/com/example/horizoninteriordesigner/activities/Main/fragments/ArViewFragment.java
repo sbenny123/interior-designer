@@ -1,4 +1,4 @@
-package com.example.horizoninteriordesigner.Main.fragments;
+package com.example.horizoninteriordesigner.activities.Main.fragments;
 
 import android.os.Bundle;
 

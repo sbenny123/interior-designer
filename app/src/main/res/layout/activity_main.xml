@@ -6,9 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.horizoninteriordesigner.Main.MainActivity">
+    tools:context=".activities.Main.MainActivity">
 
-   <fragment
+    <fragment
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/navigation_main" />
+
+    <fragment
         android:name="com.google.ar.sceneform.ux.ArFragment"
         android:id="@+id/fragment_ar"
         android:layout_width="match_parent"

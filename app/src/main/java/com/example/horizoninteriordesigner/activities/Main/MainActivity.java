@@ -1,4 +1,4 @@
-package com.example.horizoninteriordesigner.Main;
+package com.example.horizoninteriordesigner.activities.Main;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -12,13 +12,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.horizoninteriordesigner.ItemDbApplication;
 import com.example.horizoninteriordesigner.R;
-import com.example.horizoninteriordesigner.Main.fragments.ItemSelectionFragment;
+import com.example.horizoninteriordesigner.activities.Main.fragments.ItemSelectionFragment;
 import com.example.horizoninteriordesigner.models.Item;
 import com.example.horizoninteriordesigner.models.ItemDB;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

@@ -8,7 +8,7 @@ import android.widget.GridView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.horizoninteriordesigner.Main.MainActivity;
+import com.example.horizoninteriordesigner.activities.Main.MainActivity;
 import com.example.horizoninteriordesigner.ItemDbApplication;
 import com.example.horizoninteriordesigner.R;
 import com.example.horizoninteriordesigner.activities.ItemSelection.adapters.ItemSelectionAdapter;
@@ -16,7 +16,7 @@ import com.example.horizoninteriordesigner.models.Item;
 
 import java.util.ArrayList;
 
-import static com.example.horizoninteriordesigner.Main.MainActivity.ITEM_KEY;
+import static com.example.horizoninteriordesigner.activities.Main.MainActivity.ITEM_KEY;
 
 
 

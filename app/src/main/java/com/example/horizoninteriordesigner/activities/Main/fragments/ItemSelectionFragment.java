@@ -1,10 +1,9 @@
-package com.example.horizoninteriordesigner.Main.fragments;
+package com.example.horizoninteriordesigner.activities.Main.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.horizoninteriordesigner.ItemDbApplication;
-import com.example.horizoninteriordesigner.Main.adapters.ItemSelectionAdapter;
+import com.example.horizoninteriordesigner.activities.Main.adapters.ItemSelectionAdapter;
 import com.example.horizoninteriordesigner.R;
 import com.example.horizoninteriordesigner.models.Item;
 
