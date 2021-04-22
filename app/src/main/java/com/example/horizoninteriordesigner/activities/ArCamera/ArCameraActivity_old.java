@@ -17,7 +17,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.horizoninteriordesigner.ItemDbApplication;
 import com.example.horizoninteriordesigner.R;
-import com.example.horizoninteriordesigner.activities.ItemSelection.ItemSelectionActivity;
 import com.example.horizoninteriordesigner.models.Item;
 import com.example.horizoninteriordesigner.models.ItemDB;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -283,8 +282,6 @@ public class ArCameraActivity_old extends AppCompatActivity implements BaseArFra
      * Opens the item selection page.
      */
     private void launchItemSelectActivity() {
-        Intent intent = new Intent(this, ItemSelectionActivity.class);
-        startActivity(intent);
     }
 }
 
