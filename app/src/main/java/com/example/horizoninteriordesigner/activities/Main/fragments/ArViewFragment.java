@@ -2,23 +2,16 @@ package com.example.horizoninteriordesigner.activities.Main.fragments;
 
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import com.example.horizoninteriordesigner.R;
 import com.example.horizoninteriordesigner.activities.Main.MainActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.ar.sceneform.Scene;
-import com.google.ar.sceneform.ux.ArFragment;
-
 import static com.example.horizoninteriordesigner.activities.Main.MainActivity.ITEM_SELECT_TAG;
 
 
@@ -72,16 +65,6 @@ public class ArViewFragment extends Fragment {
      * Opens the item selection page.
      */
     private void showItemSelectionFragment() {
-
         ((MainActivity) getActivity()).manageFragmentTransaction(ITEM_SELECT_TAG);
-       // NavController navController = Navigation.findNavController(getActivity(), R.id.fragment_main_nav_host);
-
-       /* if (navController.popBackStack(R.id.itemSelectionFragment, false)) {
-            Log.i("Fragment", "Found itemSelection in backStack");
-        } else {
-            navController.navigate(R.id.itemSelectionFragment);
-        }*/
-
-       // navController.navigate(R.id.action_arViewFragment_to_itemSelectionFragment);
     }
 }

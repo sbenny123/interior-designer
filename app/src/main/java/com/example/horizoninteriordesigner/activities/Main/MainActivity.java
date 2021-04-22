@@ -9,7 +9,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -17,19 +16,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.Navigator;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.horizoninteriordesigner.ItemDbApplication;
 import com.example.horizoninteriordesigner.R;
-import com.example.horizoninteriordesigner.activities.Main.Navigation.CustomNavigator;
 import com.example.horizoninteriordesigner.activities.Main.fragments.ArViewFragment;
 import com.example.horizoninteriordesigner.activities.Main.fragments.ItemSelectionFragment;
 import com.example.horizoninteriordesigner.models.Item;
 import com.example.horizoninteriordesigner.models.ItemDB;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
@@ -195,38 +188,6 @@ public class MainActivity extends AppCompatActivity implements BaseArFragment.On
         return true;
     }
 
-
-    /**
-     * Adds click listeners to the buttons so the correct pages are opened/actions are taken when pressed.
-     */
-  /*  private void initialiseButtons() {
-        FloatingActionButton selectItemsBtn = findViewById(R.id.btn_select_items);
-        FloatingActionButton takePhotoBtn = findViewById(R.id.btn_take_photo);
-
-        selectItemsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showItemSelectionFragment();
-            }
-        });
-
-        takePhotoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
-    }*/
-
-
-    /**
-     * Opens the item selection page.
-     */
-    private void showItemSelectionFragment() {
-       // FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-       // fragmentTransaction.replace(R.id.fragment_holder, new ItemSelectionFragment());
-       // fragmentTransaction.addToBackStack(null);
-       // fragmentTransaction.commit();
-    }
 
     public void manageFragmentTransaction(String selectedFragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();

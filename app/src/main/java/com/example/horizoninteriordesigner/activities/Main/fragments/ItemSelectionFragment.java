@@ -5,13 +5,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,27 +68,7 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
     public void onItemClick(View view, int position) {
 
         ((MainActivity) getActivity()).manageFragmentTransaction(AR_VIEW_TAG);
-       /*Fragment arFragment = getParentFragmentManager().findFragmentByTag("ArViewFragment");
 
-        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-        fragmentTransaction.detach(getParentFragmentManager().findFragmentByTag(""));
-
-        fragmentTransaction.attach(arFragment);
-        fragmentTransaction.addToBackStack(null);
-
-       NavController navController = Navigation.findNavController(getActivity(), R.id.fragment_main_nav_host);
-
-        if (navController.popBackStack(R.id.arViewFragment, false)) {
-            Log.i("Fragment", "Found arView in backStack");
-        } else {
-            navController.navigate(R.id.action_itemSelectionFragment_to_arViewFragment);
-            Log.i("Fragment", "Did not find arView in backstack");
-        }
-
-       navController.navigate(R.id.arViewFragment);
-        navController.navigate(R.id.action_itemSelectionFragment_to_arViewFragment);
-
-           Toast.makeText(getActivity(), itemArrayList.get(position).getName() + " has been selected", Toast.LENGTH_SHORT).show();
-           */
+        Toast.makeText(getActivity(), itemArrayList.get(position).getName() + " has been selected", Toast.LENGTH_SHORT).show();
     }
 }
