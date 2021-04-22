@@ -38,7 +38,7 @@ import com.google.ar.sceneform.ux.TransformableNode;
 import java.lang.ref.WeakReference;
 
 
-public class MainActivity extends AppCompatActivity implements BaseArFragment.OnTapArPlaneListener {
+public class MainActivity extends AppCompatActivity implements BaseArFragment.OnTapArPlaneListener, ItemSelectionFragment.SendFragmentListener {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     final public static String ITEM_KEY = "item_key";
@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements BaseArFragment.On
                     MainActivity activity = weakActivity.get();
                     if (activity != null) {
                         activity.renderable = renderable;
+                        Toast.makeText(this, "Built renderable", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .exceptionally(
@@ -227,6 +228,16 @@ public class MainActivity extends AppCompatActivity implements BaseArFragment.On
 
                 fragmentTransaction.commit();
                 break;
+        }
+    }
+
+    @Override
+    public void sendItem(Item item) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        ArViewFragment arViewFragment = (ArViewFragment) fragmentManager.findFragmentByTag(AR_VIEW_TAG);
+
+        if (item.getUri() != null) {
+            buildModel(item.getUri());
         }
     }
 }

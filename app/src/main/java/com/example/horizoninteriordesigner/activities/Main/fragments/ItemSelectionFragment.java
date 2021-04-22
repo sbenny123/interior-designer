@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,12 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
     private ItemSelectionAdapter adapter;
     private ArrayList<Item> itemArrayList;
 
+    SendFragmentListener sendFragmentListener;
+
+
+    public interface SendFragmentListener {
+        void sendItem(Item item);
+    }
 
     public ItemSelectionFragment() {
         // Required empty public constructor
@@ -46,6 +53,14 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
         ItemDbApplication itemDbApplication = (ItemDbApplication) getActivity().getApplication();
         itemArrayList = itemDbApplication.getItemDB().getItems();
+
+        sendFragmentListener = (SendFragmentListener) context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        sendFragmentListener = null;
     }
 
     @Override
@@ -57,7 +72,6 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
         recyclerView = view.findViewById(R.id.rv_items);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
-        //adapter = new ItemSelectionAdapter(getActivity(), this, itemArrayList);
         adapter = new ItemSelectionAdapter(getActivity(), this, itemArrayList);
         recyclerView.setAdapter(adapter);
 
@@ -66,9 +80,9 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
     @Override
     public void onItemClick(View view, int position) {
+        Item selectedItem = itemArrayList.get(position);
+        sendFragmentListener.sendItem(selectedItem);
 
         ((MainActivity) getActivity()).manageFragmentTransaction(AR_VIEW_TAG);
-
-        Toast.makeText(getActivity(), itemArrayList.get(position).getName() + " has been selected", Toast.LENGTH_SHORT).show();
     }
 }
