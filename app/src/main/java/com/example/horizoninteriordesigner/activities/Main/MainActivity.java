@@ -38,7 +38,7 @@ import com.google.ar.sceneform.ux.TransformableNode;
 import java.lang.ref.WeakReference;
 
 
-public class MainActivity extends AppCompatActivity implements BaseArFragment.OnTapArPlaneListener, ItemSelectionFragment.SendFragmentListener {
+public class MainActivity extends AppCompatActivity implements ItemSelectionFragment.SendFragmentListener {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     final public static String ITEM_KEY = "item_key";
@@ -66,13 +66,6 @@ public class MainActivity extends AppCompatActivity implements BaseArFragment.On
         setContentView(R.layout.activity_main);
 
         manageFragmentTransaction(ITEM_SELECT_TAG);
-
-        //initialiseButtons();
-
-        //arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_ar);
-        //arFragment.setOnTapArPlaneListener(MainActivity.this);
-
-        //getModel();
     }
 
 
@@ -103,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements BaseArFragment.On
                     MainActivity activity = weakActivity.get();
                     if (activity != null) {
                         activity.renderable = renderable;
-                        Toast.makeText(this, "Built renderable", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .exceptionally(
@@ -138,28 +130,6 @@ public class MainActivity extends AppCompatActivity implements BaseArFragment.On
                         });
     }
 
-
-    @Override
-    public void onTapPlane(HitResult hitResult, Plane plane, MotionEvent motionEvent) {
-        Log.i(TAG, "Tapped on plane!");
-
-        if (renderable == null) {
-            Toast.makeText(this, "Select a model", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        Anchor anchor = hitResult.createAnchor();
-        AnchorNode anchorNode = new AnchorNode(anchor);
-        anchorNode.setParent(arFragment.getArSceneView().getScene());
-
-        // Create the transformable model and add it to the anchor.
-        TransformableNode model = new TransformableNode(arFragment.getTransformationSystem());
-        model.setParent(anchorNode);
-        model.setRenderable(renderable);
-        model.select();
-
-        selectedNode = arFragment.getTransformationSystem().getSelectedNode();
-    }
 
     /**
      * Checks if the device is compatible with Sceneform and ARCore.
@@ -233,12 +203,13 @@ public class MainActivity extends AppCompatActivity implements BaseArFragment.On
 
     @Override
     public void sendItem(Item item) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        ArViewFragment arViewFragment = (ArViewFragment) fragmentManager.findFragmentByTag(AR_VIEW_TAG);
-
         if (item.getUri() != null) {
             buildModel(item.getUri());
         }
+    }
+
+    public Renderable getRenderable() {
+        return renderable;
     }
 }
 
