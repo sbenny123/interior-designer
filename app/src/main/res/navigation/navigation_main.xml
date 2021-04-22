@@ -11,7 +11,7 @@
         android:label="fragment_item_selection"
         tools:layout="@layout/fragment_item_selection" >
         <action
-            android:id="@+id/action_itemSelectionFragment_to_arViewFragment2"
+            android:id="@+id/action_itemSelectionFragment_to_arViewFragment"
             app:destination="@id/arViewFragment" />
     </fragment>
 
@@ -19,5 +19,9 @@
         android:id="@+id/arViewFragment"
         android:name="com.example.horizoninteriordesigner.activities.Main.fragments.ArViewFragment"
         android:label="fragment_ar_view"
-        tools:layout="@layout/fragment_ar_view" />
+        tools:layout="@layout/fragment_ar_view" >
+        <action
+            android:id="@+id/action_arViewFragment_to_itemSelectionFragment"
+            app:destination="@id/itemSelectionFragment" />
+    </fragment>
 </navigation>

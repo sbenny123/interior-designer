@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.horizoninteriordesigner.ItemDbApplication;
 import com.example.horizoninteriordesigner.activities.Main.adapters.ItemSelectionAdapter;
@@ -72,7 +71,7 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
             navController.popBackStack(R.id.itemSelectionFragment, true);
         }*/
 
-        navController.navigate(R.id.action_itemSelectionFragment_to_arViewFragment2);
+        navController.navigate(R.id.action_itemSelectionFragment_to_arViewFragment);
         //    Toast.makeText(getActivity(), itemArrayList.get(position).getName() + " has been selected", Toast.LENGTH_SHORT).show();
     }
 }
