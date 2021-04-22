@@ -12,11 +12,20 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.Navigator;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.horizoninteriordesigner.ItemDbApplication;
 import com.example.horizoninteriordesigner.R;
+import com.example.horizoninteriordesigner.activities.Main.Navigation.CustomNavigator;
+import com.example.horizoninteriordesigner.activities.Main.fragments.ArViewFragment;
 import com.example.horizoninteriordesigner.activities.Main.fragments.ItemSelectionFragment;
 import com.example.horizoninteriordesigner.models.Item;
 import com.example.horizoninteriordesigner.models.ItemDB;
@@ -42,6 +51,9 @@ public class MainActivity extends AppCompatActivity implements BaseArFragment.On
     final public static String ITEM_KEY = "item_key";
     private static final double MIN_OPENGL_VERSION = 3.0;
 
+    final public static String AR_VIEW_TAG = "FRAGMENT_AR_VIEW";
+    final public static String ITEM_SELECT_TAG = "FRAGMEMTN_ITEM_SELECTION";
+
     private ArFragment arFragment;
     private Renderable renderable;
     private Texture texture;
@@ -59,6 +71,9 @@ public class MainActivity extends AppCompatActivity implements BaseArFragment.On
         }
 
         setContentView(R.layout.activity_main);
+
+        manageFragmentTransaction(ITEM_SELECT_TAG);
+
         //initialiseButtons();
 
         //arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_ar);
@@ -66,6 +81,8 @@ public class MainActivity extends AppCompatActivity implements BaseArFragment.On
 
         //getModel();
     }
+
+
 
     private void getModel() {
         Intent intent = getIntent();
@@ -209,6 +226,47 @@ public class MainActivity extends AppCompatActivity implements BaseArFragment.On
        // fragmentTransaction.replace(R.id.fragment_holder, new ItemSelectionFragment());
        // fragmentTransaction.addToBackStack(null);
        // fragmentTransaction.commit();
+    }
+
+    public void manageFragmentTransaction(String selectedFragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        @Nullable Fragment arViewFragment = fragmentManager.findFragmentByTag(AR_VIEW_TAG);
+        @Nullable Fragment itemSelectionFragment = fragmentManager.findFragmentByTag(ITEM_SELECT_TAG);
+
+        switch (selectedFragment) {
+            case AR_VIEW_TAG:
+                // Show fragment if it exists
+                if (arViewFragment != null) {
+                    fragmentTransaction.show(arViewFragment);
+
+                    // Add to fragment manager as it doesn't exist
+                } else {
+                    fragmentTransaction.add(R.id.fragment_holder, new ArViewFragment(), AR_VIEW_TAG);
+                }
+
+                if (itemSelectionFragment != null) {
+                    fragmentTransaction.hide(itemSelectionFragment);
+                }
+
+                fragmentTransaction.commit();
+                break;
+
+            case ITEM_SELECT_TAG:
+                if (itemSelectionFragment != null) {
+                    fragmentTransaction.show(itemSelectionFragment);
+                } else {
+                    fragmentTransaction.add(R.id.fragment_holder, new ItemSelectionFragment(), ITEM_SELECT_TAG);
+                }
+
+                if (arViewFragment != null) {
+                    fragmentTransaction.hide(arViewFragment);
+                }
+
+                fragmentTransaction.commit();
+                break;
+        }
     }
 }
 
