@@ -2,9 +2,11 @@ package com.example.horizoninteriordesigner.activities.Main.fragments;
 
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -68,6 +70,13 @@ public class ArViewFragment extends Fragment {
      */
     private void showItemSelectionFragment() {
         NavController navController = Navigation.findNavController(getActivity(), R.id.fragment_main_nav_host);
+
+       /* if (navController.popBackStack(R.id.itemSelectionFragment, false)) {
+            Log.i("Fragment", "Found itemSelection in backStack");
+        } else {
+            navController.navigate(R.id.itemSelectionFragment);
+        }*/
+
         navController.navigate(R.id.action_arViewFragment_to_itemSelectionFragment);
     }
 }

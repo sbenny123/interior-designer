@@ -10,9 +10,11 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.horizoninteriordesigner.ItemDbApplication;
 import com.example.horizoninteriordesigner.activities.Main.adapters.ItemSelectionAdapter;
@@ -67,11 +69,16 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
         NavController navController = Navigation.findNavController(getActivity(), R.id.fragment_main_nav_host);
 
-       /* if (position == 1) {
-            navController.popBackStack(R.id.itemSelectionFragment, true);
+        /*if (navController.popBackStack(R.id.arViewFragment, false)) {
+            Log.i("Fragment", "Found arView in backStack");
+        } else {
+            navController.navigate(R.id.action_itemSelectionFragment_to_arViewFragment);
+            Log.i("Fragment", "Did not find arView in backstack");
         }*/
 
+       // navController.navigate(R.id.arViewFragment);
         navController.navigate(R.id.action_itemSelectionFragment_to_arViewFragment);
+
         //    Toast.makeText(getActivity(), itemArrayList.get(position).getName() + " has been selected", Toast.LENGTH_SHORT).show();
     }
 }
