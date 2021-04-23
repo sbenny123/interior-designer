@@ -20,10 +20,16 @@ import com.google.ar.core.Anchor;
 import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
 import com.google.ar.sceneform.AnchorNode;
+import com.google.ar.sceneform.HitTestResult;
+import com.google.ar.sceneform.Node;
+import com.google.ar.sceneform.rendering.Color;
 import com.google.ar.sceneform.rendering.Renderable;
 import com.google.ar.sceneform.ux.BaseArFragment;
+import com.google.ar.sceneform.ux.BaseTransformableNode;
 import com.google.ar.sceneform.ux.TransformableNode;
 
+
+import java.util.List;
 
 import static com.example.horizoninteriordesigner.activities.Main.MainActivity.ITEM_SELECT_TAG;
 
@@ -32,6 +38,8 @@ public class ArViewFragment extends Fragment implements BaseArFragment.OnTapArPl
     private SceneformFragment sceneformFragment;
     private Renderable renderable;
     private Item item;
+
+    private AnchorNode currentAnchorNode;
 
     public ArViewFragment() {
         // Required empty public constructor
@@ -66,6 +74,7 @@ public class ArViewFragment extends Fragment implements BaseArFragment.OnTapArPl
         selectItemsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                currentAnchorNode = null;
                 showItemSelectionFragment();
             }
         });
@@ -96,15 +105,21 @@ public class ArViewFragment extends Fragment implements BaseArFragment.OnTapArPl
         }
 
         Anchor anchor = hitResult.createAnchor();
-        AnchorNode anchorNode = new AnchorNode(anchor);
-        anchorNode.setParent(sceneformFragment.getArSceneView().getScene());
 
-        // Create the transformable model and add it to the anchor.
-        TransformableNode model = new TransformableNode(sceneformFragment.getTransformationSystem());
-        model.setParent(anchorNode);
-        model.setRenderable(renderable);
-        model.select();
+        if (currentAnchorNode != null) {
+            currentAnchorNode.setAnchor(anchor);
 
-        //selectedNode = sceneformFragment.getTransformationSystem().getSelectedNode();
+        } else {
+            AnchorNode anchorNode = new AnchorNode(anchor);
+            anchorNode.setParent(sceneformFragment.getArSceneView().getScene());
+
+            // Create the transformable model and add it to the anchor.
+            TransformableNode model = new TransformableNode(sceneformFragment.getTransformationSystem());
+            model.setParent(anchorNode);
+            model.setRenderable(renderable);
+            model.select();
+            
+            currentAnchorNode = anchorNode;
+        }
     }
 }

@@ -88,17 +88,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.905" />
 
-    <FrameLayout
-        android:id="@+id/fragment_ar"
-        android:layout_width="321dp"
-        android:layout_height="592dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+  <FrameLayout
+      android:id="@+id/fragment_ar"
+      android:layout_width="530dp"
+      android:layout_height="878dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.0">
 
 
-    </FrameLayout>
+  </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
