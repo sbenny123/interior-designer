@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.horizoninteriordesigner.R;
 import com.example.horizoninteriordesigner.activities.Main.MainActivity;
 import com.example.horizoninteriordesigner.models.Item;
+import com.google.android.filament.Material;
 import com.google.android.filament.MaterialInstance;
 import com.google.android.filament.gltfio.FilamentAsset;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -24,11 +25,17 @@ import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
 import com.google.ar.core.Session;
 import com.google.ar.sceneform.AnchorNode;
+import com.google.ar.sceneform.FrameTime;
 import com.google.ar.sceneform.HitTestResult;
 import com.google.ar.sceneform.Node;
 import com.google.ar.sceneform.Scene;
+import com.google.ar.sceneform.collision.Box;
+import com.google.ar.sceneform.collision.CollisionShape;
+import com.google.ar.sceneform.math.Vector3;
 import com.google.ar.sceneform.rendering.Color;
+import com.google.ar.sceneform.rendering.MaterialFactory;
 import com.google.ar.sceneform.rendering.Renderable;
+import com.google.ar.sceneform.rendering.ShapeFactory;
 import com.google.ar.sceneform.rendering.Texture;
 import com.google.ar.sceneform.ux.BaseArFragment;
 import com.google.ar.sceneform.ux.BaseTransformableNode;
@@ -47,6 +54,10 @@ public class ArViewFragment extends Fragment implements BaseArFragment.OnTapArPl
     private Item item;
 
     private AnchorNode currentAnchorNode;
+
+    FloatingActionButton takePhotoBtn;
+    FloatingActionButton selectItemsBtn;
+    FloatingActionButton deleteItemBtn;
 
     public ArViewFragment() {
         // Required empty public constructor
@@ -76,9 +87,9 @@ public class ArViewFragment extends Fragment implements BaseArFragment.OnTapArPl
     }
 
     private void initialiseButtons(View view) {
-        FloatingActionButton takePhotoBtn = view.findViewById(R.id.btn_take_photo);
-        FloatingActionButton selectItemsBtn = view.findViewById(R.id.btn_select_items);
-        FloatingActionButton deleteItemBtn = view.findViewById(R.id.btn_delete_item);
+        takePhotoBtn = view.findViewById(R.id.btn_take_photo);
+        selectItemsBtn = view.findViewById(R.id.btn_select_items);
+        deleteItemBtn = view.findViewById(R.id.btn_delete_item);
 
         takePhotoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,19 +157,23 @@ public class ArViewFragment extends Fragment implements BaseArFragment.OnTapArPl
             model.setOnTapListener(new Node.OnTapListener() {
                 @Override
                 public void onTap(HitTestResult hitTestResult, MotionEvent motionEvent) {
-                    Node selectedNode = hitTestResult.getNode();
+                    deleteItemBtn.setVisibility(View.VISIBLE);
+                    selectItemsBtn.setVisibility(View.INVISIBLE);
+                    takePhotoBtn.setVisibility(View.INVISIBLE);
 
-                    BaseTransformableNode transformableNode = sceneformFragment.getTransformationSystem().getSelectedNode();
+                    //Node selectedNode = hitTestResult.getNode();
 
-                    FilamentAsset filamentAsset = selectedNode.getRenderableInstance().getFilamentAsset();
+                   // Renderable selectedRenderable = selectedNode.getRenderable();
 
-                    MaterialInstance[] materialInstances = filamentAsset.getMaterialInstances();
+                   // BaseTransformableNode transformableNode = sceneformFragment.getTransformationSystem().getSelectedNode();
 
+                   // FilamentAsset filamentAsset = selectedNode.getRenderableInstance().getFilamentAsset();
 
-                    /*for (MaterialInstance materialInstance : materialInstances) {
-                        if (materialInstance.getName() == "example_name") {
-                            materialInstance.setParameter("baseColorFactor", 0.3f, 0.5f, 0.7f); // Values for Red, Green and Blue
-                        }
+                   // MaterialInstance[] materialInstances = filamentAsset.getMaterialInstances();
+
+                  /*  for (MaterialInstance materialInstance : materialInstances) {
+                        Material material = materialInstance.getMaterial();
+                        materialInstance.setParameter("baseColorFactor", 0.3f, 0.5f, 0.7f); // Values for Red, Green and Blue
                     }*/
                 }
             });
@@ -199,7 +214,29 @@ public class ArViewFragment extends Fragment implements BaseArFragment.OnTapArPl
             public void onPeekTouch(HitTestResult hitTestResult, MotionEvent motionEvent) {
                 if (hitTestResult.getNode() != null) {
                     currentAnchorNode = (AnchorNode) hitTestResult.getNode().getParent();
+
+                    takePhotoBtn.setVisibility(View.INVISIBLE);
+                    selectItemsBtn.setVisibility(View.INVISIBLE);
+                    deleteItemBtn.setVisibility(View.VISIBLE);
                 }
+            }
+        });
+
+        scene.setOnTouchListener(new Scene.OnTouchListener() {
+            @Override
+            public boolean onSceneTouch(HitTestResult hitTestResult, MotionEvent motionEvent) {
+                takePhotoBtn.setVisibility(View.VISIBLE);
+                selectItemsBtn.setVisibility(View.VISIBLE);
+                deleteItemBtn.setVisibility(View.INVISIBLE);
+
+                return false;
+            }
+        });
+
+        scene.addOnUpdateListener(new Scene.OnUpdateListener() {
+            @Override
+            public void onUpdate(FrameTime frameTime) {
+
             }
         });
     }
