@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="129dp"
-        android:layout_toRightOf="@id/btn_save_photo"
+        android:layout_toRightOf="@id/btn_take_photo"
         android:clickable="true"
         android:contentDescription="Add items"
         app:srcCompat="@drawable/couch_icon" />

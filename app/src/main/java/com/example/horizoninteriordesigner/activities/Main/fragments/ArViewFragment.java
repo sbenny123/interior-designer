@@ -1,5 +1,6 @@
 package com.example.horizoninteriordesigner.activities.Main.fragments;
 
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -28,11 +29,13 @@ import com.google.ar.sceneform.Node;
 import com.google.ar.sceneform.Scene;
 import com.google.ar.sceneform.rendering.Color;
 import com.google.ar.sceneform.rendering.Renderable;
+import com.google.ar.sceneform.rendering.Texture;
 import com.google.ar.sceneform.ux.BaseArFragment;
 import com.google.ar.sceneform.ux.BaseTransformableNode;
 import com.google.ar.sceneform.ux.TransformableNode;
 
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import static com.example.horizoninteriordesigner.activities.Main.MainActivity.ITEM_SELECT_TAG;
@@ -149,11 +152,10 @@ public class ArViewFragment extends Fragment implements BaseArFragment.OnTapArPl
 
                     FilamentAsset filamentAsset = selectedNode.getRenderableInstance().getFilamentAsset();
 
-                    filamentAsset.
-                /*   MaterialInstance[] materialInstances = filamentAsset.getMaterialInstances();
+                    MaterialInstance[] materialInstances = filamentAsset.getMaterialInstances();
 
 
-                    for (MaterialInstance materialInstance : materialInstances) {
+                    /*for (MaterialInstance materialInstance : materialInstances) {
                         if (materialInstance.getName() == "example_name") {
                             materialInstance.setParameter("baseColorFactor", 0.3f, 0.5f, 0.7f); // Values for Red, Green and Blue
                         }
@@ -164,6 +166,30 @@ public class ArViewFragment extends Fragment implements BaseArFragment.OnTapArPl
             currentAnchorNode = anchorNode;
         }
     }
+
+   /* public void loadTexture() {
+        Texture.builder()
+                .setSampler(Texture.Sampler.builder()
+                        .setMinFilter(Texture.Sampler.MinFilter.LINEAR_MIPMAP_LINEAR)
+                        .setMagFilter(Texture.Sampler.MagFilter.LINEAR)
+                        .setWrapMode(Texture.Sampler.WrapMode.REPEAT)
+                        .build())
+                .setSource(this, Uri.parse("textures/parquet.jpg"))
+                .setUsage(Texture.Usage.COLOR)
+                .build()
+                .thenAccept(
+                        texture -> {
+                            ArCameraActivity_old activity = weakActivity.get();
+                            if (activity != null) {
+                                activity.texture = texture;
+                            }
+                        })
+                .exceptionally(
+                        throwable -> {
+                            Toast.makeText(this, "Unable to load texture", Toast.LENGTH_LONG).show();
+                            return null;
+                        });
+    }*/
 
     @Override
     public void onSessionInitialization(Session session) {
