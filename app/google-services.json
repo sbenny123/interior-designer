@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "915972657310",
+    "project_id": "horizon-interior-design",
+    "storage_bucket": "horizon-interior-design.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:915972657310:android:784a57cf4a85f9fed4ab8f",
+        "android_client_info": {
+          "package_name": "com.example.horizoninteriordesigner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "915972657310-p41japq0ehlfj22hu0gci1sl2dvj7k7l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsqqs1UFMjors7NLtfWeBV3Vj7-9dRsIg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "915972657310-p41japq0ehlfj22hu0gci1sl2dvj7k7l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

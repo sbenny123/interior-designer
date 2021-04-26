@@ -21,7 +21,7 @@ public class ItemDB {
         String assestPrefix = "file:///android_asset/models/";
 
         itemArrayList.add(new Item("Chair", Uri.parse(assestPrefix + "chair_1.glb"), R.drawable.chair_1));
-        itemArrayList.add(new Item("Chair 2", Uri.parse(assestPrefix + "chair_2.glb"), R.drawable.couch_icon));
+        itemArrayList.add(new Item("Chair 2", Uri.parse(assestPrefix + "chair_2.glb"), R.drawable.chair_2));
         itemArrayList.add(new Item("Sofa", Uri.parse(assestPrefix + "sofa_1.glb"), R.drawable.sofa_1));
         itemArrayList.add(new Item("Sofa 2", Uri.parse(assestPrefix + "sofa_2.glb"), R.drawable.sofa_2));
         itemArrayList.add(new Item("Sofa 3", Uri.parse(assestPrefix + "sofa_3.glb"), R.drawable.sofa_3));
