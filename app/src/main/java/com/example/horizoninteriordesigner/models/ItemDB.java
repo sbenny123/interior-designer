@@ -19,9 +19,8 @@ public class ItemDB {
 
     private void setItems() {
         String assestPrefix = "file:///android_asset/models/";
-
-        itemArrayList.add(new Item("Cube", Uri.parse(assestPrefix + "model.glb"), R.drawable.wooden_chair));
-        itemArrayList.add(new Item("Sofa", Uri.parse(assestPrefix + "sofa.glb"), R.drawable.office_chair));
+        
+        itemArrayList.add(new Item("Sofa", Uri.parse(assestPrefix + "sofa_1.glb"), R.drawable.sofa_1));
     }
 
     /**
