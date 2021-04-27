@@ -1,8 +1,18 @@
 package com.example.horizoninteriordesigner.models;
 
 import android.net.Uri;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.example.horizoninteriordesigner.*;
+import com.example.horizoninteriordesigner.activities.Main.adapters.ItemSelectionAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -22,16 +32,31 @@ public class ItemDB {
 
 
     private void setItems() {
-        String assestPrefix = "file:///android_asset/models/";
+         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+         db.collection("models")
+                 .get()
+                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                     @Override
+                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                         if (task.isSuccessful()) {
+                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                 String itemId = document.getId();
+                                 String imageName = document.get("imageName") + "";
+                                 String imageUrl = document.get("imageUrl") + "";
+                                 String modelUrl = document.get("modelUrl") + "";
 
-       // FirebaseStorage storage = FirebaseStorage.getInstance();
-      //  StorageReference modelsRef = storage.getReference().child("models");
-      //  StorageReference thumbnailRef = storage.getReference().child("thumbnails");
+                                 Log.i("itemDB", itemId);
+                                 Log.i("ItemDB", imageName);
 
+                                 itemArrayList.add(new Item(itemId, imageName, imageUrl, modelUrl));
+                             }
+                         }
+                     }
+                 });
 
         //itemArrayList.add(new Item("Chair", ))
-        itemArrayList.add(new Item("Chair", Uri.parse(assestPrefix + "chair_1.glb"), R.drawable.chair_1));
+       /* itemArrayList.add(new Item("Chair", Uri.parse(assestPrefix + "chair_1.glb"), R.drawable.chair_1));
         itemArrayList.add(new Item("Chair 2", Uri.parse(assestPrefix + "chair_2.glb"), R.drawable.chair_2));
         itemArrayList.add(new Item("Sofa", Uri.parse(assestPrefix + "sofa_1.glb"), R.drawable.sofa_1));
         itemArrayList.add(new Item("Sofa 2", Uri.parse(assestPrefix + "sofa_2.glb"), R.drawable.sofa_2));
@@ -42,7 +67,7 @@ public class ItemDB {
         itemArrayList.add(new Item("Test sofa 1", Uri.parse(assestPrefix + "test_sofa1.glb"), R.drawable.couch_icon));
         itemArrayList.add(new Item("Test sofa 2", Uri.parse(assestPrefix + "test_sofa2.glb"), R.drawable.couch_icon));
         itemArrayList.add(new Item("Test chair 1", Uri.parse(assestPrefix + "test_chair1.glb"), R.drawable.couch_icon));
-        itemArrayList.add(new Item("Test wardrobe 1", Uri.parse(assestPrefix + "test_wardrobe1.glb"), R.drawable.couch_icon));
+        itemArrayList.add(new Item("Test wardrobe 1", Uri.parse(assestPrefix + "test_wardrobe1.glb"), R.drawable.couch_icon));*/
         // itemArrayList.add(new Item("Test chair 1", Uri.parse(assestPrefix + ".glb"), R.drawable.couch_icon));
         // itemArrayList.add(new Item("Test chair 1", Uri.parse(assestPrefix + ".glb"), R.drawable.couch_icon));
         //itemArrayList.add(new Item("", Uri.parse(assestPrefix + ".glb"), R.drawable.couch_icon));
@@ -59,7 +84,7 @@ public class ItemDB {
         for (int i = 0; i < itemArrayList.size(); i++) {
             currentItem = itemArrayList.get(i);
 
-            if (currentItem.getId().equals(id)) {
+            if (currentItem.getItemId().equals(id)) {
                 return currentItem;
             }
         }

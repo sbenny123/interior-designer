@@ -161,9 +161,11 @@ public class MainActivity extends AppCompatActivity implements ItemSelectionFrag
 
     @Override
     public void sendItem(Item item) {
-        if (item.getUri() != null) {
+      /*  if (item.getUri() != null) {
             buildModel(item.getUri());
-        }
+        }*/
+
+        Toast.makeText(this, "Item selected", Toast.LENGTH_SHORT);
     }
 
     public Renderable getRenderable() {

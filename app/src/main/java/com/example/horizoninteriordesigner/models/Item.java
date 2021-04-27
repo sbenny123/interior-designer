@@ -12,21 +12,54 @@ import java.util.UUID;
  */
 public class Item {
 
-    private String id;
-    private final String name;
-    private String url;
-    private Uri uri;
-    private final int resId;
+    private String itemId;
+    private String imageName;
+    private String imageUrl;
+    private String modelUrl;
+
+    //private String id;
+    //private final String name;
+   // private final int resId;
+   // private String url;
+   // private Uri uri;
 
 
-    public Item(String name, Uri uri, int resId) {
+    public Item() {
+        // Needed for Firebase
+    }
+
+    public Item(String itemId, String imageName, String imageUrl, String modelUrl) {
+        this.itemId = itemId;
+        this.imageName = imageName;
+        this.imageUrl = imageUrl;
+        this.modelUrl = modelUrl;
+    }
+
+    public String getItemId() {
+        return itemId;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public String getModelUrl() {
+        return modelUrl;
+    }
+
+
+    /*  public Item(String name, Uri uri, int resId) {
         this.name = name;
         this.uri = uri;
         this.resId = resId;
         setId(); // Creates a unique id
     }
 
-    public Item(String name, String url, int resId) {
+    public Item(String name, int resId, String url) {
         this.name = name;
         this.url = url;
         this.resId = resId;
@@ -50,5 +83,8 @@ public class Item {
     public Uri getUri() {
         return uri;
     }
+
     public int getResId() { return resId; }
+
+    public String getUrl() { return url; }*/
 }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.horizoninteriordesigner.R;
 import com.example.horizoninteriordesigner.models.Item;
 
@@ -67,8 +68,12 @@ public class ItemSelectionAdapter extends RecyclerView.Adapter<ItemSelectionAdap
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         Item currentItem = itemArrayList.get(position);
 
+        holder.itemTV.setText(currentItem.getImageName());
+
         //holder.itemIV.setImageResource(currentItem.getResId());
-        holder.itemTV.setText(currentItem.getName());
+
+        // Load image using Glide
+        Glide.with(context).load(currentItem.getImageUrl()).into(holder.itemIV);
     }
 
 
