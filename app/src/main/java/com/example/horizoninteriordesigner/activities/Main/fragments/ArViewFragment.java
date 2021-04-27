@@ -157,9 +157,9 @@ public class ArViewFragment extends Fragment implements BaseArFragment.OnTapArPl
             model.setOnTapListener(new Node.OnTapListener() {
                 @Override
                 public void onTap(HitTestResult hitTestResult, MotionEvent motionEvent) {
-                    deleteItemBtn.setVisibility(View.VISIBLE);
-                    selectItemsBtn.setVisibility(View.INVISIBLE);
-                    takePhotoBtn.setVisibility(View.INVISIBLE);
+                    //deleteItemBtn.setVisibility(View.VISIBLE);
+                   // selectItemsBtn.setVisibility(View.INVISIBLE);
+                    //takePhotoBtn.setVisibility(View.INVISIBLE);
 
                     //Node selectedNode = hitTestResult.getNode();
 
@@ -225,9 +225,9 @@ public class ArViewFragment extends Fragment implements BaseArFragment.OnTapArPl
         scene.setOnTouchListener(new Scene.OnTouchListener() {
             @Override
             public boolean onSceneTouch(HitTestResult hitTestResult, MotionEvent motionEvent) {
-                takePhotoBtn.setVisibility(View.VISIBLE);
-                selectItemsBtn.setVisibility(View.VISIBLE);
-                deleteItemBtn.setVisibility(View.INVISIBLE);
+                //takePhotoBtn.setVisibility(View.VISIBLE);
+                //selectItemsBtn.setVisibility(View.VISIBLE);
+                //deleteItemBtn.setVisibility(View.INVISIBLE);
 
                 return false;
             }
