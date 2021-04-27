@@ -69,23 +69,6 @@ public class MainActivity extends AppCompatActivity implements ItemSelectionFrag
     }
 
 
-
-    private void getModel() {
-        Intent intent = getIntent();
-        String itemId = intent.getStringExtra(ITEM_KEY);
-
-        if (itemId != null && !itemId.isEmpty()) {
-            ItemDbApplication itemDbApplication = (ItemDbApplication)this.getApplication();
-            ItemDB itemDB = itemDbApplication.getItemDB();
-
-            selectedItem = itemDB.getItemById(itemId);
-
-            buildModel(selectedItem.getUri());
-        } else {
-            Log.i(TAG, "Item id is null");
-        }
-    }
-
     public void buildModel(Uri itemUri) {
         WeakReference<MainActivity> weakActivity = new WeakReference<>(this);
         ModelRenderable.builder()
@@ -101,31 +84,6 @@ public class MainActivity extends AppCompatActivity implements ItemSelectionFrag
                 .exceptionally(
                         throwable -> {
                             Toast.makeText(this, "Unable to load renderable", Toast.LENGTH_LONG).show();
-                            return null;
-                        });
-    }
-
-    public void loadTexture() {
-        WeakReference<MainActivity> weakActivity = new WeakReference<>(this);
-        Texture.builder()
-                .setSampler(Texture.Sampler.builder()
-                        .setMinFilter(Texture.Sampler.MinFilter.LINEAR_MIPMAP_LINEAR)
-                        .setMagFilter(Texture.Sampler.MagFilter.LINEAR)
-                        .setWrapMode(Texture.Sampler.WrapMode.REPEAT)
-                        .build())
-                .setSource(this, Uri.parse("textures/parquet.jpg"))
-                .setUsage(Texture.Usage.COLOR)
-                .build()
-                .thenAccept(
-                        texture -> {
-                            MainActivity activity = weakActivity.get();
-                            if (activity != null) {
-                                activity.texture = texture;
-                            }
-                        })
-                .exceptionally(
-                        throwable -> {
-                            Toast.makeText(this, "Unable to load texture", Toast.LENGTH_LONG).show();
                             return null;
                         });
     }
