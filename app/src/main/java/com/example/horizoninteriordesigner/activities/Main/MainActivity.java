@@ -161,6 +161,8 @@ public class MainActivity extends AppCompatActivity implements ItemSelectionFrag
 
     @Override
     public void sendItem(Item item) {
+
+        buildModel(Uri.parse(item.getModelUrl()));
       /*  if (item.getUri() != null) {
             buildModel(item.getUri());
         }*/
