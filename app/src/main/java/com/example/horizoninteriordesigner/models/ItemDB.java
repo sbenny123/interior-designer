@@ -6,6 +6,7 @@ import com.example.horizoninteriordesigner.*;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
 import java.util.ArrayList;
 
 
@@ -19,11 +20,13 @@ public class ItemDB {
 
     public ArrayList<Item> getItems() { return itemArrayList; }
 
+
     private void setItems() {
         String assestPrefix = "file:///android_asset/models/";
 
+
        // FirebaseStorage storage = FirebaseStorage.getInstance();
-       // StorageReference modelsRef = storage.getReference().child("models");
+      //  StorageReference modelsRef = storage.getReference().child("models");
       //  StorageReference thumbnailRef = storage.getReference().child("thumbnails");
 
 

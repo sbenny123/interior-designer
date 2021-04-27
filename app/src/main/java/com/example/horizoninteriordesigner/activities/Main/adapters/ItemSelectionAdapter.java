@@ -40,10 +40,6 @@ public class ItemSelectionAdapter extends RecyclerView.Adapter<ItemSelectionAdap
         this.itemArrayList = itemArrayList;
     }
 
-   /* public ItemSelectionAdapter(Context context, ArrayList<Item> itemArrayList) {
-        this.context = context;
-        this.itemArrayList = itemArrayList;
-    }*/
 
     /**
      * Inflates the layout to be used for each item.
@@ -71,7 +67,7 @@ public class ItemSelectionAdapter extends RecyclerView.Adapter<ItemSelectionAdap
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         Item currentItem = itemArrayList.get(position);
 
-        holder.itemIV.setImageResource(currentItem.getResId());
+        //holder.itemIV.setImageResource(currentItem.getResId());
         holder.itemTV.setText(currentItem.getName());
     }
 

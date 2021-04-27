@@ -14,7 +14,7 @@ public class Item {
 
     private String id;
     private final String name;
-    private String fileName;
+    private String url;
     private Uri uri;
     private final int resId;
 
@@ -26,9 +26,9 @@ public class Item {
         setId(); // Creates a unique id
     }
 
-    public Item(String name, String fileName, int resId) {
+    public Item(String name, String url, int resId) {
         this.name = name;
-        this.fileName = fileName;
+        this.url = url;
         this.resId = resId;
         setId(); // Creates a unique id
     }
