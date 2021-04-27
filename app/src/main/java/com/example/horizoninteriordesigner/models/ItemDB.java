@@ -3,6 +3,8 @@ package com.example.horizoninteriordesigner.models;
 import android.net.Uri;
 
 import com.example.horizoninteriordesigner.*;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -20,6 +22,12 @@ public class ItemDB {
     private void setItems() {
         String assestPrefix = "file:///android_asset/models/";
 
+       // FirebaseStorage storage = FirebaseStorage.getInstance();
+       // StorageReference modelsRef = storage.getReference().child("models");
+      //  StorageReference thumbnailRef = storage.getReference().child("thumbnails");
+
+
+        //itemArrayList.add(new Item("Chair", ))
         itemArrayList.add(new Item("Chair", Uri.parse(assestPrefix + "chair_1.glb"), R.drawable.chair_1));
         itemArrayList.add(new Item("Chair 2", Uri.parse(assestPrefix + "chair_2.glb"), R.drawable.chair_2));
         itemArrayList.add(new Item("Sofa", Uri.parse(assestPrefix + "sofa_1.glb"), R.drawable.sofa_1));

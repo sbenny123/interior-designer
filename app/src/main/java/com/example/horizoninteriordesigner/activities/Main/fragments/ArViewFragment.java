@@ -215,9 +215,9 @@ public class ArViewFragment extends Fragment implements BaseArFragment.OnTapArPl
                 if (hitTestResult.getNode() != null) {
                     currentAnchorNode = (AnchorNode) hitTestResult.getNode().getParent();
 
-                    takePhotoBtn.setVisibility(View.INVISIBLE);
-                    selectItemsBtn.setVisibility(View.INVISIBLE);
-                    deleteItemBtn.setVisibility(View.VISIBLE);
+                    //takePhotoBtn.setVisibility(View.INVISIBLE);
+                    //selectItemsBtn.setVisibility(View.INVISIBLE);
+                    //deleteItemBtn.setVisibility(View.VISIBLE);
                 }
             }
         });

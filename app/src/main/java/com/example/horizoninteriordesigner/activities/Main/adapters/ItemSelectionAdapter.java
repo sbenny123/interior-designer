@@ -54,7 +54,7 @@ public class ItemSelectionAdapter extends RecyclerView.Adapter<ItemSelectionAdap
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
+        View itemView = LayoutInflater.from(context).inflate(R.layout.card_item, parent, false);
 
         ItemViewHolder itemViewHolder = new ItemViewHolder(itemView);
 
@@ -69,10 +69,10 @@ public class ItemSelectionAdapter extends RecyclerView.Adapter<ItemSelectionAdap
      */
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-        Item item = itemArrayList.get(position);
+        Item currentItem = itemArrayList.get(position);
 
-        holder.itemIV.setImageResource(item.getResId());
-        holder.itemTV.setText(item.getName());
+        holder.itemIV.setImageResource(currentItem.getResId());
+        holder.itemTV.setText(currentItem.getName());
     }
 
 
