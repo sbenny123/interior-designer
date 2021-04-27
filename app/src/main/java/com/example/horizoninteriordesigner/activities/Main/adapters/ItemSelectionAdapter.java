@@ -70,8 +70,6 @@ public class ItemSelectionAdapter extends RecyclerView.Adapter<ItemSelectionAdap
 
         holder.itemTV.setText(currentItem.getImageName());
 
-        //holder.itemIV.setImageResource(currentItem.getResId());
-
         // Load image using Glide
         Glide.with(context).load(currentItem.getImageUrl()).into(holder.itemIV);
     }

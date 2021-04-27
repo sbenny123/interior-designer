@@ -17,13 +17,7 @@ public class Item {
     private String imageUrl;
     private String modelUrl;
 
-    //private String id;
-    //private final String name;
-   // private final int resId;
-   // private String url;
-   // private Uri uri;
-
-
+    
     public Item() {
         // Needed for Firebase
     }
@@ -50,41 +44,4 @@ public class Item {
     public String getModelUrl() {
         return modelUrl;
     }
-
-
-    /*  public Item(String name, Uri uri, int resId) {
-        this.name = name;
-        this.uri = uri;
-        this.resId = resId;
-        setId(); // Creates a unique id
-    }
-
-    public Item(String name, int resId, String url) {
-        this.name = name;
-        this.url = url;
-        this.resId = resId;
-        setId(); // Creates a unique id
-    }
-
-
-    public String getId() {
-        return id;
-    }
-
-    private void setId() {
-        String randomId = UUID.randomUUID().toString();
-        this.id = randomId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Uri getUri() {
-        return uri;
-    }
-
-    public int getResId() { return resId; }
-
-    public String getUrl() { return url; }*/
 }
