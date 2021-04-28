@@ -55,11 +55,8 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         BaseArFragment.OnTapArPlaneListener, BaseArFragment.OnSessionInitializationListener {
 
     private SceneformFragment sceneformFragment;
-    private Renderable renderable;
-    private Item item;
-
     private AnchorNode currentAnchorNode;
-    
+
 
     public ArViewFragment() {
         // Required empty public constructor
@@ -157,6 +154,19 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         popupMenu.show();
     }
 
+
+    private void updateModelMaterial(TransformableNode modelToUpdate) {
+        // BaseTransformableNode transformableNode = sceneformFragment.getTransformationSystem().getSelectedNode();
+
+        // FilamentAsset filamentAsset = selectedNode.getRenderableInstance().getFilamentAsset();
+
+        // MaterialInstance[] materialInstances = filamentAsset.getMaterialInstances();
+
+                  /*  for (MaterialInstance materialInstance : materialInstances) {
+                        Material material = materialInstance.getMaterial();
+                        materialInstance.setParameter("baseColorFactor", 0.3f, 0.5f, 0.7f); // Values for Red, Green and Blue
+                    }*/
+    }
 
     /**
      *
@@ -287,6 +297,4 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
             }
         });
     }
-
-
 }
