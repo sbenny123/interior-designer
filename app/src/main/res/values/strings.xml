@@ -6,5 +6,9 @@
     <!-- Buttons -->
     <string name="btn_take_photo_desc">Take a photo</string>
     <string name="btn_select_items_desc">Select an item</string>
-    <string name="btn_delete_item_desc">Delete item</string>
+    <string name="btn_show_item_options_desc">Show item options</string>
+
+    <!-- Menu items -->
+    <string name="item_change_design">Change design</string>
+    <string name="item_remove_item">Remove</string>
 </resources>

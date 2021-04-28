@@ -7,44 +7,15 @@
     android:layout_height="match_parent"
     tools:context=".activities.Main.fragments.ArViewFragment">
 
-  <!--  <FrameLayout
-        android:id="@+id/fragment_ar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-
-    </FrameLayout> -->
-
-   <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_select_items"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/btn_take_photo"
-        android:clickable="true"
-        android:contentDescription="Add items"
-        android:focusable="true"
-        app:srcCompat="@drawable/couch_icon" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_take_photo"
-            android:contentDescription="Take a photo"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/btn_select_items"
-            app:srcCompat="@android:drawable/ic_menu_camera" /> -->
-
     <!-- Icon made by Freepik from www.flaticon.com -->
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_delete_item"
+        android:id="@+id/btn_show_item_options"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:clickable="true"
-        android:contentDescription="@string/btn_delete_item_desc"
+        android:contentDescription="@string/btn_show_item_options_desc"
         android:focusable="true"
-        android:src="@android:drawable/ic_menu_delete"
+        android:src="@drawable/options_icon"
         app:fabCustomSize="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_take_photo"
@@ -70,6 +41,7 @@
         app:layout_constraintVertical_bias="0.905"
         app:useCompatPadding="false" />
 
+  <!-- Icon made by Freepik from www.flaticon.com -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_select_items"
         android:layout_width="70dp"

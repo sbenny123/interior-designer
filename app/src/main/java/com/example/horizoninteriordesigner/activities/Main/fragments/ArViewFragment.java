@@ -5,9 +5,12 @@ import android.os.Bundle;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -48,16 +51,15 @@ import java.util.List;
 import static com.example.horizoninteriordesigner.activities.Main.MainActivity.ITEM_SELECT_TAG;
 
 
-public class ArViewFragment extends Fragment implements BaseArFragment.OnTapArPlaneListener, BaseArFragment.OnSessionInitializationListener {
+public class ArViewFragment extends Fragment implements View.OnClickListener,
+        BaseArFragment.OnTapArPlaneListener, BaseArFragment.OnSessionInitializationListener {
+
     private SceneformFragment sceneformFragment;
     private Renderable renderable;
     private Item item;
 
     private AnchorNode currentAnchorNode;
-
-    FloatingActionButton takePhotoBtn;
-    FloatingActionButton selectItemsBtn;
-    FloatingActionButton deleteItemBtn;
+    
 
     public ArViewFragment() {
         // Required empty public constructor
@@ -79,38 +81,41 @@ public class ArViewFragment extends Fragment implements BaseArFragment.OnTapArPl
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_ar_view, container, false);
+        View v = inflater.inflate(R.layout.fragment_ar_view, container, false);
 
-        initialiseButtons(view);
+        initialiseButtons(v);
 
-        return view;
+        return v;
     }
 
-    private void initialiseButtons(View view) {
-        takePhotoBtn = view.findViewById(R.id.btn_take_photo);
-        selectItemsBtn = view.findViewById(R.id.btn_select_items);
-        deleteItemBtn = view.findViewById(R.id.btn_delete_item);
 
-        takePhotoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
+    private void initialiseButtons(View v) {
+        FloatingActionButton takePhotoBtn = v.findViewById(R.id.btn_take_photo);
+        FloatingActionButton selectItemsBtn = v.findViewById(R.id.btn_select_items);
+        FloatingActionButton showItemOptionsBtn = v.findViewById(R.id.btn_show_item_options);
 
-        selectItemsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        takePhotoBtn.setOnClickListener(this);
+        selectItemsBtn.setOnClickListener(this);
+        showItemOptionsBtn.setOnClickListener(this);
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+
+            case R.id.btn_select_items:
                 currentAnchorNode = null;
                 showItemSelectionFragment();
-            }
-        });
+                break;
 
-        deleteItemBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                removeAnchorNode(currentAnchorNode);
-            }
-        });
+            case R.id.btn_show_item_options:
+                showItemOptionsPopup(v);
+                break;
+
+            case R.id.btn_take_photo:
+                break;
+        }
     }
 
     /**
@@ -120,6 +125,43 @@ public class ArViewFragment extends Fragment implements BaseArFragment.OnTapArPl
         ((MainActivity) getActivity()).manageFragmentTransaction(ITEM_SELECT_TAG);
     }
 
+
+    /**
+     *
+     * @param v
+     */
+    private void showItemOptionsPopup(View v) {
+        PopupMenu popupMenu = new PopupMenu(getActivity(), v);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_model_options, popupMenu.getMenu());
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.item_change_design:
+                        break;
+
+                    case R.id.item_remove_item:
+                        removeAnchorNode(currentAnchorNode);
+                        break;
+
+                    default:
+                        return false;
+                }
+
+                return true;
+            }
+        });
+
+        popupMenu.show();
+    }
+
+
+    /**
+     *
+     * @param nodeToRemove
+     */
     private void removeAnchorNode(AnchorNode nodeToRemove) {
         if (nodeToRemove != null) {
             sceneformFragment.getArSceneView().getScene().removeChild(nodeToRemove);
@@ -245,4 +287,6 @@ public class ArViewFragment extends Fragment implements BaseArFragment.OnTapArPl
             }
         });
     }
+
+
 }
