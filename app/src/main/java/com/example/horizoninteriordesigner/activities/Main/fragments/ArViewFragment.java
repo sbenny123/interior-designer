@@ -151,6 +151,9 @@ public class ArViewFragment extends Fragment implements BaseArFragment.OnTapArPl
 
             // Create the transformable model and add it to the anchor.
             TransformableNode model = new TransformableNode(sceneformFragment.getTransformationSystem());
+
+            Log.i("ARViewFragment", "Min scale is " + String.valueOf(model.getScaleController().getMinScale()));
+            Log.i("ARViewFragment", "Max scale is " + String.valueOf(model.getScaleController().getMaxScale()));
             model.setParent(anchorNode);
             model.setRenderable(renderable);
             model.select();
@@ -161,9 +164,11 @@ public class ArViewFragment extends Fragment implements BaseArFragment.OnTapArPl
                    // selectItemsBtn.setVisibility(View.INVISIBLE);
                     //takePhotoBtn.setVisibility(View.INVISIBLE);
 
-                    //Node selectedNode = hitTestResult.getNode();
+                    TransformableNode selectedModel = (TransformableNode) hitTestResult.getNode();
+                    AnchorNode selectedAnchorNode = (AnchorNode) selectedModel.getParent();
+                    Renderable selectedRenderable = selectedModel.getRenderable();
 
-                   // Renderable selectedRenderable = selectedNode.getRenderable();
+                    currentAnchorNode = selectedAnchorNode;
 
                    // BaseTransformableNode transformableNode = sceneformFragment.getTransformationSystem().getSelectedNode();
 
