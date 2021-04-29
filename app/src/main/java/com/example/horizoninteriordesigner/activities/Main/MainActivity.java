@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements ItemSelectionFrag
                         });
     }
 
-
     /**
      * Checks if the device is compatible with Sceneform and ARCore.
      * Returns true if compatible and false if not.
