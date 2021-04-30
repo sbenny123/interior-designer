@@ -54,7 +54,7 @@ public class MaterialSelectionAdapter
     @NonNull
     @Override
     public MaterialViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View materialView = LayoutInflater.from(context).inflate(R.layout.card_item, parent, false);
+        View materialView = LayoutInflater.from(context).inflate(R.layout.card_material, parent, false);
 
         MaterialViewHolder materialViewHolder = new MaterialViewHolder(materialView);
 
@@ -70,8 +70,6 @@ public class MaterialSelectionAdapter
     @Override
     public void onBindViewHolder(@NonNull MaterialViewHolder holder, int position) {
         Material currentMaterial = materialArrayList.get(position);
-
-        holder.materialTV.setText(currentMaterial.getMaterialName());
 
         // Load image using Glide
         Glide.with(context).load(currentMaterial.getMaterialUrl()).into(holder.materialIV);
@@ -92,15 +90,14 @@ public class MaterialSelectionAdapter
      *
      */
     public class MaterialViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
         private ImageView materialIV;
-        private TextView materialTV;
 
 
         public MaterialViewHolder(@NonNull View materialView) {
             super(materialView);
 
             materialIV = materialView.findViewById(R.id.iv_material);
-            materialTV = materialView.findViewById(R.id.tv_material);
 
             materialView.setOnClickListener(this);
         }

@@ -112,6 +112,12 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
     }
 
 
+    private void showMaterialSelectionFragment() {
+        Fragment materialSelectionFragment = new MaterialSelectionFragment();
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_materials, materialSelectionFragment).commit();
+    }
+
     /**
      *
      * @param v
@@ -126,6 +132,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
 
                 switch (item.getItemId()) {
                     case R.id.item_change_design:
+                        showMaterialSelectionFragment();
                         break;
 
                     case R.id.item_remove_item:

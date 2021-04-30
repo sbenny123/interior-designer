@@ -6,15 +6,15 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.horizoninteriordesigner.R;
-import com.example.horizoninteriordesigner.activities.Main.MainActivity;
-import com.example.horizoninteriordesigner.activities.Main.adapters.ItemSelectionAdapter;
 import com.example.horizoninteriordesigner.activities.Main.adapters.MaterialSelectionAdapter;
 import com.example.horizoninteriordesigner.models.Material;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,7 +25,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-import static com.example.horizoninteriordesigner.activities.Main.MainActivity.AR_VIEW_TAG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,12 +34,12 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
     private RecyclerView recyclerView;
     private MaterialSelectionAdapter adapter;
     private ArrayList<Material> materialArrayList;
-    SendFragmentListener sendFragmentListener;
+   // SendFragmentListener sendFragmentListener;
 
 
-    public interface SendFragmentListener {
+    /*public interface SendFragmentListener {
         void sendMaterial(Material material);
-    }
+    }*/
 
     public MaterialSelectionFragment() {
         // Required empty public constructor
@@ -50,13 +49,13 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        sendFragmentListener = (SendFragmentListener) context;
+        //sendFragmentListener = (SendFragmentListener) context;
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        sendFragmentListener = null;
+        //sendFragmentListener = null;
     }
 
     @Override
@@ -67,8 +66,11 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
 
         recyclerView = view.findViewById(R.id.rv_materials);
 
-        setUpRecyclerView(); // sets up configuration for recycler view
-        getMaterials(); // Sets material data in array list for a given item and creates adapter
+        // Set up configuration for recycler view
+        setUpRecyclerView();
+
+        // Set material data in array list for a given item and creates adapter
+        getMaterials();
 
         return view;
     }
@@ -76,9 +78,9 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
     @Override
     public void onItemClick(View view, int position) {
         Material selectedMaterial = materialArrayList.get(position);
-        sendFragmentListener.sendMaterial(selectedMaterial);
+        //sendFragmentListener.sendMaterial(selectedMaterial);
 
-        ((MainActivity) getActivity()).manageFragmentTransaction(AR_VIEW_TAG);
+        //((MainActivity) getActivity()).manageFragmentTransaction(AR_VIEW_TAG);
     }
 
     /**
@@ -101,10 +103,16 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
                                 String materialUrl = document.get("materialUrl") + "";
 
                                 materialArrayList.add(new Material(materialId, materialName, materialUrl));
+
+                                Log.i("MaterialSelectionFragment", materialName);
                             }
 
-                            adapter = new MaterialSelectionAdapter(getActivity(),
+                            Log.i("MaterialSelectionFragment", "Material array is " + materialArrayList.size());
+
+                            // Create adapter for materials view - bridges recyclerview and materials (data source)
+                            adapter = new MaterialSelectionAdapter(getContext(),
                                     MaterialSelectionFragment.this::onItemClick, materialArrayList);
+
                             recyclerView.setAdapter(adapter);
                         }
                     }
@@ -115,6 +123,6 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
      *
      */
     private void setUpRecyclerView() {
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
     }
 }
