@@ -1,50 +1,120 @@
 package com.example.horizoninteriordesigner.activities.Main.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.horizoninteriordesigner.R;
+import com.example.horizoninteriordesigner.activities.Main.MainActivity;
+import com.example.horizoninteriordesigner.activities.Main.adapters.ItemSelectionAdapter;
+import com.example.horizoninteriordesigner.activities.Main.adapters.MaterialSelectionAdapter;
+import com.example.horizoninteriordesigner.models.Material;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+
+import static com.example.horizoninteriordesigner.activities.Main.MainActivity.AR_VIEW_TAG;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MaterialSelectionFragment#newInstance} factory method to
- * create an instance of this fragment.
  */
-public class MaterialSelectionFragment extends Fragment {
+public class MaterialSelectionFragment extends Fragment implements MaterialSelectionAdapter.ItemClickListener {
 
+    private RecyclerView recyclerView;
+    private MaterialSelectionAdapter adapter;
+    private ArrayList<Material> materialArrayList;
+    SendFragmentListener sendFragmentListener;
+
+
+    public interface SendFragmentListener {
+        void sendMaterial(Material material);
+    }
 
     public MaterialSelectionFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment MaterialSelectionFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MaterialSelectionFragment newInstance(String param1, String param2) {
-        MaterialSelectionFragment fragment = new MaterialSelectionFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        sendFragmentListener = (SendFragmentListener) context;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onDetach() {
+        super.onDetach();
+        sendFragmentListener = null;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_material_selection, container, false);
+        View view = inflater.inflate(R.layout.fragment_material_selection, container, false);
+
+        recyclerView = view.findViewById(R.id.rv_materials);
+
+        setUpRecyclerView(); // sets up configuration for recycler view
+        getMaterials(); // Sets material data in array list for a given item and creates adapter
+
+        return view;
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        Material selectedMaterial = materialArrayList.get(position);
+        sendFragmentListener.sendMaterial(selectedMaterial);
+
+        ((MainActivity) getActivity()).manageFragmentTransaction(AR_VIEW_TAG);
+    }
+
+    /**
+     * Retrieves item documents from Firestore and maps to Item model and adds to array list.
+     * Adapter is set once all documents are added.
+     */
+    private void getMaterials() {
+        materialArrayList = new ArrayList<>();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("materials")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String materialId = document.getId();
+                                String materialName = document.get("materialName") + "";
+                                String materialUrl = document.get("materialUrl") + "";
+
+                                materialArrayList.add(new Material(materialId, materialName, materialUrl));
+                            }
+
+                            adapter = new MaterialSelectionAdapter(getActivity(),
+                                    MaterialSelectionFragment.this::onItemClick, materialArrayList);
+                            recyclerView.setAdapter(adapter);
+                        }
+                    }
+                });
+    }
+
+    /**
+     *
+     */
+    private void setUpRecyclerView() {
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
     }
 }
