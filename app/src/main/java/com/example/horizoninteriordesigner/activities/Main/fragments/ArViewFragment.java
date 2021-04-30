@@ -130,6 +130,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
 
                     case R.id.item_remove_item:
                         removeAnchorNode(currentAnchorNode);
+                        currentAnchorNode = null;
                         break;
 
                     default:
@@ -207,7 +208,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
 
                     currentAnchorNode = selectedAnchorNode;
 
-                    FilamentAsset filamentAsset = selectedModel.getRenderableInstance().getFilamentAsset();
+                   /* FilamentAsset filamentAsset = selectedModel.getRenderableInstance().getFilamentAsset();
                     MaterialInstance[] materialInstances = filamentAsset.getMaterialInstances();
                     AtomicReference<Texture> aTexture;
 
@@ -221,6 +222,9 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
                         Material material = selectedModel.getRenderableInstance().getMaterial();
 
                         Log.i("onTap", "Texture set");
+
+
+                    */
 
 
 
@@ -283,5 +287,9 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
 
             }
         });
+    }
+
+    private void getMaterials() {
+
     }
 }
