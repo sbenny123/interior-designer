@@ -1,11 +1,13 @@
 package com.example.horizoninteriordesigner.activities.Main.fragments;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -15,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.horizoninteriordesigner.activities.Main.MainActivity;
@@ -41,6 +44,7 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
     private ItemSelectionAdapter adapter;
     private ArrayList<Item> itemArrayList;
     private ItemViewModel itemViewModel;
+    private AlertDialog progressDialog;
    // SendFragmentListener sendFragmentListener;
 
 
@@ -73,6 +77,12 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
         recyclerView = view.findViewById(R.id.rv_items);
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setCancelable(false);
+        builder.setView(R.layout.dialog_item_progress);
+
+        progressDialog = builder.create();
+
         setUpRecyclerView(); // sets up configuration for recycler view
         getItems(); // Sets item data in array list and creates adapter
 
@@ -88,11 +98,11 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
     @Override
     public void onItemClick(View view, int position) {
+        progressDialog.show();
+
         Item selectedItem = itemArrayList.get(position);
 
         buildModel(selectedItem);
-
-        ((MainActivity) getActivity()).manageFragmentTransaction(AR_VIEW_TAG);
     }
 
     private void buildModel(Item selectedItem) {
@@ -104,6 +114,11 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
                 .build()
                 .thenAccept(renderable -> {
                     itemViewModel.setRenderable(renderable);
+
+                    progressDialog.dismiss();
+
+                    ((MainActivity) getActivity()).manageFragmentTransaction(AR_VIEW_TAG);
+
                 })
                 .exceptionally(
                         throwable -> {
