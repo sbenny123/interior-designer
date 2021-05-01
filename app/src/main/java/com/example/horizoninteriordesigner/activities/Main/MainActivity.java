@@ -28,7 +28,9 @@ import com.google.ar.sceneform.ux.BaseTransformableNode;
 import java.lang.ref.WeakReference;
 
 
-public class MainActivity extends AppCompatActivity implements ItemSelectionFragment.SendFragmentListener {
+public class MainActivity extends AppCompatActivity {
+    // implements ItemSelectionFragment.SendFragmentListener
+
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final double MIN_OPENGL_VERSION = 3.0;
@@ -154,12 +156,12 @@ public class MainActivity extends AppCompatActivity implements ItemSelectionFrag
      * Builds item to be rendered.
      * @param item
      */
-    @Override
+   /** @Override
     public void sendItem(Item item) {
         if (!item.getModelUrl().isEmpty()) {
             buildModel(Uri.parse(item.getModelUrl()));
         }
-    }
+    }**/
 
     public Renderable getRenderable() {
         return renderable;

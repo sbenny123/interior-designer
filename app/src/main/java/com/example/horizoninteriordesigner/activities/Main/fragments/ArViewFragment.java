@@ -11,11 +11,16 @@ import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.horizoninteriordesigner.R;
 import com.example.horizoninteriordesigner.activities.Main.MainActivity;
+import com.example.horizoninteriordesigner.activities.Main.viewModels.ItemViewModel;
+import com.example.horizoninteriordesigner.models.Item;
 import com.google.android.filament.MaterialInstance;
 import com.google.android.filament.gltfio.FilamentAsset;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -45,6 +50,8 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
 
     private SceneformFragment sceneformFragment;
     private AnchorNode currentAnchorNode;
+    private Item selectedItem;
+    private ItemViewModel itemViewModel;
 
 
     public ArViewFragment() {
@@ -74,6 +81,12 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         return v;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        itemViewModel = new ViewModelProvider(getActivity()).get(ItemViewModel.class);
+    }
 
     private void initialiseButtons(View v) {
         FloatingActionButton takePhotoBtn = v.findViewById(R.id.btn_take_photo);
@@ -180,9 +193,9 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onTapPlane(HitResult hitResult, Plane plane, MotionEvent motionEvent) {
-        Log.i("ArViewFragment", "Tapped on plane!");
+        Log.i("ArView", "Tapped on plane!");
 
-        Renderable renderable = ((MainActivity)getActivity()).getRenderable();
+        /* Renderable renderable = ((MainActivity)getActivity()).getRenderable();
 
         if (renderable == null) {
             Toast.makeText(getActivity(), "Select a model", Toast.LENGTH_SHORT).show();
@@ -213,7 +226,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
                     AnchorNode selectedAnchorNode = (AnchorNode) selectedModel.getParent();
                     Renderable selectedRenderable = selectedModel.getRenderable();
 
-                    currentAnchorNode = selectedAnchorNode;
+                    currentAnchorNode = selectedAnchorNode;*/
 
                    /* FilamentAsset filamentAsset = selectedModel.getRenderableInstance().getFilamentAsset();
                     MaterialInstance[] materialInstances = filamentAsset.getMaterialInstances();
@@ -252,14 +265,22 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
                         materialInstance.setParameter("baseColor", texture, textureSampler);
                         //materialInstance.setParameter("baseColorFactor", 0.3f, 0.5f, 0.7f); // Values for Red, Green and Blue
                     }*/
-                }
+                /*}
             });
 
 
             currentAnchorNode = anchorNode;
-        }
+        }*/
     }
 
+    private void buildModel() {
+        itemViewModel.getItem().observe(getViewLifecycleOwner(), item -> {
+            selectedItem = item;
+        });
+
+
+        Log.i("ArView", "Item name is " + selectedItem.getImageName());
+    }
 
     @Override
     public void onSessionInitialization(Session session) {

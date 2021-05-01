@@ -4,10 +4,13 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,7 @@ import android.view.ViewGroup;
 import com.example.horizoninteriordesigner.activities.Main.MainActivity;
 import com.example.horizoninteriordesigner.activities.Main.adapters.ItemSelectionAdapter;
 import com.example.horizoninteriordesigner.R;
+import com.example.horizoninteriordesigner.activities.Main.viewModels.ItemViewModel;
 import com.example.horizoninteriordesigner.models.Item;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -32,12 +36,13 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
     private RecyclerView recyclerView;
     private ItemSelectionAdapter adapter;
     private ArrayList<Item> itemArrayList;
-    SendFragmentListener sendFragmentListener;
+    private ItemViewModel itemViewModel;
+   // SendFragmentListener sendFragmentListener;
 
 
-    public interface SendFragmentListener {
+   /* public interface SendFragmentListener {
         void sendItem(Item item);
-    }
+    }*/
 
     public ItemSelectionFragment() {
         // Required empty public constructor
@@ -47,13 +52,13 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        sendFragmentListener = (SendFragmentListener) context;
+        //sendFragmentListener = (SendFragmentListener) context;
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        sendFragmentListener = null;
+        //sendFragmentListener = null;
     }
 
     @Override
@@ -71,9 +76,18 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        itemViewModel = new ViewModelProvider(getActivity()).get(ItemViewModel.class);
+    }
+
+    @Override
     public void onItemClick(View view, int position) {
         Item selectedItem = itemArrayList.get(position);
-        sendFragmentListener.sendItem(selectedItem);
+
+        itemViewModel.setItem(selectedItem);
+        //sendFragmentListener.sendItem(selectedItem);
 
         ((MainActivity) getActivity()).manageFragmentTransaction(AR_VIEW_TAG);
     }

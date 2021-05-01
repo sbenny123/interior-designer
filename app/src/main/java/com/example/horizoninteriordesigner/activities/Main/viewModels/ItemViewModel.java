@@ -12,7 +12,8 @@ public class ItemViewModel extends ViewModel {
         return item;
     }
 
-    public void setItem(MutableLiveData<Item> item) {
-        this.item = item;
+    public void setItem(Item item) {
+        this.item = new MutableLiveData<Item>();
+        this.item.setValue(item);
     }
 }
