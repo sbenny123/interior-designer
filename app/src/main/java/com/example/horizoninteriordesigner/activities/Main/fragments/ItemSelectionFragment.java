@@ -45,29 +45,11 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
     private ArrayList<Item> itemArrayList;
     private ItemViewModel itemViewModel;
     private AlertDialog progressDialog;
-   // SendFragmentListener sendFragmentListener;
-
-
-   /* public interface SendFragmentListener {
-        void sendItem(Item item);
-    }*/
 
     public ItemSelectionFragment() {
         // Required empty public constructor
     }
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-
-        //sendFragmentListener = (SendFragmentListener) context;
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        //sendFragmentListener = null;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

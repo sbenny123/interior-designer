@@ -29,16 +29,12 @@ import java.lang.ref.WeakReference;
 
 
 public class MainActivity extends AppCompatActivity {
-    // implements ItemSelectionFragment.SendFragmentListener
-
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final double MIN_OPENGL_VERSION = 3.0;
 
     final public static String AR_VIEW_TAG = "FRAGMENT_AR_VIEW";
     final public static String ITEM_SELECT_TAG = "FRAGMEMTN_ITEM_SELECTION";
-
-    //private Renderable renderable;
 
 
     @Override
@@ -53,30 +49,6 @@ public class MainActivity extends AppCompatActivity {
 
         manageFragmentTransaction(ITEM_SELECT_TAG);
     }
-
-
-    /**
-     *
-     * @param itemUri
-     */
- /*  public void buildModel(Uri itemUri) {
-        WeakReference<MainActivity> weakActivity = new WeakReference<>(this);
-        ModelRenderable.builder()
-                .setSource(this, itemUri)
-                .setIsFilamentGltf(true)
-                .build()
-                .thenAccept(renderable -> {
-                    MainActivity activity = weakActivity.get();
-                    if (activity != null) {
-                        activity.renderable = renderable;
-                    }
-                })
-                .exceptionally(
-                        throwable -> {
-                            Toast.makeText(this, "Unable to load renderable", Toast.LENGTH_LONG).show();
-                            return null;
-                        });
-    }*/
 
     /**
      * Checks if the device is compatible with Sceneform and ARCore.
@@ -151,20 +123,5 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
-
-    /**
-     * Builds item to be rendered.
-     * @param item
-     */
-   /** @Override
-    public void sendItem(Item item) {
-        if (!item.getModelUrl().isEmpty()) {
-            buildModel(Uri.parse(item.getModelUrl()));
-        }
-    }**/
-
-    /*public Renderable getRenderable() {
-        return renderable;
-    }*/
 }
 

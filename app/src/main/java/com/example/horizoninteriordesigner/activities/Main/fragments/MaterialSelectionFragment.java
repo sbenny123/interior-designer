@@ -34,29 +34,11 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
     private RecyclerView recyclerView;
     private MaterialSelectionAdapter adapter;
     private ArrayList<Material> materialArrayList;
-   // SendFragmentListener sendFragmentListener;
-
-
-    /*public interface SendFragmentListener {
-        void sendMaterial(Material material);
-    }*/
 
     public MaterialSelectionFragment() {
         // Required empty public constructor
     }
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-
-        //sendFragmentListener = (SendFragmentListener) context;
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        //sendFragmentListener = null;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

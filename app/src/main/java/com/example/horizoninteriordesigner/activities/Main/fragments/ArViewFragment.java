@@ -348,34 +348,9 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
             public void onPeekTouch(HitTestResult hitTestResult, MotionEvent motionEvent) {
                 if (hitTestResult.getNode() != null) {
                     currentAnchorNode = (AnchorNode) hitTestResult.getNode().getParent();
-
-                    //takePhotoBtn.setVisibility(View.INVISIBLE);
-                    //selectItemsBtn.setVisibility(View.INVISIBLE);
-                    //deleteItemBtn.setVisibility(View.VISIBLE);
                 }
             }
         });
-
-        scene.setOnTouchListener(new Scene.OnTouchListener() {
-            @Override
-            public boolean onSceneTouch(HitTestResult hitTestResult, MotionEvent motionEvent) {
-                //takePhotoBtn.setVisibility(View.VISIBLE);
-                //selectItemsBtn.setVisibility(View.VISIBLE);
-                //deleteItemBtn.setVisibility(View.INVISIBLE);
-
-                return false;
-            }
-        });
-
-        scene.addOnUpdateListener(new Scene.OnUpdateListener() {
-            @Override
-            public void onUpdate(FrameTime frameTime) {
-
-            }
-        });
-    }
-
-    private void getMaterials() {
 
     }
 }
