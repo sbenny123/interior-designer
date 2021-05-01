@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     final public static String AR_VIEW_TAG = "FRAGMENT_AR_VIEW";
     final public static String ITEM_SELECT_TAG = "FRAGMEMTN_ITEM_SELECTION";
 
-    private Renderable renderable;
+    //private Renderable renderable;
 
 
     @Override
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param itemUri
      */
-    public void buildModel(Uri itemUri) {
+ /*  public void buildModel(Uri itemUri) {
         WeakReference<MainActivity> weakActivity = new WeakReference<>(this);
         ModelRenderable.builder()
                 .setSource(this, itemUri)
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(this, "Unable to load renderable", Toast.LENGTH_LONG).show();
                             return null;
                         });
-    }
+    }*/
 
     /**
      * Checks if the device is compatible with Sceneform and ARCore.
@@ -163,8 +163,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }**/
 
-    public Renderable getRenderable() {
+    /*public Renderable getRenderable() {
         return renderable;
-    }
+    }*/
 }
 

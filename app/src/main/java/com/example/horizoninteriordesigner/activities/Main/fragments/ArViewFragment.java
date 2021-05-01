@@ -199,9 +199,6 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
     public void onTapPlane(HitResult hitResult, Plane plane, MotionEvent motionEvent) {
         Log.i("ArView", "Tapped on plane!");
 
-
-       // buildModel(anchor);
-
         itemViewModel.getRenderable().observe(getViewLifecycleOwner(), renderable -> {
             this.renderable = renderable;
         });
@@ -280,35 +277,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         }
     }
 
-    private void buildModel(Anchor anchor) {
-        itemViewModel.getItem().observe(getViewLifecycleOwner(), item -> {
-            selectedItem = item;
-        });
 
-        Uri itemUri = Uri.parse(selectedItem.getModelUrl());
-
-        //WeakReference<MainActivity> weakActivity = new WeakReference<>(getActivity());
-        ModelRenderable.builder()
-                .setSource(getActivity(), itemUri)
-                .setIsFilamentGltf(true)
-                .build()
-                .thenAccept(renderable -> {
-                    //this.renderable = renderable;
-                    //MainActivity activity = weakActivity.get();
-                    //if (activity != null) {
-                    //    activity.renderable = renderable;
-                    //}
-
-                    addModelToScene(anchor, renderable);
-
-                })
-                .exceptionally(
-                        throwable -> {
-                            Toast.makeText(getActivity(), "Unable to load renderable", Toast.LENGTH_LONG).show();
-                            return null;
-                        });
-    }
-    
     private void addModelToScene(Anchor anchor, Renderable modelToRender) {
         AnchorNode anchorNode = new AnchorNode(anchor);
         anchorNode.setParent(sceneformFragment.getArSceneView().getScene());
