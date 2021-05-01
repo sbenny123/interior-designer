@@ -1,6 +1,7 @@
 package com.example.horizoninteriordesigner.activities.Main.fragments;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.horizoninteriordesigner.activities.Main.MainActivity;
 import com.example.horizoninteriordesigner.activities.Main.adapters.ItemSelectionAdapter;
@@ -22,6 +24,8 @@ import com.example.horizoninteriordesigner.activities.Main.viewModels.ItemViewMo
 import com.example.horizoninteriordesigner.models.Item;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.ar.core.Anchor;
+import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -86,10 +90,26 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
     public void onItemClick(View view, int position) {
         Item selectedItem = itemArrayList.get(position);
 
-        itemViewModel.setItem(selectedItem);
-        //sendFragmentListener.sendItem(selectedItem);
+        buildModel(selectedItem);
 
         ((MainActivity) getActivity()).manageFragmentTransaction(AR_VIEW_TAG);
+    }
+
+    private void buildModel(Item selectedItem) {
+        Uri itemUri = Uri.parse(selectedItem.getModelUrl());
+
+        ModelRenderable.builder()
+                .setSource(getActivity(), itemUri)
+                .setIsFilamentGltf(true)
+                .build()
+                .thenAccept(renderable -> {
+                    itemViewModel.setRenderable(renderable);
+                })
+                .exceptionally(
+                        throwable -> {
+                            Toast.makeText(getActivity(), "Unable to load renderable", Toast.LENGTH_LONG).show();
+                            return null;
+                        });
     }
 
     /**

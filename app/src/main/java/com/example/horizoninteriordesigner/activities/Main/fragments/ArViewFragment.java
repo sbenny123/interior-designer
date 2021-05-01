@@ -1,5 +1,6 @@
 package com.example.horizoninteriordesigner.activities.Main.fragments;
 
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -34,12 +35,14 @@ import com.google.ar.sceneform.HitTestResult;
 import com.google.ar.sceneform.Node;
 import com.google.ar.sceneform.Scene;
 import com.google.ar.sceneform.rendering.Material;
+import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.rendering.Renderable;
 import com.google.ar.sceneform.rendering.Texture;
 import com.google.ar.sceneform.ux.BaseArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
 
 
+import java.lang.ref.WeakReference;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static com.example.horizoninteriordesigner.activities.Main.MainActivity.ITEM_SELECT_TAG;
@@ -52,6 +55,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
     private AnchorNode currentAnchorNode;
     private Item selectedItem;
     private ItemViewModel itemViewModel;
+    private Renderable renderable;
 
 
     public ArViewFragment() {
@@ -195,7 +199,12 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
     public void onTapPlane(HitResult hitResult, Plane plane, MotionEvent motionEvent) {
         Log.i("ArView", "Tapped on plane!");
 
-        /* Renderable renderable = ((MainActivity)getActivity()).getRenderable();
+
+       // buildModel(anchor);
+
+        itemViewModel.getRenderable().observe(getViewLifecycleOwner(), renderable -> {
+            this.renderable = renderable;
+        });
 
         if (renderable == null) {
             Toast.makeText(getActivity(), "Select a model", Toast.LENGTH_SHORT).show();
@@ -214,8 +223,6 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
             // Create the transformable model and add it to the anchor.
             TransformableNode model = new TransformableNode(sceneformFragment.getTransformationSystem());
 
-            Log.i("ARViewFragment", "Min scale is " + String.valueOf(model.getScaleController().getMinScale()));
-            Log.i("ARViewFragment", "Max scale is " + String.valueOf(model.getScaleController().getMaxScale()));
             model.setParent(anchorNode);
             model.setRenderable(renderable);
             model.select();
@@ -226,7 +233,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
                     AnchorNode selectedAnchorNode = (AnchorNode) selectedModel.getParent();
                     Renderable selectedRenderable = selectedModel.getRenderable();
 
-                    currentAnchorNode = selectedAnchorNode;*/
+                    currentAnchorNode = selectedAnchorNode;
 
                    /* FilamentAsset filamentAsset = selectedModel.getRenderableInstance().getFilamentAsset();
                     MaterialInstance[] materialInstances = filamentAsset.getMaterialInstances();
@@ -265,21 +272,103 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
                         materialInstance.setParameter("baseColor", texture, textureSampler);
                         //materialInstance.setParameter("baseColorFactor", 0.3f, 0.5f, 0.7f); // Values for Red, Green and Blue
                     }*/
-                /*}
+                }
             });
 
 
             currentAnchorNode = anchorNode;
-        }*/
+        }
     }
 
-    private void buildModel() {
+    private void buildModel(Anchor anchor) {
         itemViewModel.getItem().observe(getViewLifecycleOwner(), item -> {
             selectedItem = item;
         });
 
+        Uri itemUri = Uri.parse(selectedItem.getModelUrl());
 
-        Log.i("ArView", "Item name is " + selectedItem.getImageName());
+        //WeakReference<MainActivity> weakActivity = new WeakReference<>(getActivity());
+        ModelRenderable.builder()
+                .setSource(getActivity(), itemUri)
+                .setIsFilamentGltf(true)
+                .build()
+                .thenAccept(renderable -> {
+                    //this.renderable = renderable;
+                    //MainActivity activity = weakActivity.get();
+                    //if (activity != null) {
+                    //    activity.renderable = renderable;
+                    //}
+
+                    addModelToScene(anchor, renderable);
+
+                })
+                .exceptionally(
+                        throwable -> {
+                            Toast.makeText(getActivity(), "Unable to load renderable", Toast.LENGTH_LONG).show();
+                            return null;
+                        });
+    }
+    
+    private void addModelToScene(Anchor anchor, Renderable modelToRender) {
+        AnchorNode anchorNode = new AnchorNode(anchor);
+        anchorNode.setParent(sceneformFragment.getArSceneView().getScene());
+
+        // Create the transformable model and add it to the anchor.
+        TransformableNode model = new TransformableNode(sceneformFragment.getTransformationSystem());
+
+        model.setParent(anchorNode);
+        model.setRenderable(modelToRender);
+        model.select();
+        model.setOnTapListener(new Node.OnTapListener() {
+            @Override
+            public void onTap(HitTestResult hitTestResult, MotionEvent motionEvent) {
+                TransformableNode selectedModel = (TransformableNode) hitTestResult.getNode();
+                AnchorNode selectedAnchorNode = (AnchorNode) selectedModel.getParent();
+                Renderable selectedRenderable = selectedModel.getRenderable();
+
+                currentAnchorNode = selectedAnchorNode;
+
+                   /* FilamentAsset filamentAsset = selectedModel.getRenderableInstance().getFilamentAsset();
+                    MaterialInstance[] materialInstances = filamentAsset.getMaterialInstances();
+                    AtomicReference<Texture> aTexture;
+
+                    Texture.builder()
+                            .setSource(getActivity(), R.drawable.parquet)
+                            .build()
+                            .thenAccept(texture -> {
+                                selectedModel.getRenderable().getMaterial().setTexture("baseColorMap", texture);
+                            });
+
+                        Material material = selectedModel.getRenderableInstance().getMaterial();
+
+                        Log.i("onTap", "Texture set");
+
+
+                    */
+
+
+
+                  /*  Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.parquet);
+
+                    TextureSampler textureSampler = new TextureSampler();
+
+                    Engine engine = Engine.create();
+                    Texture texture = new Texture.Builder()
+                            .width(bitmap.getWidth())
+                            .height(bitmap.getHeight())
+                            .sampler(Texture.Sampler.SAMPLER_3D)
+                            .format(Texture.InternalFormat.RGBA8)
+                            .build(engine);
+
+                    for (MaterialInstance materialInstance : materialInstances) {
+                        Material material = materialInstance.getMaterial();
+                        materialInstance.setParameter("baseColor", texture, textureSampler);
+                        //materialInstance.setParameter("baseColorFactor", 0.3f, 0.5f, 0.7f); // Values for Red, Green and Blue
+                    }*/
+            }
+        });
+
+        currentAnchorNode = anchorNode;
     }
 
     @Override
