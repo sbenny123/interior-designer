@@ -14,14 +14,37 @@ import com.google.ar.sceneform.ux.TransformableNode;
  *
  */
 public class ItemViewModel extends ViewModel {
+    private MutableLiveData<Item> itemToRender = new MutableLiveData<Item>();
+    private MutableLiveData<Item> currentItem = new MutableLiveData<Item>();
+    private MutableLiveData<TransformableNode> currentModelNode = new MutableLiveData<TransformableNode>();
+    private MutableLiveData<Renderable> renderableToAdd = new MutableLiveData<Renderable>();
+
     private MutableLiveData<Item> item = new MutableLiveData<Item>();
     private MutableLiveData<TransformableNode> modelNode = new MutableLiveData<TransformableNode>();
     private MutableLiveData<Renderable> renderable = new MutableLiveData<Renderable>();
 
 
+
+    public MutableLiveData<Item> getItemToRender() {
+        return itemToRender;
+    }
+
+    public void setItemToRender(MutableLiveData<Item> itemToRender) {
+        this.itemToRender = itemToRender;
+    }
+
+
+    public MutableLiveData<Item> getCurrentItem() {
+        return currentItem;
+    }
+
+    public void setCurrentItem(MutableLiveData<Item> currentItem) {
+        this.currentItem = currentItem;
+    }
+
     /*
-         Methods for Item
-     */
+                         Methods for Item
+                     */
     public MutableLiveData<Item> getItem() {
         return item;
     }

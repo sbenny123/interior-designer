@@ -138,6 +138,8 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
 
 
     private void showMaterialSelectionFragment() {
+        itemViewModel.setModelNode(currentModel);
+
         Fragment materialSelectionFragment = new MaterialSelectionFragment();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_materials, materialSelectionFragment).commit();
@@ -282,13 +284,13 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
                     currentAnchorNode = selectedAnchorNode;
                     currentModel = selectedModel;
 
-                    Texture.builder()
-                            .setSource(getActivity(), R.drawable.blue_1)
+                   /* Texture.builder()
+                            .setSource(getActivity(), R.drawable.hexagon_wood)
                             .build()
                             .thenAccept(texture -> {
                                 selectedModel.getRenderable().getMaterial().setTexture("baseColorMap", texture);
                             });
-
+                    */
 
                   /*  Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.parquet);
 

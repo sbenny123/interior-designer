@@ -9,18 +9,15 @@
     android:orientation="vertical"
     tools:context=".activities.Main.MainActivity">
 
-    <!-- <fragment
-        android:name="com.google.ar.sceneform.ux.ArFragment"
-        android:id="@+id/fragment_ar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" /> -->
-
-   <FrameLayout
+  <!-- <FrameLayout
         android:id="@+id/fragment_holder"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </FrameLayout>
+    </FrameLayout> -->
 
-
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_holder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

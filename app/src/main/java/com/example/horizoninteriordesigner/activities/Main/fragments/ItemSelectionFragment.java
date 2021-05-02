@@ -52,28 +52,27 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_item_selection, container, false);
-
-        recyclerView = view.findViewById(R.id.rv_items);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setCancelable(false);
-        builder.setView(R.layout.dialog_item_progress);
-
-        progressDialog = builder.create();
-
-        setUpRecyclerView(); // sets up configuration for recycler view
-        getItems(); // Sets item data in array list and creates adapter
-
-        return view;
+        return inflater.inflate(R.layout.fragment_item_selection, container, false);
     }
 
+    /**
+     * Inflates sub-views
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // Set up configuration for recycler view
+        recyclerView = view.findViewById(R.id.rv_items);
+        setUpRecyclerView();
+
+        // Set up alert dialog for showing loading screen
+        setUpProgressDialog();
+
+        // Gets item data in array list and creates adapter
+        getItems();
 
         itemViewModel = new ViewModelProvider(getActivity()).get(ItemViewModel.class);
     }
@@ -144,5 +143,17 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
      */
     private void setUpRecyclerView() {
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+    }
+
+
+    /**
+     *
+     */
+    private void setUpProgressDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setCancelable(false);
+        builder.setView(R.layout.dialog_item_progress);
+
+        progressDialog = builder.create();
     }
 }

@@ -71,11 +71,10 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
     @Override
     public void onItemClick(View view, int position) {
         Material selectedMaterial = materialArrayList.get(position);
-        AtomicReference<TransformableNode> selectedModel = null;
+        AtomicReference<TransformableNode> selectedModel = new AtomicReference<TransformableNode>();
 
         itemViewModel.getModelNode().observe(getViewLifecycleOwner(), transformableNode -> {
             selectedModel.set(transformableNode);
-
             updateModelMaterial(selectedModel.get(), selectedMaterial);
         });
     }
@@ -88,8 +87,6 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
                 .build()
                 .thenAccept(texture -> {
                     selectedModel.getRenderable().getMaterial().setTexture("baseColorMap", texture);
-
-                    Toast.makeText(getContext(), "Texture applied", Toast.LENGTH_SHORT);
 
                     ((MainActivity) getActivity()).manageFragmentTransaction(AR_VIEW_TAG);
                 });
@@ -116,11 +113,7 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
                                 String materialUrl = document.get("materialUrl") + "";
 
                                 materialArrayList.add(new Material(materialId, materialName, materialUrl));
-
-                                Log.i("MaterialSelectionFragment", materialName);
                             }
-
-                            Log.i("MaterialSelectionFragment", "Material array is " + materialArrayList.size());
 
                             // Create adapter for materials view - bridges recyclerview and materials (data source)
                             adapter = new MaterialSelectionAdapter(getContext(),
