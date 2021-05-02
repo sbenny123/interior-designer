@@ -98,9 +98,9 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
 
     /**
-     * Creates a {@link <a href="https://developers.google.com/sceneform/reference/com/google/ar/sceneform/rendering/Renderable>Renderable</a>"}
-     * object to be added to the scene in ArViewFragment.
-     * @param selectedItem
+     * Creates a Renderable object to be added to the scene in ArViewFragment.
+     * @see <a href="https://developers.google.com/sceneform/reference/com/google/ar/sceneform/rendering/Renderable>Renderable</a>"}
+     * @param selectedItem Item that was selected and should be built.
      */
     private void buildModel(@NotNull Item selectedItem) {
         // Convert model's url from Firebase storage to a Uri
@@ -126,7 +126,7 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
                         });
     }
 
-    
+
     /**
      * Retrieves item documents from Firestore and maps to Item model and adds to array list.
      * Adapter is set once all documents are added.
