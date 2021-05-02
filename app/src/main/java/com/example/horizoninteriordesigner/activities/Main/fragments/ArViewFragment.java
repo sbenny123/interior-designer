@@ -1,12 +1,17 @@
 package com.example.horizoninteriordesigner.activities.Main.fragments;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.PixelCopy;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
@@ -14,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
@@ -21,31 +27,27 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.horizoninteriordesigner.R;
 import com.example.horizoninteriordesigner.activities.Main.MainActivity;
 import com.example.horizoninteriordesigner.activities.Main.viewModels.ItemViewModel;
-import com.example.horizoninteriordesigner.models.Item;
-import com.google.android.filament.MaterialInstance;
-import com.google.android.filament.gltfio.FilamentAsset;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
 import com.google.ar.core.Session;
 import com.google.ar.sceneform.AnchorNode;
-import com.google.ar.sceneform.FrameTime;
+import com.google.ar.sceneform.ArSceneView;
 import com.google.ar.sceneform.HitTestResult;
 import com.google.ar.sceneform.Node;
 import com.google.ar.sceneform.Scene;
-import com.google.ar.sceneform.rendering.Material;
-import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.rendering.Renderable;
-import com.google.ar.sceneform.rendering.Texture;
 import com.google.ar.sceneform.ux.BaseArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
 
 
-import java.lang.ref.WeakReference;
-import java.util.concurrent.atomic.AtomicReference;
+import java.io.File;
+import java.io.IOException;
 
 import static com.example.horizoninteriordesigner.activities.Main.MainActivity.ITEM_SELECT_TAG;
+import static com.example.horizoninteriordesigner.utils.CameraUtils.*;
 
 
 public class ArViewFragment extends Fragment implements View.OnClickListener,
@@ -116,6 +118,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
                 break;
 
             case R.id.btn_take_photo:
+                takePhoto(v);
                 break;
         }
     }
@@ -192,6 +195,60 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
             nodeToRemove.setParent(null);
             nodeToRemove = null;
         }
+    }
+
+
+    /**
+     * Uses PixelCopy API to take a screenshot of the ArSceneView - scene with camera view and models.
+     *
+     */
+    private void takePhoto(View v) {
+        final String filename = generatePhotoFileName();
+        ArSceneView view = sceneformFragment.getArSceneView();
+
+        // Create a bitmap the size of the scene view.
+        final Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),
+                Bitmap.Config.ARGB_8888);
+
+        // Create a handler thread to offload the processing of the image.
+        final HandlerThread handlerThread = new HandlerThread("PixelCopier");
+        handlerThread.start();
+
+        // Make the request to copy.
+        PixelCopy.request(view, bitmap, (copyResult) -> {
+            if (copyResult == PixelCopy.SUCCESS) {
+                try {
+                    saveBitmapToDisk(bitmap, filename);
+
+                } catch (IOException e) {
+                    Toast toast = Toast.makeText(getContext(), e.toString(),
+                            Toast.LENGTH_LONG);
+                    toast.show();
+                    return;
+                }
+
+                Snackbar snackbar = Snackbar.make(v.findViewById(android.R.id.content),
+                        "Photo saved", Snackbar.LENGTH_LONG);
+                snackbar.setAction("Open in Photos", view1 -> {
+                    File photoFile = new File(filename);
+
+                    Uri photoURI = FileProvider.getUriForFile(getContext(),
+                            getActivity().getPackageName() + ".ar.name.provider",
+                            photoFile);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, photoURI);
+                    intent.setDataAndType(photoURI, "image/*");
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    startActivity(intent);
+
+                });
+                snackbar.show();
+            } else {
+                Toast toast = Toast.makeText(getContext(),
+                        "Failed to copyPixels: " + copyResult, Toast.LENGTH_LONG);
+                toast.show();
+            }
+            handlerThread.quitSafely();
+        }, new Handler(handlerThread.getLooper()));
     }
 
     @Override
