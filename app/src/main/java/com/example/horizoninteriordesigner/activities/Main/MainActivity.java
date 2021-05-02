@@ -31,9 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Actions when activity is first created:
-     * Checks if the device is supported
-     * Sets the layout to show to user
-     * Displays start fragment
+     *   Checks if the device is supported
+     *   Sets the layout to show to user
+     *   Displays start fragment
      * @param savedInstanceState any saved types like string
      */
     @Override
@@ -88,7 +88,9 @@ public class MainActivity extends AppCompatActivity {
     public void manageFragmentTransaction(String selectedFragment) {
 
         FragmentManager fragmentManager = getSupportFragmentManager(); // to manage fragments
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction(); // group of actions to perform at a time
+        FragmentTransaction fragmentTransaction =
+                fragmentManager.beginTransaction()
+                        .setReorderingAllowed(true); // group of actions on fragments to perform at a time
 
         // Avaiable fragments
         @Nullable Fragment arViewFragment = fragmentManager.findFragmentByTag(AR_VIEW_TAG);
@@ -102,17 +104,15 @@ public class MainActivity extends AppCompatActivity {
 
             case AR_VIEW_TAG:
 
+                if (itemSelectionFragment != null) {
+                    fragmentTransaction.hide(itemSelectionFragment);
+                }
+
                 if (arViewFragment != null) {
                     fragmentTransaction.show(arViewFragment);
                 } else {
                     fragmentTransaction.add(R.id.fragment_holder, new ArViewFragment(), AR_VIEW_TAG);
                 }
-
-                if (itemSelectionFragment != null) {
-                    fragmentTransaction.hide(itemSelectionFragment);
-                }
-
-                fragmentTransaction.commit(); // signals the fragment manager that all operations have been added
                 break;
 
 
@@ -127,10 +127,10 @@ public class MainActivity extends AppCompatActivity {
                 if (arViewFragment != null) {
                     fragmentTransaction.hide(arViewFragment);
                 }
-
-                fragmentTransaction.commit(); // signals the fragment manager that all operations have been added
                 break;
         }
+
+        fragmentTransaction.commit(); // signals the fragment manager that all operations have been added
     }
 }
 

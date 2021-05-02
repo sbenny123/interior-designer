@@ -11,4 +11,7 @@
     <!-- Menu items -->
     <string name="item_change_design">Change design</string>
     <string name="item_remove_item">Remove</string>
+
+    <!-- Textviews -->
+    <string name="tv_item_progress">Loading</string>
 </resources>

@@ -1,7 +1,5 @@
 package com.example.horizoninteriordesigner.activities.Main.fragments;
 
-import android.app.Dialog;
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -13,11 +11,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.horizoninteriordesigner.activities.Main.MainActivity;
@@ -27,24 +23,30 @@ import com.example.horizoninteriordesigner.activities.Main.viewModels.ItemViewMo
 import com.example.horizoninteriordesigner.models.Item;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.ar.core.Anchor;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import org.jetbrains.annotations.NotNull;
 
 import static com.example.horizoninteriordesigner.activities.Main.MainActivity.AR_VIEW_TAG;
 
 import java.util.ArrayList;
 
 
+/**
+ * Item selection fragment
+ * All selectable items are shown and the renderable for sceneform is created once selected.
+ */
 public class ItemSelectionFragment extends Fragment implements ItemSelectionAdapter.ItemClickListener {
 
-    private RecyclerView recyclerView;
-    private ItemSelectionAdapter adapter;
-    private ArrayList<Item> itemArrayList;
-    private ItemViewModel itemViewModel;
-    private AlertDialog progressDialog;
+    private RecyclerView recyclerView; // Reuses the view to show new items in place of old ones
+    private ItemSelectionAdapter adapter; // Specifies how each item card should look like
+    private AlertDialog progressDialog; // For showing loading screen between item selection and ar view
+    private ArrayList<Item> itemArrayList; // List of items avaiable to select and render in AR view
+    private ItemViewModel itemViewModel; // Used to retrieve data shared amongst the fragments and activity
+
 
     public ItemSelectionFragment() {
         // Required empty public constructor
@@ -56,6 +58,7 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_item_selection, container, false);
     }
+
 
     /**
      * Inflates sub-views
@@ -74,21 +77,37 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
         // Gets item data in array list and creates adapter
         getItems();
 
+        // Sets up view model for retrieving shared data
         itemViewModel = new ViewModelProvider(getActivity()).get(ItemViewModel.class);
     }
 
+
+    /**
+     * Once a item has been selected:
+     *   The loading screen is shown
+     *   The model for the item is built
+     *   ArView fragment is added/shown
+     */
     @Override
     public void onItemClick(View view, int position) {
         progressDialog.show();
 
         Item selectedItem = itemArrayList.get(position);
-
         buildModel(selectedItem);
     }
 
-    private void buildModel(Item selectedItem) {
+
+    /**
+     * Creates a {@link <a href="https://developers.google.com/sceneform/reference/com/google/ar/sceneform/rendering/Renderable>Renderable</a>"}
+     * object to be added to the scene in ArViewFragment.
+     * @param selectedItem
+     */
+    private void buildModel(@NotNull Item selectedItem) {
+        // Convert model's url from Firebase storage to a Uri
         Uri itemUri = Uri.parse(selectedItem.getModelUrl());
 
+        // Build .glb file as a renderable object
+        // Go to ArView fragment once complete
         ModelRenderable.builder()
                 .setSource(getActivity(), itemUri)
                 .setIsFilamentGltf(true)
@@ -96,10 +115,9 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
                 .thenAccept(renderable -> {
                     itemViewModel.setRenderable(renderable);
 
-                    progressDialog.dismiss();
-
                     ((MainActivity) getActivity()).manageFragmentTransaction(AR_VIEW_TAG);
 
+                    progressDialog.dismiss();
                 })
                 .exceptionally(
                         throwable -> {
@@ -108,6 +126,7 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
                         });
     }
 
+    
     /**
      * Retrieves item documents from Firestore and maps to Item model and adds to array list.
      * Adapter is set once all documents are added.
@@ -138,13 +157,6 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
                 });
     }
 
-    /**
-     *
-     */
-    private void setUpRecyclerView() {
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-    }
-
 
     /**
      *
@@ -155,5 +167,13 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
         builder.setView(R.layout.dialog_item_progress);
 
         progressDialog = builder.create();
+    }
+
+
+    /**
+     *
+     */
+    private void setUpRecyclerView() {
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
     }
 }
