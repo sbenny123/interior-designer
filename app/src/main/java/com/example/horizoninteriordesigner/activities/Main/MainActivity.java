@@ -3,7 +3,6 @@ package com.example.horizoninteriordesigner.activities.Main;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,27 +17,28 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.horizoninteriordesigner.R;
 import com.example.horizoninteriordesigner.activities.Main.fragments.ArViewFragment;
 import com.example.horizoninteriordesigner.activities.Main.fragments.ItemSelectionFragment;
-import com.example.horizoninteriordesigner.models.Item;
-import com.google.ar.sceneform.rendering.ModelRenderable;
-import com.google.ar.sceneform.rendering.Renderable;
-import com.google.ar.sceneform.rendering.Texture;
-import com.google.ar.sceneform.ux.ArFragment;
-import com.google.ar.sceneform.ux.BaseTransformableNode;
-
-import java.lang.ref.WeakReference;
 
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = MainActivity.class.getSimpleName(); // Used when writing logs and Toast text
 
     private static final double MIN_OPENGL_VERSION = 3.0;
 
+    // Tag names of main fragments avaiable in this activity
     final public static String AR_VIEW_TAG = "FRAGMENT_AR_VIEW";
     final public static String ITEM_SELECT_TAG = "FRAGMEMTN_ITEM_SELECTION";
 
 
+    /**
+     * Actions when activity is first created:
+     * Checks if the device is supported
+     * Sets the layout to show to user
+     * Displays start fragment
+     * @param savedInstanceState any saved types like string
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         if (!checkIsSupportedDeviceOrFinish(this)) {
@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         manageFragmentTransaction(ITEM_SELECT_TAG);
     }
+
 
     /**
      * Checks if the device is compatible with Sceneform and ARCore.
@@ -80,23 +81,29 @@ public class MainActivity extends AppCompatActivity {
 
 
     /**
-     *
-     * @param selectedFragment
+     * Used to configure the switching of the main fragments in the activity - Ar view and item
+     * selection.
+     * @param selectedFragment The tag of the fragment to show
      */
     public void manageFragmentTransaction(String selectedFragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
+        FragmentManager fragmentManager = getSupportFragmentManager(); // to manage fragments
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction(); // group of actions to perform at a time
+
+        // Avaiable fragments
         @Nullable Fragment arViewFragment = fragmentManager.findFragmentByTag(AR_VIEW_TAG);
         @Nullable Fragment itemSelectionFragment = fragmentManager.findFragmentByTag(ITEM_SELECT_TAG);
 
+
+        // Each case will show the fragment if it already exists or add the fragment to the fragment
+        // manager if it doesn't.
+        // Any existing fragments being shown will be hidden.
         switch (selectedFragment) {
+
             case AR_VIEW_TAG:
-                // Show fragment if it exists
+
                 if (arViewFragment != null) {
                     fragmentTransaction.show(arViewFragment);
-
-                    // Add to fragment manager as it doesn't exist
                 } else {
                     fragmentTransaction.add(R.id.fragment_holder, new ArViewFragment(), AR_VIEW_TAG);
                 }
@@ -105,10 +112,12 @@ public class MainActivity extends AppCompatActivity {
                     fragmentTransaction.hide(itemSelectionFragment);
                 }
 
-                fragmentTransaction.commit();
+                fragmentTransaction.commit(); // signals the fragment manager that all operations have been added
                 break;
 
+
             case ITEM_SELECT_TAG:
+
                 if (itemSelectionFragment != null) {
                     fragmentTransaction.show(itemSelectionFragment);
                 } else {
@@ -119,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                     fragmentTransaction.hide(arViewFragment);
                 }
 
-                fragmentTransaction.commit();
+                fragmentTransaction.commit(); // signals the fragment manager that all operations have been added
                 break;
         }
     }

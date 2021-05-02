@@ -53,7 +53,6 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
 
     private SceneformFragment sceneformFragment;
     private AnchorNode currentAnchorNode;
-    private Item selectedItem;
     private ItemViewModel itemViewModel;
     private Renderable renderable;
 
