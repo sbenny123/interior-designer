@@ -27,6 +27,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.horizoninteriordesigner.R;
 import com.example.horizoninteriordesigner.activities.Main.MainActivity;
 import com.example.horizoninteriordesigner.activities.Main.viewModels.ItemViewModel;
+import com.google.android.filament.MaterialInstance;
+import com.google.android.filament.gltfio.FilamentAsset;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.ar.core.Anchor;
@@ -38,13 +40,16 @@ import com.google.ar.sceneform.ArSceneView;
 import com.google.ar.sceneform.HitTestResult;
 import com.google.ar.sceneform.Node;
 import com.google.ar.sceneform.Scene;
+import com.google.ar.sceneform.rendering.Material;
 import com.google.ar.sceneform.rendering.Renderable;
+import com.google.ar.sceneform.rendering.Texture;
 import com.google.ar.sceneform.ux.BaseArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
 
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static com.example.horizoninteriordesigner.activities.Main.MainActivity.ITEM_SELECT_TAG;
 import static com.example.horizoninteriordesigner.utils.CameraUtils.*;
@@ -55,6 +60,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
 
     private SceneformFragment sceneformFragment;
     private AnchorNode currentAnchorNode;
+    private TransformableNode currentModel;
     private ItemViewModel itemViewModel;
     private Renderable renderable;
 
@@ -171,19 +177,6 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
     }
 
 
-    private void updateModelMaterial(TransformableNode modelToUpdate) {
-        // BaseTransformableNode transformableNode = sceneformFragment.getTransformationSystem().getSelectedNode();
-
-        // FilamentAsset filamentAsset = selectedNode.getRenderableInstance().getFilamentAsset();
-
-        // MaterialInstance[] materialInstances = filamentAsset.getMaterialInstances();
-
-                  /*  for (MaterialInstance materialInstance : materialInstances) {
-                        Material material = materialInstance.getMaterial();
-                        materialInstance.setParameter("baseColorFactor", 0.3f, 0.5f, 0.7f); // Values for Red, Green and Blue
-                    }*/
-    }
-
     /**
      *
      * @param nodeToRemove
@@ -287,25 +280,14 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
                     Renderable selectedRenderable = selectedModel.getRenderable();
 
                     currentAnchorNode = selectedAnchorNode;
-
-                   /* FilamentAsset filamentAsset = selectedModel.getRenderableInstance().getFilamentAsset();
-                    MaterialInstance[] materialInstances = filamentAsset.getMaterialInstances();
-                    AtomicReference<Texture> aTexture;
+                    currentModel = selectedModel;
 
                     Texture.builder()
-                            .setSource(getActivity(), R.drawable.parquet)
+                            .setSource(getActivity(), R.drawable.blue_1)
                             .build()
                             .thenAccept(texture -> {
                                 selectedModel.getRenderable().getMaterial().setTexture("baseColorMap", texture);
                             });
-
-                        Material material = selectedModel.getRenderableInstance().getMaterial();
-
-                        Log.i("onTap", "Texture set");
-
-
-                    */
-
 
 
                   /*  Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.parquet);
@@ -330,6 +312,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
 
 
             currentAnchorNode = anchorNode;
+            currentModel = model;
         }
     }
 
@@ -352,44 +335,6 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
                 Renderable selectedRenderable = selectedModel.getRenderable();
 
                 currentAnchorNode = selectedAnchorNode;
-
-                   /* FilamentAsset filamentAsset = selectedModel.getRenderableInstance().getFilamentAsset();
-                    MaterialInstance[] materialInstances = filamentAsset.getMaterialInstances();
-                    AtomicReference<Texture> aTexture;
-
-                    Texture.builder()
-                            .setSource(getActivity(), R.drawable.parquet)
-                            .build()
-                            .thenAccept(texture -> {
-                                selectedModel.getRenderable().getMaterial().setTexture("baseColorMap", texture);
-                            });
-
-                        Material material = selectedModel.getRenderableInstance().getMaterial();
-
-                        Log.i("onTap", "Texture set");
-
-
-                    */
-
-
-
-                  /*  Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.parquet);
-
-                    TextureSampler textureSampler = new TextureSampler();
-
-                    Engine engine = Engine.create();
-                    Texture texture = new Texture.Builder()
-                            .width(bitmap.getWidth())
-                            .height(bitmap.getHeight())
-                            .sampler(Texture.Sampler.SAMPLER_3D)
-                            .format(Texture.InternalFormat.RGBA8)
-                            .build(engine);
-
-                    for (MaterialInstance materialInstance : materialInstances) {
-                        Material material = materialInstance.getMaterial();
-                        materialInstance.setParameter("baseColor", texture, textureSampler);
-                        //materialInstance.setParameter("baseColorFactor", 0.3f, 0.5f, 0.7f); // Values for Red, Green and Blue
-                    }*/
             }
         });
 

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.horizoninteriordesigner.models.Item;
 import com.google.ar.sceneform.rendering.Renderable;
+import com.google.ar.sceneform.ux.TransformableNode;
 
 
 /**
@@ -14,6 +15,7 @@ import com.google.ar.sceneform.rendering.Renderable;
  */
 public class ItemViewModel extends ViewModel {
     private MutableLiveData<Item> item = new MutableLiveData<Item>();
+    private MutableLiveData<TransformableNode> modelNode = new MutableLiveData<TransformableNode>();
     private MutableLiveData<Renderable> renderable = new MutableLiveData<Renderable>();
 
 
@@ -39,4 +41,12 @@ public class ItemViewModel extends ViewModel {
     public void setRenderable(Renderable renderable) {
         this.renderable.setValue(renderable);
     }
+
+
+    /*
+         Methods for TransoformableNode
+     */
+    public MutableLiveData<TransformableNode> getModelNode() { return modelNode; }
+
+    public void setModelNode(TransformableNode modelNode) { this.modelNode.setValue(modelNode); }
 }
