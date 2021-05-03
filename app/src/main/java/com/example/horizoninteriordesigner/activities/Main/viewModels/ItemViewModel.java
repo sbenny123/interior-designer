@@ -14,9 +14,7 @@ import com.google.ar.sceneform.ux.TransformableNode;
  *
  */
 public class ItemViewModel extends ViewModel {
-    private MutableLiveData<Item> itemToRender = new MutableLiveData<Item>();
-    private MutableLiveData<Item> currentItem = new MutableLiveData<Item>();
-    private MutableLiveData<TransformableNode> currentModelNode = new MutableLiveData<TransformableNode>();
+    private String itemId;
     private MutableLiveData<Renderable> renderableToAdd = new MutableLiveData<Renderable>();
 
     private MutableLiveData<Item> item = new MutableLiveData<Item>();
@@ -24,23 +22,26 @@ public class ItemViewModel extends ViewModel {
     private MutableLiveData<Renderable> renderable = new MutableLiveData<Renderable>();
 
 
+    /**
+     *
+     */
+    public MutableLiveData<Renderable> getRenderableToAdd() { return renderableToAdd; }
 
-    public MutableLiveData<Item> getItemToRender() {
-        return itemToRender;
-    }
-
-    public void setItemToRender(MutableLiveData<Item> itemToRender) {
-        this.itemToRender = itemToRender;
-    }
+    public void setRenderableToAdd(Renderable renderableToAdd) { this.renderableToAdd.setValue(renderableToAdd); }
 
 
-    public MutableLiveData<Item> getCurrentItem() {
-        return currentItem;
-    }
+    /**
+     *
+     */
+    public String getItemId() { return itemId; }
 
-    public void setCurrentItem(MutableLiveData<Item> currentItem) {
-        this.currentItem = currentItem;
-    }
+    public void setItemId(String itemId) { this.itemId = itemId; }
+
+
+
+
+
+
 
     /*
                          Methods for Item

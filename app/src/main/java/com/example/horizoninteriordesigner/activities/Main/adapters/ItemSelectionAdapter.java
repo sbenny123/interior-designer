@@ -97,10 +97,10 @@ public class ItemSelectionAdapter extends RecyclerView.Adapter<ItemSelectionAdap
 
 
         @Override
-        public void onClick(View v) {
+        public void onClick(View view) {
             int position = getAdapterPosition();
 
-            onItemClickListener.onItemClick(v, position);
+            onItemClickListener.onItemClick(view, position);
         }
     }
 }

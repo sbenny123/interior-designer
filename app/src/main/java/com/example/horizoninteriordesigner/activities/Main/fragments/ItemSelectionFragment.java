@@ -53,9 +53,11 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
     }
 
 
+    /**
+     * Inflates the fragment's layout
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the fragment's layout
         return inflater.inflate(R.layout.fragment_item_selection, container, false);
     }
 
@@ -104,8 +106,8 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
      */
     private void buildModel(@NotNull Item selectedItem) {
 
-        // Convert model's url from Firebase storage to a Uri
-        Uri itemUri = Uri.parse(selectedItem.getModelUrl());
+        Uri itemUri = Uri.parse(selectedItem.getModelUrl()); // model's url from Firebase storage as a Uri
+        String itemId = selectedItem.getItemId();
 
 
         // Build .glb file as a renderable object
@@ -116,7 +118,8 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
                 .build()
                 .thenAccept(renderable -> {
 
-                    itemViewModel.setRenderable(renderable);
+                    itemViewModel.setRenderableToAdd(renderable);
+                    itemViewModel.setItemId(itemId);
 
                     ((MainActivity) getActivity()).manageFragmentTransaction(AR_VIEW_TAG);
 

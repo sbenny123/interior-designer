@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -53,25 +54,31 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_material_selection, container, false);
+        return inflater.inflate(R.layout.fragment_material_selection, container, false);
+    }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         recyclerView = view.findViewById(R.id.rv_materials);
 
         // Set up configuration for recycler view
         setUpRecyclerView();
 
-        // Set material data in array list for a given item and creates adapter
-        getMaterials();
-
         itemViewModel = new ViewModelProvider(getActivity()).get(ItemViewModel.class);
+        String itemId = itemViewModel.getItemId();
 
-        return view;
+        // Set material data in array list for a given item and creates adapter
+        getMaterials(itemId);
     }
+
 
     @Override
     public void onItemClick(View view, int position) {
         Material selectedMaterial = materialArrayList.get(position);
-        AtomicReference<TransformableNode> selectedModel = new AtomicReference<TransformableNode>();
+        AtomicReference<TransformableNode> selectedModel = new AtomicReference<>();
 
         itemViewModel.getModelNode().observe(getViewLifecycleOwner(), transformableNode -> {
             selectedModel.set(transformableNode);
@@ -97,7 +104,7 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
      * Retrieves item documents from Firestore and maps to Item model and adds to array list.
      * Adapter is set once all documents are added.
      */
-    private void getMaterials() {
+    private void getMaterials(String selectedItemId) {
         materialArrayList = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
