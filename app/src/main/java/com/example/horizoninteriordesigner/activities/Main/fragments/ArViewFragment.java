@@ -289,7 +289,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         AtomicReference<Renderable> currentRenderable = new AtomicReference<>();
         String currentItemId = itemViewModel.getItemId();
 
-        
+
         itemViewModel.getRenderableToAdd().observe(getViewLifecycleOwner(), renderable -> {
             currentRenderable.set(renderable);
         });

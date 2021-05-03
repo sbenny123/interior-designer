@@ -25,18 +25,23 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.ar.sceneform.rendering.Texture;
 import com.google.ar.sceneform.ux.TransformableNode;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static com.example.horizoninteriordesigner.activities.Main.MainActivity.AR_VIEW_TAG;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ *
  */
 public class MaterialSelectionFragment extends Fragment implements MaterialSelectionAdapter.ItemClickListener {
 
@@ -44,16 +49,19 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
     private MaterialSelectionAdapter adapter;
     private ArrayList<Material> materialArrayList;
     private ItemViewModel itemViewModel;
+    private FirebaseFirestore db;
 
     public MaterialSelectionFragment() {
         // Required empty public constructor
     }
 
 
+    /**
+     * Inflates the fragment's layout
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_material_selection, container, false);
     }
 
@@ -62,16 +70,17 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        recyclerView = view.findViewById(R.id.rv_materials);
-
         // Set up configuration for recycler view
+        recyclerView = view.findViewById(R.id.rv_materials);
         setUpRecyclerView();
 
         itemViewModel = new ViewModelProvider(getActivity()).get(ItemViewModel.class);
         String itemId = itemViewModel.getItemId();
 
+        db = FirebaseFirestore.getInstance();
+
         // Set material data in array list for a given item and creates adapter
-        getMaterials(itemId);
+        getMaterialsById(itemId);
     }
 
 
@@ -100,21 +109,48 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
     }
 
 
+    private void getMaterialsById(String selectedItemId) {
+
+
+        DocumentReference docRef = db.collection("models").document(selectedItemId);
+
+
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+
+                    if (document.exists() && document.contains("materials")) {
+                        Map documentData = document.getData();
+                        ArrayList materialNmes = (ArrayList) documentData.get("materials");
+
+
+                        getSelectedMaterials(materialNmes);
+
+                        Log.i("A", "A");
+                    }
+                }
+            }
+        });
+    }
+
     /**
      * Retrieves item documents from Firestore and maps to Item model and adds to array list.
      * Adapter is set once all documents are added.
      */
-    private void getMaterials(String selectedItemId) {
+    private void getSelectedMaterials(ArrayList materialsToRetrieve) {
         materialArrayList = new ArrayList<>();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection("materials")
+                .whereIn("materialName", materialsToRetrieve)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
+
                                 String materialId = document.getId();
                                 String materialName = document.get("materialName") + "";
                                 String materialUrl = document.get("materialUrl") + "";
