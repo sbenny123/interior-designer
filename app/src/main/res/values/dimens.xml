@@ -12,4 +12,10 @@
     inner_frame_layout_padding (below variable) on round screens.
     -->
     <dimen name="inner_frame_layout_padding">5dp</dimen>
+
+    <!-- card_item dimensions -->
+    <dimen name="card_item_rl_layout_height">120dp</dimen>
+    <dimen name="card_item_rl_layout_margin">5dp</dimen>
+    <dimen name="card_item_cv_elevation">5dp</dimen>
+    <dimen name="card_item_cv_radius">4dp</dimen>
 </resources>

@@ -3,19 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
-    android:layout_gravity="center"
-    android:layout_margin="5dp">
+    android:layout_height="@dimen/card_item_rl_layout_height"
+    android:layout_margin="@dimen/card_item_rl_layout_margin">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        app:cardElevation="@dimen/card_item_cv_elevation"
+        app:cardCornerRadius="@dimen/card_item_cv_radius">
 
             <ImageView
                 android:id="@+id/iv_item"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center" />
 
     </androidx.cardview.widget.CardView>
+
 </RelativeLayout>

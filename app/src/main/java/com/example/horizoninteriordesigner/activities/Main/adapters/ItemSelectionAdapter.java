@@ -17,14 +17,13 @@ import com.example.horizoninteriordesigner.models.Item;
 import java.util.ArrayList;
 
 /**
- * Manages the item data model and adapts each item entry.
+ * Manages the item data model and sorts each item entry.
  */
 public class ItemSelectionAdapter extends RecyclerView.Adapter<ItemSelectionAdapter.ItemViewHolder> {
+
     private Context context;
     private ArrayList<Item> itemArrayList; // List of item models that can be used
-
-    private final ItemClickListener onItemClickListener; // onClick listener for when an item has
-                                                         // been pressed
+    private final ItemClickListener onItemClickListener; // onClick listener for when an item has been pressed
 
 
     /**
@@ -44,25 +43,21 @@ public class ItemSelectionAdapter extends RecyclerView.Adapter<ItemSelectionAdap
 
     /**
      * Inflates the layout to be used for each item.
-     * @param parent
-     * @param viewType
-     * @return Contains references to each filled item entry. Used to access elements in the layout.
+     * @return References to each filled item entry. Used to access elements in the layout.
      */
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(context).inflate(R.layout.card_item, parent, false);
 
-        ItemViewHolder itemViewHolder = new ItemViewHolder(itemView);
-
-        return itemViewHolder;
+        return new ItemViewHolder(itemView);
     }
 
+
     /**
-     * Assigns values to each item using the inflated view from #onCreateViewHolder
-     *
-     * @param holder
-     * @param position
+     * Assigns values to each item using the inflated view from onCreateViewHolder
+     * @param holder types of views the values can be assigned to e.g. imageView and textView.
+     * @param position The index of the current card - used to retrieve its assocated value in itemArrayList.
      */
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
@@ -84,9 +79,11 @@ public class ItemSelectionAdapter extends RecyclerView.Adapter<ItemSelectionAdap
 
 
     /**
-     *
+     * Specifies what view types the values should be assigned to and the variables for the onClick
+     * event for each item.
      */
     public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
         private ImageView itemIV;
 
 
@@ -106,6 +103,5 @@ public class ItemSelectionAdapter extends RecyclerView.Adapter<ItemSelectionAdap
             onItemClickListener.onItemClick(v, position);
         }
     }
-
 }
 

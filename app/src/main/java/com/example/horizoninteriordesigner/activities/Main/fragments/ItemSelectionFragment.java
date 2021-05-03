@@ -103,8 +103,10 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
      * @param selectedItem Item that was selected and should be built.
      */
     private void buildModel(@NotNull Item selectedItem) {
+
         // Convert model's url from Firebase storage to a Uri
         Uri itemUri = Uri.parse(selectedItem.getModelUrl());
+
 
         // Build .glb file as a renderable object
         // Go to ArView fragment once complete
@@ -113,17 +115,19 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
                 .setIsFilamentGltf(true)
                 .build()
                 .thenAccept(renderable -> {
+
                     itemViewModel.setRenderable(renderable);
 
                     ((MainActivity) getActivity()).manageFragmentTransaction(AR_VIEW_TAG);
 
                     progressDialog.dismiss();
+
                 })
-                .exceptionally(
-                        throwable -> {
+                .exceptionally(throwable -> {
+
                             Toast.makeText(getActivity(), "Unable to load renderable", Toast.LENGTH_LONG).show();
                             return null;
-                        });
+                });
     }
 
 
@@ -132,8 +136,10 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
      * Adapter is set once all documents are added.
      */
     private void getItems() {
+
         itemArrayList = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
         db.collection("models")
                 .get()

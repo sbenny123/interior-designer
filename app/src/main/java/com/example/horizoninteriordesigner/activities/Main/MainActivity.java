@@ -19,9 +19,12 @@ import com.example.horizoninteriordesigner.activities.Main.fragments.ArViewFragm
 import com.example.horizoninteriordesigner.activities.Main.fragments.ItemSelectionFragment;
 
 
+/**
+ * Used to control visibilty of fragments and check device is compatible with the app.
+ */
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = MainActivity.class.getSimpleName(); // Used when writing logs and Toast text
 
+    private static final String TAG = MainActivity.class.getSimpleName(); // Used when writing logs and Toast text
     private static final double MIN_OPENGL_VERSION = 3.0;
 
     // Tag names of main fragments avaiable in this activity
@@ -38,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
         if (!checkIsSupportedDeviceOrFinish(this)) {
