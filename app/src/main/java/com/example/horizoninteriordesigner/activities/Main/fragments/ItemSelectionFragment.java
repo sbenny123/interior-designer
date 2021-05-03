@@ -44,7 +44,7 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
     private RecyclerView recyclerView; // Reuses the view to show new items in place of old ones
     private ItemSelectionAdapter adapter; // Specifies how each item card should look like
     private AlertDialog progressDialog; // For showing loading screen between item selection and ar view
-    private ArrayList<Item> itemArrayList; // List of items avaiable to select and render in AR view
+    private ArrayList<Item> itemArrayList; // List of items available to select and render in AR view
     private ItemViewModel itemViewModel; // Used to retrieve data shared amongst the fragments and activity
 
 
@@ -55,7 +55,7 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the fragment's layout
         return inflater.inflate(R.layout.fragment_item_selection, container, false);
     }
 
@@ -74,16 +74,16 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
         // Set up alert dialog for showing loading screen
         setUpProgressDialog();
 
-        // Gets item data in array list and creates adapter
+        // Get item as an array list and create adapter for displaying info on a single item
         getItems();
 
-        // Sets up view model for retrieving shared data
+        // Set up view model for retrieving shared data amongst the fragments and activity
         itemViewModel = new ViewModelProvider(getActivity()).get(ItemViewModel.class);
     }
 
 
     /**
-     * Once a item has been selected:
+     * Once an item has been selected:
      *   The loading screen is shown
      *   The model for the item is built
      *   ArView fragment is added/shown
@@ -159,7 +159,7 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
 
     /**
-     *
+     * Sets up an alert dialog with the loading icon and text
      */
     private void setUpProgressDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -171,7 +171,8 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
 
     /**
-     *
+     * Sets up configuration for the recycler view:
+     *   Uses grid layout with 2 columns
      */
     private void setUpRecyclerView() {
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));

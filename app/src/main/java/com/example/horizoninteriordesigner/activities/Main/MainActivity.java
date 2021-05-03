@@ -97,9 +97,10 @@ public class MainActivity extends AppCompatActivity {
         @Nullable Fragment itemSelectionFragment = fragmentManager.findFragmentByTag(ITEM_SELECT_TAG);
 
 
-        // Each case will show the fragment if it already exists or add the fragment to the fragment
-        // manager if it doesn't.
-        // Any existing fragments being shown will be hidden.
+        // Each case will:
+        //   Show the fragment if it already exists
+        //   (or) Add the fragment to the fragment manager if it doesn't
+        //   Any existing fragments being shown will be hidden.
         switch (selectedFragment) {
 
             case AR_VIEW_TAG:
@@ -118,19 +119,27 @@ public class MainActivity extends AppCompatActivity {
 
             case ITEM_SELECT_TAG:
 
+                if (arViewFragment != null) {
+                    fragmentTransaction.hide(arViewFragment);
+                }
+
                 if (itemSelectionFragment != null) {
                     fragmentTransaction.show(itemSelectionFragment);
                 } else {
                     fragmentTransaction.add(R.id.fragment_holder, new ItemSelectionFragment(), ITEM_SELECT_TAG);
                 }
 
-                if (arViewFragment != null) {
-                    fragmentTransaction.hide(arViewFragment);
-                }
                 break;
+
+
+            default:
+                Log.i(TAG, "manageFragmentTransaction: Actions not found for fragment");
+                return;
         }
 
-        fragmentTransaction.commit(); // signals the fragment manager that all operations have been added
+
+        // Run fragment transactions - show/hide - on the UI thread immediately
+        fragmentTransaction.commitNow();
     }
 }
 

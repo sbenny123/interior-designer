@@ -68,8 +68,6 @@ public class ItemSelectionAdapter extends RecyclerView.Adapter<ItemSelectionAdap
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         Item currentItem = itemArrayList.get(position);
 
-        holder.itemTV.setText(currentItem.getImageName());
-
         // Load image using Glide
         Glide.with(context).load(currentItem.getImageUrl()).into(holder.itemIV);
     }
@@ -90,14 +88,12 @@ public class ItemSelectionAdapter extends RecyclerView.Adapter<ItemSelectionAdap
      */
     public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView itemIV;
-        private TextView itemTV;
 
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
 
             itemIV = itemView.findViewById(R.id.iv_item);
-            itemTV = itemView.findViewById(R.id.tv_item);
 
             itemView.setOnClickListener(this);
         }
