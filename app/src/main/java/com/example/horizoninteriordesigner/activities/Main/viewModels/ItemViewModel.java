@@ -16,61 +16,33 @@ import com.google.ar.sceneform.ux.TransformableNode;
 public class ItemViewModel extends ViewModel {
     private String itemId;
     private MutableLiveData<Renderable> renderableToAdd = new MutableLiveData<Renderable>();
-
-    private MutableLiveData<Item> item = new MutableLiveData<Item>();
-    private MutableLiveData<TransformableNode> modelNode = new MutableLiveData<TransformableNode>();
-    private MutableLiveData<Renderable> renderable = new MutableLiveData<Renderable>();
+    private MutableLiveData<TransformableNode> selectedModelNode = new MutableLiveData<TransformableNode>();
 
 
     /**
-     *
-     */
-    public MutableLiveData<Renderable> getRenderableToAdd() { return renderableToAdd; }
-
-    public void setRenderableToAdd(Renderable renderableToAdd) { this.renderableToAdd.setValue(renderableToAdd); }
-
-
-    /**
-     *
+     * ItemId methods - get and set
      */
     public String getItemId() { return itemId; }
 
     public void setItemId(String itemId) { this.itemId = itemId; }
 
 
-
-
-
-
-
-    /*
-                         Methods for Item
-                     */
-    public MutableLiveData<Item> getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item.setValue(item);
-    }
-
-
-    /*
-         Methods for Renderable
+    /**
+     * RenderableToAdd methods - get and set
      */
-    public MutableLiveData<Renderable> getRenderable() {
-        return renderable;
+    public MutableLiveData<Renderable> getRenderableToAdd() { return renderableToAdd; }
+
+    public void setRenderableToAdd(Renderable renderableToAdd) {
+        this.renderableToAdd.setValue(renderableToAdd);
     }
 
-    public void setRenderable(Renderable renderable) {
-        this.renderable.setValue(renderable);
-    }
 
-
-    /*
-         Methods for TransoformableNode
+    /**
+     *  selectedModelNode methods - get and set
      */
-    public MutableLiveData<TransformableNode> getModelNode() { return modelNode; }
+    public MutableLiveData<TransformableNode> getSelectedModelNode() { return selectedModelNode; }
 
-    public void setModelNode(TransformableNode modelNode) { this.modelNode.setValue(modelNode); }
+    public void setSelectedModelNode(TransformableNode selectedModelNode) {
+        this.selectedModelNode.setValue(selectedModelNode);
+    }
 }

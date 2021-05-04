@@ -89,7 +89,7 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
         Material selectedMaterial = materialArrayList.get(position);
         AtomicReference<TransformableNode> selectedModel = new AtomicReference<>();
 
-        itemViewModel.getModelNode().observe(getViewLifecycleOwner(), transformableNode -> {
+        itemViewModel.getSelectedModelNode().observe(getViewLifecycleOwner(), transformableNode -> {
             selectedModel.set(transformableNode);
             updateModelMaterial(selectedModel.get(), selectedMaterial);
         });
@@ -125,10 +125,7 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
                         Map documentData = document.getData();
                         ArrayList materialNmes = (ArrayList) documentData.get("materials");
 
-
                         getSelectedMaterials(materialNmes);
-
-                        Log.i("A", "A");
                     }
                 }
             }

@@ -129,6 +129,7 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
                 .exceptionally(throwable -> {
 
                             Toast.makeText(getActivity(), "Unable to load renderable", Toast.LENGTH_LONG).show();
+                            progressDialog.dismiss();
                             return null;
                 });
     }

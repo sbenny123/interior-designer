@@ -16,6 +16,7 @@
         android:contentDescription="@string/btn_show_item_options_desc"
         android:focusable="true"
         android:src="@drawable/options_icon"
+        android:visibility="gone"
         app:fabCustomSize="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_take_photo"

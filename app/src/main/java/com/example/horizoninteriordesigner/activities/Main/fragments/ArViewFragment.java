@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -35,6 +36,7 @@ import com.google.ar.core.Plane;
 import com.google.ar.core.Session;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.ArSceneView;
+import com.google.ar.sceneform.FrameTime;
 import com.google.ar.sceneform.HitTestResult;
 import com.google.ar.sceneform.Node;
 import com.google.ar.sceneform.Scene;
@@ -42,13 +44,13 @@ import com.google.ar.sceneform.rendering.Renderable;
 import com.google.ar.sceneform.ux.BaseArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static com.example.horizoninteriordesigner.activities.Main.MainActivity.ITEM_SELECT_TAG;
 import static com.example.horizoninteriordesigner.utils.CameraUtils.*;
+import static com.example.horizoninteriordesigner.utils.SceneformUtils.*;
 
 
 /**
@@ -61,7 +63,10 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
     private SceneformFragment sceneformFragment; // Inner fragment which utilises Sceneform to manipulate 3D models and scenes
     private TransformableNode currentModel;
     private ItemViewModel itemViewModel;
-    //private Renderable renderable;
+
+    private FloatingActionButton takePhotoBtn;
+    private FloatingActionButton selectItemsBtn;
+    private FloatingActionButton showItemOptionsBtn;
 
 
     public ArViewFragment() {
@@ -115,9 +120,9 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
      */
     private void initialiseButtons(View view) {
 
-        FloatingActionButton takePhotoBtn = view.findViewById(R.id.btn_take_photo);
-        FloatingActionButton selectItemsBtn = view.findViewById(R.id.btn_select_items);
-        FloatingActionButton showItemOptionsBtn = view.findViewById(R.id.btn_show_item_options);
+        takePhotoBtn = view.findViewById(R.id.btn_take_photo);
+        selectItemsBtn = view.findViewById(R.id.btn_select_items);
+        showItemOptionsBtn = view.findViewById(R.id.btn_show_item_options);
 
         takePhotoBtn.setOnClickListener(this);
         selectItemsBtn.setOnClickListener(this);
@@ -183,12 +188,13 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
 
                     // Change model's design
                     case R.id.item_change_design:
+                        itemViewModel.setSelectedModelNode(currentModel);
                         showMaterialSelectionFragment();
                         break;
 
                     // Remove model from scene
                     case R.id.item_remove_item:
-                        AnchorNode currentAnchorNode = setAnchorNode(currentModel);
+                        AnchorNode currentAnchorNode = getParentAnchorNode(currentModel);
                         removeAnchorNode(currentAnchorNode);
                         currentModel = null;
                         break;
@@ -209,8 +215,6 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
      * Show a sliding menu with the available designs the item can be changed to
      */
     private void showMaterialSelectionFragment() {
-        itemViewModel.setModelNode(currentModel);
-
         Fragment materialSelectionFragment = new MaterialSelectionFragment();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_materials, materialSelectionFragment).commit();
@@ -283,6 +287,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         }, new Handler(handlerThread.getLooper()));
     }
 
+
     @Override
     public void onTapPlane(HitResult hitResult, Plane plane, MotionEvent motionEvent) {
 
@@ -303,70 +308,12 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         Anchor anchor = hitResult.createAnchor();
 
         if (currentModel != null) {
-            AnchorNode currentAnchorNode = setAnchorNode(currentModel);
+            AnchorNode currentAnchorNode = getParentAnchorNode(currentModel);
             currentAnchorNode.setAnchor(anchor);
 
         } else {
             addModelToScene(anchor, currentRenderable.get(), currentItemId);
         }
-        /*else {
-            AnchorNode newAnchorNode = new AnchorNode(anchor);
-
-            newAnchorNode.setParent(sceneformFragment.getArSceneView().getScene());
-
-            // Create the transformable model and add it to the anchor.
-            TransformableNode newModel = new TransformableNode(sceneformFragment.getTransformationSystem());
-
-            newModel.setParent(newAnchorNode);
-            newModel.setRenderable(renderable);
-            newModel.select();
-            newModel.setOnTapListener(new Node.OnTapListener() {
-                @Override
-                public void onTap(HitTestResult hitTestResult, MotionEvent motionEvent) {
-                    TransformableNode selectedModel = (TransformableNode) hitTestResult.getNode();
-                    AnchorNode selectedAnchorNode = (AnchorNode) selectedModel.getParent();
-                    Renderable selectedRenderable = selectedModel.getRenderable();
-
-                    currentModel = selectedModel;
-
-                 Texture.builder()
-                            .setSource(getActivity(), R.drawable.hexagon_wood)
-                            .build()
-                            .thenAccept(texture -> {
-                                selectedModel.getRenderable().getMaterial().setTexture("baseColorMap", texture);
-                            });
-
-
-                   Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.parquet);
-
-                    TextureSampler textureSampler = new TextureSampler();
-
-                    Engine engine = Engine.create();
-                    Texture texture = new Texture.Builder()
-                            .width(bitmap.getWidth())
-                            .height(bitmap.getHeight())
-                            .sampler(Texture.Sampler.SAMPLER_3D)
-                            .format(Texture.InternalFormat.RGBA8)
-                            .build(engine);
-
-                    for (MaterialInstance materialInstance : materialInstances) {
-                        Material material = materialInstance.getMaterial();
-                        materialInstance.setParameter("baseColor", texture, textureSampler);
-                        //materialInstance.setParameter("baseColorFactor", 0.3f, 0.5f, 0.7f); // Values for Red, Green and Blue
-                    }
-                }
-            });
-
-
-            currentModel = newModel;
-        }*/
-    }
-
-
-    private AnchorNode setAnchorNode (TransformableNode model) {
-        AnchorNode anchorNode = (AnchorNode) model.getParent();
-
-        return anchorNode;
     }
 
 
@@ -387,26 +334,47 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
                 TransformableNode selectedModel = (TransformableNode) hitTestResult.getNode();
                 AnchorNode selectedAnchorNode = (AnchorNode) selectedModel.getParent();
                 Renderable selectedRenderable = selectedModel.getRenderable();
-
-                currentModel = selectedModel;
             }
         });
 
-        currentModel = renderedModel;
+        performModelSelectedActions(renderedModel);
     }
 
 
     @Override
     public void onSessionInitialization(Session session) {
         Scene scene = sceneformFragment.getArSceneView().getScene();
+
         scene.addOnPeekTouchListener(new Scene.OnPeekTouchListener() {
             @Override
             public void onPeekTouch(HitTestResult hitTestResult, MotionEvent motionEvent) {
-                if (hitTestResult.getNode() != null) {
-                    //currentAnchorNode = (AnchorNode) hitTestResult.getNode().getParent();
-                }
+                TransformableNode node = (TransformableNode) hitTestResult.getNode();
+                String name = node != null ? node.getName() : null;
+
+                performModelSelectedActions((TransformableNode) hitTestResult.getNode());
             }
         });
+    }
 
+    /**
+     * Actions to perform once a model may/has been selected
+     *   Toggles visibility of item options button
+     *   Sets the selected model as the currentModel - used for item options
+     * @param selectedModel
+     */
+    private void performModelSelectedActions(@Nullable TransformableNode selectedModel) {
+
+        if (selectedModel != null) {
+
+            setCurrentModel(selectedModel);
+            showItemOptionsBtn.setVisibility(View.VISIBLE);
+
+        } else {
+            showItemOptionsBtn.setVisibility(View.GONE);
+        }
+    }
+
+    private void setCurrentModel(TransformableNode model) {
+        currentModel = model;
     }
 }
