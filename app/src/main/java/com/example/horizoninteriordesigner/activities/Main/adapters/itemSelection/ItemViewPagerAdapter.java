@@ -6,7 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.horizoninteriordesigner.activities.Main.fragments.itemSelection.ItemSelectionFragment;
 
-import static com.example.horizoninteriordesigner.constants.itemConstants.itemCategories;
+import static com.example.horizoninteriordesigner.constants.itemConstants.getItemCategories;
 
 
 public class ItemViewPagerAdapter extends FragmentStateAdapter {
@@ -23,6 +23,6 @@ public class ItemViewPagerAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return itemCategories.length;
+        return getItemCategories().size();
     }
 }

@@ -10,10 +10,13 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.horizoninteriordesigner.R;
 import com.example.horizoninteriordesigner.activities.Main.adapters.itemSelection.ItemViewPagerAdapter;
+import com.example.horizoninteriordesigner.models.ItemCategory;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-import static com.example.horizoninteriordesigner.constants.itemConstants.itemCategories;
+import java.util.ArrayList;
+
+import static com.example.horizoninteriordesigner.constants.itemConstants.*;
 
 
 /**
@@ -50,8 +53,10 @@ public class ItemViewPagerFragment extends Fragment {
         adapter = new ItemViewPagerAdapter(this);
         viewPager.setAdapter(adapter);
 
+        // Creates tab for each item category and gives it a title
+        // Each category is of model ItemCategory
         new TabLayoutMediator(tabLayout, viewPager,
-                (tab, position) -> tab.setText(itemCategories[position])
+                (tab, position) -> tab.setText(getItemCategories().get(position).getCatTitle())
         ).attach();
     }
 }
