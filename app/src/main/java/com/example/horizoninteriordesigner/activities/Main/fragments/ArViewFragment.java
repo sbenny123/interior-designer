@@ -95,7 +95,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
 
 
     /**
-     * Inflates view for fragment
+     * Inflates the fragment's layout
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -104,7 +104,8 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
 
 
     /**
-     * Initialises associated UI like the buttons and viewModel
+     * Initialises associated UI like the buttons and viewModel.
+     * Sets viewModel to be used for shared data between the fragments.
      */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

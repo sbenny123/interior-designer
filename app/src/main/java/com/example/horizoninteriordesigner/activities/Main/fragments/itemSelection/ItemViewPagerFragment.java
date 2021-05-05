@@ -16,18 +16,30 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import static com.example.horizoninteriordesigner.constants.itemConstants.itemCategories;
 
 
+/**
+ * Tabbed item selection fragment
+ * Handles provision of tabs for each item category and calling the fragment to show the correct items.
+ */
 public class ItemViewPagerFragment extends Fragment {
-    private ItemViewPagerAdapter adapter;
-    private TabLayout tabLayout;
-    private ViewPager2 viewPager;
+
+    private ItemViewPagerAdapter adapter; // Handles calling of itemSelection fragment to get items
+    private TabLayout tabLayout; // For tabs
+    private ViewPager2 viewPager; // For section showing the items
 
 
+    /**
+     * Inflates the fragment's layout
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_item_view_pager, container, false);
     }
 
 
+    /**
+     *  Initialises the tabs to show the different item categories.
+     *  Initialises the view page to show the items to select for that tab.
+     */
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
