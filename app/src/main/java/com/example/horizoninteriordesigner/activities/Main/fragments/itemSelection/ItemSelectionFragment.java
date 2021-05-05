@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +26,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -37,10 +39,12 @@ import java.util.ArrayList;
 
 /**
  * Item selection fragment
- * All selectable items are shown and the renderable for sceneform is created once selected.
+ * All selectable items for a particular category are shown and the renderable for sceneform is
+ * created once selected.
  */
 public class ItemSelectionFragment extends Fragment implements ItemSelectionAdapter.ItemClickListener {
 
+    private String catKey; // Item category key. Used to retrieve correct items from database
     private RecyclerView recyclerView; // Reuses the view to show new items in place of old ones
     private ItemSelectionAdapter adapter; // Specifies how each item card should look like
     private AlertDialog progressDialog; // For showing loading screen between item selection and ar view
@@ -48,8 +52,8 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
     private ItemViewModel itemViewModel; // Used to retrieve data shared amongst the fragments and activity
 
 
-    public ItemSelectionFragment() {
-        // Required empty public constructor
+    public ItemSelectionFragment(String catKey) {
+        this.catKey = catKey;
     }
 
 
@@ -59,6 +63,21 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_item_selection, container, false);
+    }
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        getParentFragmentManager().setFragmentResultListener("requestKey", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
+                // We use a String here, but any type that can be put in a Bundle is supported
+                String result = bundle.getString("bundleKey");
+                // Do something with the result
+            }
+        });
     }
 
 
@@ -143,10 +162,16 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
         itemArrayList = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Query query;
 
+        if (catKey != "") {
+            query = db.collection("models").whereEqualTo("itemCategory", catKey);
+        } else {
+            query = db.collection("models");
 
-        db.collection("models")
-                .get()
+        }
+
+        query.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {

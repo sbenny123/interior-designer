@@ -10,13 +10,10 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.horizoninteriordesigner.R;
 import com.example.horizoninteriordesigner.activities.Main.adapters.itemSelection.ItemViewPagerAdapter;
-import com.example.horizoninteriordesigner.models.ItemCategory;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-import java.util.ArrayList;
-
-import static com.example.horizoninteriordesigner.constants.itemConstants.*;
+import static com.example.horizoninteriordesigner.constants.itemConstants.getItemCategories;
 
 
 /**
