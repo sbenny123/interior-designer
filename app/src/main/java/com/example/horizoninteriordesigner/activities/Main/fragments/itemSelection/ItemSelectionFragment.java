@@ -109,31 +109,10 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
         Uri itemUri = Uri.parse(selectedItem.getModelUrl()); // model's url from Firebase storage as a Uri
         String itemId = selectedItem.getItemId();
 
-        ModelRenderable.builder()
-                .setSource(getActivity(), itemUri)
-                .setIsFilamentGltf(true)
-                .build()
-                .thenAccept(renderable -> {
-
-                    itemViewModel.setRenderableToAdd(renderable);
-                    itemViewModel.setItemId(itemId);
-
-                    ((MainActivity) getActivity()).manageFragmentTransaction(AR_VIEW_TAG);
-
-                    progressDialog.dismiss();
-
-                })
-                .exceptionally(throwable -> {
-
-                    Toast.makeText(getActivity(), "Unable to load renderable", Toast.LENGTH_LONG).show();
-                    progressDialog.dismiss();
-                    return null;
-                });
-
 
         // Build .glb file as a renderable object
         // Go to ArView fragment once complete
-        /*ModelRenderable.builder()
+        ModelRenderable.builder()
                 .setSource(getActivity(), itemUri)
                 .setIsFilamentGltf(true)
                 .build()
@@ -152,9 +131,7 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
                             Toast.makeText(getActivity(), "Unable to load renderable", Toast.LENGTH_LONG).show();
                             progressDialog.dismiss();
                             return null;
-                });*/
-
-
+                });
     }
 
 
