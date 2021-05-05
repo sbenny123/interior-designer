@@ -1,4 +1,4 @@
-package com.example.horizoninteriordesigner.activities.Main;
+package com.example.horizoninteriordesigner.activities.main;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -15,8 +15,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.horizoninteriordesigner.R;
-import com.example.horizoninteriordesigner.activities.Main.fragments.ArViewFragment;
-import com.example.horizoninteriordesigner.activities.Main.fragments.itemSelection.ItemViewPagerFragment;
+import com.example.horizoninteriordesigner.activities.main.fragments.ArViewFragment;
+import com.example.horizoninteriordesigner.activities.main.fragments.itemSelection.ItemViewPagerFragment;
 
 
 /**

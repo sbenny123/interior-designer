@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.Main.fragments.ArViewFragment">
+    tools:context=".activities.main.fragments.ArViewFragment">
 
     <!-- Icon made by Freepik from www.flaticon.com -->
    <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton

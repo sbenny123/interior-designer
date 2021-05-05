@@ -1,4 +1,4 @@
-package com.example.horizoninteriordesigner.activities.Main.fragments;
+package com.example.horizoninteriordesigner.activities.main.fragments;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,16 +10,14 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.horizoninteriordesigner.R;
-import com.example.horizoninteriordesigner.activities.Main.MainActivity;
-import com.example.horizoninteriordesigner.activities.Main.adapters.MaterialSelectionAdapter;
-import com.example.horizoninteriordesigner.activities.Main.viewModels.ItemViewModel;
+import com.example.horizoninteriordesigner.activities.main.MainActivity;
+import com.example.horizoninteriordesigner.activities.main.adapters.MaterialSelectionAdapter;
+import com.example.horizoninteriordesigner.activities.main.viewModels.ItemViewModel;
 import com.example.horizoninteriordesigner.models.Material;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,13 +29,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static com.example.horizoninteriordesigner.activities.Main.MainActivity.AR_VIEW_TAG;
+import static com.example.horizoninteriordesigner.activities.main.MainActivity.AR_VIEW_TAG;
 
 
 /**

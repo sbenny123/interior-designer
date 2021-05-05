@@ -1,13 +1,10 @@
-package com.example.horizoninteriordesigner.activities.Main.fragments;
+package com.example.horizoninteriordesigner.activities.main.fragments;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -20,37 +17,30 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.horizoninteriordesigner.R;
-import com.example.horizoninteriordesigner.activities.Main.MainActivity;
-import com.example.horizoninteriordesigner.activities.Main.viewModels.ItemViewModel;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.horizoninteriordesigner.activities.main.MainActivity;
+import com.example.horizoninteriordesigner.activities.main.viewModels.ItemViewModel;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
 import com.google.ar.core.Session;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.ArSceneView;
-import com.google.ar.sceneform.FrameTime;
 import com.google.ar.sceneform.HitTestResult;
 import com.google.ar.sceneform.Node;
 import com.google.ar.sceneform.Scene;
-import com.google.ar.sceneform.math.Vector3;
 import com.google.ar.sceneform.rendering.Renderable;
 import com.google.ar.sceneform.ux.BaseArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static com.example.horizoninteriordesigner.activities.Main.MainActivity.ITEM_SELECT_TAG;
+import static com.example.horizoninteriordesigner.activities.main.MainActivity.ITEM_SELECT_TAG;
 import static com.example.horizoninteriordesigner.utils.CameraUtils.*;
 import static com.example.horizoninteriordesigner.utils.SceneformUtils.*;
 

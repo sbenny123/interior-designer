@@ -1,10 +1,10 @@
-package com.example.horizoninteriordesigner.activities.Main.adapters.itemSelection;
+package com.example.horizoninteriordesigner.activities.main.adapters.itemSelection;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.horizoninteriordesigner.activities.Main.fragments.itemSelection.ItemSelectionFragment;
+import com.example.horizoninteriordesigner.activities.main.fragments.itemSelection.ItemSelectionFragment;
 
 import static com.example.horizoninteriordesigner.constants.itemConstants.getItemCategories;
 

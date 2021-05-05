@@ -1,16 +1,15 @@
-package com.example.horizoninteriordesigner.activities.Main.viewModels;
+package com.example.horizoninteriordesigner.activities.main.viewModels;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.horizoninteriordesigner.models.Item;
 import com.google.ar.sceneform.rendering.Renderable;
 import com.google.ar.sceneform.ux.TransformableNode;
 
 
 /**
  * Manages UI-related data which is shared amongst the fragments in MainActivity
- * {@link com.example.horizoninteriordesigner.activities.Main.MainActivity}
+ * {@link com.example.horizoninteriordesigner.activities.main.MainActivity}
  *
  */
 public class ItemViewModel extends ViewModel {

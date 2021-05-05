@@ -1,4 +1,4 @@
-package com.example.horizoninteriordesigner.activities.Main.fragments.itemSelection;
+package com.example.horizoninteriordesigner.activities.main.fragments.itemSelection;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,10 +16,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.horizoninteriordesigner.activities.Main.MainActivity;
-import com.example.horizoninteriordesigner.activities.Main.adapters.itemSelection.ItemSelectionAdapter;
+import com.example.horizoninteriordesigner.activities.main.MainActivity;
+import com.example.horizoninteriordesigner.activities.main.adapters.itemSelection.ItemSelectionAdapter;
 import com.example.horizoninteriordesigner.R;
-import com.example.horizoninteriordesigner.activities.Main.viewModels.ItemViewModel;
+import com.example.horizoninteriordesigner.activities.main.viewModels.ItemViewModel;
 import com.example.horizoninteriordesigner.models.Item;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -32,7 +31,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
-import static com.example.horizoninteriordesigner.activities.Main.MainActivity.AR_VIEW_TAG;
+import static com.example.horizoninteriordesigner.activities.main.MainActivity.AR_VIEW_TAG;
 
 import java.util.ArrayList;
 
