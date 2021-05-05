@@ -8,7 +8,7 @@
     tools:context=".activities.Main.fragments.ArViewFragment">
 
     <!-- Icon made by Freepik from www.flaticon.com -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+   <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_show_item_options"
         android:layout_width="70dp"
         android:layout_height="70dp"
@@ -16,7 +16,6 @@
         android:contentDescription="@string/btn_show_item_options_desc"
         android:focusable="true"
         android:src="@drawable/options_icon"
-        android:visibility="gone"
         app:fabCustomSize="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_take_photo"
@@ -40,10 +39,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.905"
-        app:useCompatPadding="false" />
+        app:useCompatPadding="false" /> -->
 
     <!-- Icon made by Freepik from www.flaticon.com -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+   <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_select_items"
         android:layout_width="70dp"
         android:layout_height="70dp"
@@ -52,25 +51,77 @@
         android:clickable="true"
         android:contentDescription="@string/btn_select_items_desc"
         android:focusable="true"
-        android:src="@drawable/couch_icon"
         app:fabCustomSize="70dp"
+        android:src="@drawable/couch_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.242"
         app:layout_constraintStart_toEndOf="@+id/btn_take_photo"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.905" /> -->
+
+    <Button
+        android:id="@+id/btn_show_item_options"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/round_button"
+        android:clickable="true"
+        android:drawableTop="@drawable/options_icon"
+        android:focusable="true"
+        android:gravity="center"
+        android:text="@string/btn_show_item_options_text"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_take_photo"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.905" />
+
+    <Button
+        android:id="@+id/btn_take_photo"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/round_button"
+        android:clickable="true"
+        android:drawableTop="@android:drawable/ic_menu_camera"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.905"
+        app:useCompatPadding="false" />
+
+    <Button
+        android:id="@+id/btn_select_items"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/round_button"
+        android:drawableTop="@drawable/couch_icon"
+        android:focusable="true"
+        android:gravity="center"
+        android:text="@string/btn_select_items_text"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toEndOf="@+id/btn_take_photo"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.905" />
 
     <FrameLayout
-      android:id="@+id/fragment_ar"
-      android:layout_width="530dp"
-      android:layout_height="878dp"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.0"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.0" />
+        android:id="@+id/fragment_ar"
+        android:layout_width="530dp"
+        android:layout_height="878dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.21" />
 
     <FrameLayout
         android:id="@+id/fragment_materials"

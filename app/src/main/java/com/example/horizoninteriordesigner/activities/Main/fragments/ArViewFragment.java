@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.PixelCopy;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ import com.google.ar.sceneform.FrameTime;
 import com.google.ar.sceneform.HitTestResult;
 import com.google.ar.sceneform.Node;
 import com.google.ar.sceneform.Scene;
+import com.google.ar.sceneform.math.Vector3;
 import com.google.ar.sceneform.rendering.Renderable;
 import com.google.ar.sceneform.ux.BaseArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
@@ -64,9 +66,9 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
     private TransformableNode currentModel;
     private ItemViewModel itemViewModel;
 
-    private FloatingActionButton takePhotoBtn;
-    private FloatingActionButton selectItemsBtn;
-    private FloatingActionButton showItemOptionsBtn;
+    private Button takePhotoBtn;
+    private Button selectItemsBtn;
+    private Button showItemOptionsBtn;
 
 
     public ArViewFragment() {
@@ -123,6 +125,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         takePhotoBtn = view.findViewById(R.id.btn_take_photo);
         selectItemsBtn = view.findViewById(R.id.btn_select_items);
         showItemOptionsBtn = view.findViewById(R.id.btn_show_item_options);
+
 
         takePhotoBtn.setOnClickListener(this);
         selectItemsBtn.setOnClickListener(this);
@@ -252,7 +255,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
 
         // Make the request to copy.
         PixelCopy.request(view, bitmap, (copyResult) -> {
-            if (copyResult == PixelCopy.SUCCESS) {
+           if (copyResult == PixelCopy.SUCCESS) {
                 try {
                     saveBitmapToDisk(bitmap, filename);
 
@@ -263,7 +266,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
                     return;
                 }
 
-                Snackbar snackbar = Snackbar.make(v.findViewById(android.R.id.content),
+                /*Snackbar snackbar = Snackbar.make(v.findViewById(android.R.id.content),
                         "Photo saved", Snackbar.LENGTH_LONG);
                 snackbar.setAction("Open in Photos", view1 -> {
                     File photoFile = new File(filename);
@@ -281,7 +284,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
             } else {
                 Toast toast = Toast.makeText(getContext(),
                         "Failed to copyPixels: " + copyResult, Toast.LENGTH_LONG);
-                toast.show();
+                toast.show();*/
             }
             handlerThread.quitSafely();
         }, new Handler(handlerThread.getLooper()));
