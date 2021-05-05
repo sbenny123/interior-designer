@@ -16,9 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.horizoninteriordesigner.R;
 import com.example.horizoninteriordesigner.activities.Main.fragments.ArViewFragment;
-import com.example.horizoninteriordesigner.activities.Main.fragments.ItemSelectionFragment;
 import com.example.horizoninteriordesigner.activities.Main.fragments.itemSelection.ItemViewPagerFragment;
-import com.example.horizoninteriordesigner.activities.Main.fragments.itemSelection.NewItemSelectionFragment;
 
 
 /**
@@ -31,8 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Tag names of main fragments avaiable in this activity
     final public static String AR_VIEW_TAG = "FRAGMENT_AR_VIEW";
-    final public static String ITEM_SELECT_TAG = "FRAGMEMNT_ITEM_SELECTION";
-    final public static String TEST_ITEM_SELECT_TAG = "FRAGMENT_NEW_ITEM_SELECTION";
+    final public static String ITEM_SELECT_TAG = "FRAGMENT_ITEM_SELECTION";
 
 
     /**
@@ -52,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        manageFragmentTransaction(TEST_ITEM_SELECT_TAG);
+        manageFragmentTransaction(ITEM_SELECT_TAG);
     }
 
 
@@ -100,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
         // Avaiable fragments
         @Nullable Fragment arViewFragment = fragmentManager.findFragmentByTag(AR_VIEW_TAG);
         @Nullable Fragment itemSelectionFragment = fragmentManager.findFragmentByTag(ITEM_SELECT_TAG);
-        @Nullable Fragment newItemSelectionFragment = fragmentManager.findFragmentByTag(TEST_ITEM_SELECT_TAG);
 
         // Each case will:
         //   Show the fragment if it already exists
@@ -131,25 +127,11 @@ public class MainActivity extends AppCompatActivity {
                 if (itemSelectionFragment != null) {
                     fragmentTransaction.show(itemSelectionFragment);
                 } else {
-                    fragmentTransaction.add(R.id.fragment_holder, new ItemSelectionFragment(), ITEM_SELECT_TAG);
+                    fragmentTransaction.add(R.id.fragment_holder, new ItemViewPagerFragment(), ITEM_SELECT_TAG);
                 }
 
                 break;
 
-
-            case TEST_ITEM_SELECT_TAG:
-
-                if (arViewFragment != null) {
-                    fragmentTransaction.hide(arViewFragment);
-                }
-
-                if (newItemSelectionFragment != null) {
-                    fragmentTransaction.show(newItemSelectionFragment);
-                } else {
-                    fragmentTransaction.add(R.id.fragment_holder, new ItemViewPagerFragment(), TEST_ITEM_SELECT_TAG);
-                }
-
-                break;
 
             default:
                 Log.i(TAG, "manageFragmentTransaction: Actions not found for fragment");

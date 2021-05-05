@@ -5,15 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.horizoninteriordesigner.R;
-import com.example.horizoninteriordesigner.activities.Main.adapters.ItemViewPagerAdapter;
+import com.example.horizoninteriordesigner.activities.Main.adapters.itemSelection.ItemViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+
+import static com.example.horizoninteriordesigner.constants.itemConstants.itemCategories;
+
 
 public class ItemViewPagerFragment extends Fragment {
     private ItemViewPagerAdapter adapter;
@@ -37,9 +38,8 @@ public class ItemViewPagerFragment extends Fragment {
         adapter = new ItemViewPagerAdapter(this);
         viewPager.setAdapter(adapter);
 
-
         new TabLayoutMediator(tabLayout, viewPager,
-                (tab, position) -> tab.setText("Tab " + (position + 1))
+                (tab, position) -> tab.setText(itemCategories[position])
         ).attach();
     }
 }

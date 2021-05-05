@@ -1,12 +1,13 @@
-package com.example.horizoninteriordesigner.activities.Main.adapters;
-
-import android.os.Bundle;
+package com.example.horizoninteriordesigner.activities.Main.adapters.itemSelection;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.horizoninteriordesigner.activities.Main.fragments.itemSelection.NewItemSelectionFragment;
+import com.example.horizoninteriordesigner.activities.Main.fragments.itemSelection.ItemSelectionFragment;
+
+import static com.example.horizoninteriordesigner.constants.itemConstants.itemCategories;
+
 
 public class ItemViewPagerAdapter extends FragmentStateAdapter {
 
@@ -17,11 +18,11 @@ public class ItemViewPagerAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        return new NewItemSelectionFragment();
+        return new ItemSelectionFragment();
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return itemCategories.length;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.horizoninteriordesigner.activities.Main.fragments;
+package com.example.horizoninteriordesigner.activities.Main.fragments.itemSelection;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,14 +17,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.horizoninteriordesigner.activities.Main.MainActivity;
-import com.example.horizoninteriordesigner.activities.Main.adapters.ItemSelectionAdapter;
+import com.example.horizoninteriordesigner.activities.Main.adapters.itemSelection.ItemSelectionAdapter;
 import com.example.horizoninteriordesigner.R;
 import com.example.horizoninteriordesigner.activities.Main.viewModels.ItemViewModel;
 import com.example.horizoninteriordesigner.models.Item;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.ar.sceneform.rendering.ModelRenderable;
-import com.google.ar.sceneform.rendering.ViewRenderable;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
