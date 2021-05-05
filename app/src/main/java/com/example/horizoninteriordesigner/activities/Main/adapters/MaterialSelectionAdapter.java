@@ -20,15 +20,12 @@ import java.util.ArrayList;
 /**
  * Manages the item data model and adapts each item entry.
  */
-public class MaterialSelectionAdapter
-        extends RecyclerView.Adapter<MaterialSelectionAdapter.MaterialViewHolder> {
+public class MaterialSelectionAdapter extends RecyclerView.Adapter<MaterialSelectionAdapter.MaterialViewHolder> {
 
     private Context context;
     private ArrayList<Material> materialArrayList; // List of materials that could be selected
 
-    private final ItemClickListener onItemClickListener; // onClick listener for when a material has
-                                                         // been selected
-
+    private final ItemClickListener onItemClickListener; // onClick listener for when a material has been selected
 
     /**
      * Interface to handle onClick event for each material.
@@ -61,6 +58,7 @@ public class MaterialSelectionAdapter
         return materialViewHolder;
     }
 
+
     /**
      * Assigns values to each item using the inflated view from #onCreateViewHolder
      *
@@ -87,7 +85,7 @@ public class MaterialSelectionAdapter
 
 
     /**
-     *
+     * Sets up view type that each item has.
      */
     public class MaterialViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 

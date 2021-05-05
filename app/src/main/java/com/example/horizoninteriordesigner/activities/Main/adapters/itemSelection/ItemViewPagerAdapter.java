@@ -19,6 +19,7 @@ public class ItemViewPagerAdapter extends FragmentStateAdapter {
         super(fragment);
     }
 
+
     /**
      * Gets the item selection fragment which shows the items.
      * @param position index of selected tab
@@ -32,6 +33,7 @@ public class ItemViewPagerAdapter extends FragmentStateAdapter {
 
         return new ItemSelectionFragment(catKey);
     }
+
 
     /**
      * @return Total number of tabulated categories
