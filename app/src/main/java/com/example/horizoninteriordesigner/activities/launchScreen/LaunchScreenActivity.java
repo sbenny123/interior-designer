@@ -11,7 +11,8 @@ import com.example.horizoninteriordesigner.R;
 import com.example.horizoninteriordesigner.activities.main.MainActivity;
 
 public class LaunchScreenActivity extends AppCompatActivity {
-    private static int SPLASH_TIME_OUT = 1000; // Launcher screen timer
+
+    private final int SPLASH_TIME_OUT = 5000; // Launcher screen timer
 
 
     @Override
@@ -22,6 +23,7 @@ public class LaunchScreenActivity extends AppCompatActivity {
 
         new BackgroundTask().execute();
     }
+
 
     private class BackgroundTask extends AsyncTask {
         Intent intent;
