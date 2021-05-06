@@ -1,10 +1,13 @@
 package com.example.horizoninteriordesigner.activities.main.fragments;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
@@ -24,6 +28,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.horizoninteriordesigner.R;
 import com.example.horizoninteriordesigner.activities.main.MainActivity;
 import com.example.horizoninteriordesigner.activities.main.viewModels.ItemViewModel;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
@@ -37,6 +42,7 @@ import com.google.ar.sceneform.rendering.Renderable;
 import com.google.ar.sceneform.ux.BaseArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -247,35 +253,17 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         // Make the request to copy.
         PixelCopy.request(view, bitmap, (copyResult) -> {
            if (copyResult == PixelCopy.SUCCESS) {
-                try {
-                    saveBitmapToDisk(bitmap, filename);
-
-                } catch (IOException e) {
-                    Toast toast = Toast.makeText(getContext(), e.toString(),
-                            Toast.LENGTH_LONG);
-                    toast.show();
-                    return;
-                }
-
-                /*Snackbar snackbar = Snackbar.make(v.findViewById(android.R.id.content),
-                        "Photo saved", Snackbar.LENGTH_LONG);
-                snackbar.setAction("Open in Photos", view1 -> {
-                    File photoFile = new File(filename);
-
-                    Uri photoURI = FileProvider.getUriForFile(getContext(),
-                            getActivity().getPackageName() + ".ar.name.provider",
-                            photoFile);
-                    Intent intent = new Intent(Intent.ACTION_VIEW, photoURI);
-                    intent.setDataAndType(photoURI, "image/*");
-                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    startActivity(intent);
-
-                });
-                snackbar.show();
+               try {
+                   saveBitmapToDisk(bitmap, filename);
+               } catch (IOException e) {
+                   e.printStackTrace();
+                   return;
+               }
+               
             } else {
                 Toast toast = Toast.makeText(getContext(),
                         "Failed to copyPixels: " + copyResult, Toast.LENGTH_LONG);
-                toast.show();*/
+                toast.show();
             }
             handlerThread.quitSafely();
         }, new Handler(handlerThread.getLooper()));

@@ -1,7 +1,9 @@
 package com.example.horizoninteriordesigner.utils;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -24,8 +26,14 @@ public final class CameraUtils {
         SimpleDateFormat formatter = new SimpleDateFormat("yyMMddhhmmss");
         String dateStr = formatter.format(date);
 
-        return Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES) + File.separator + "HorizonInterior/" + dateStr + "_screenshot.jpg";
+        /*return Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES) + File.separator + "HorizonInterior/" + dateStr + "_screenshot.jpg";*/
+
+        //File sdCard = Environment.getExternalStorageDirectory();
+
+        //return sdCard.getAbsolutePath();
+
+        return dateStr + "_screenshot.jpg";
     }
 
 
@@ -37,18 +45,27 @@ public final class CameraUtils {
      */
     public static void saveBitmapToDisk(Bitmap bitmap, String filename) throws IOException {
 
-        File out = new File(filename);
-        if (!out.getParentFile().exists()) {
-            out.getParentFile().mkdirs();
+        File sdCard = Environment.getExternalStorageDirectory();
+        File dir = new File(sdCard.getAbsolutePath() + "/HorizonInterior/");
+
+        // Create directory if it does not already exist
+        if (!dir.exists() && !dir.isDirectory()) {
+            dir.mkdirs();
         }
-        try (FileOutputStream outputStream = new FileOutputStream(filename);
-             ByteArrayOutputStream outputData = new ByteArrayOutputStream()) {
+
+        File out = new File(dir, filename);
+
+        try {
+            FileOutputStream outputStream = new FileOutputStream(out);
+            ByteArrayOutputStream outputData = new ByteArrayOutputStream();
+
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputData);
             outputData.writeTo(outputStream);
             outputStream.flush();
             outputStream.close();
-        } catch (IOException ex) {
-            throw new IOException("Failed to save bitmap to disk", ex);
+
+        } catch (IOException e) {
+            throw new IOException("Failed to save bitmap to disk", e);
         }
     }
 }
