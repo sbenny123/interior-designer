@@ -3,6 +3,9 @@
     <string name="app_name">Horizon Interior Designer</string>
     <string name="title_activity_item_selection">Select an item</string>
 
+    <!-- Action bar items -->
+    <string name="item_help">Help</string>
+
     <!-- Buttons -->
     <string name="btn_select_items_text">Add</string>
     <string name="btn_show_item_options_text">Edit</string>
