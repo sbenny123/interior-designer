@@ -58,7 +58,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
     private TransformableNode currentModel;
     private ItemViewModel itemViewModel;
 
-    private Button takePhotoBtn, selectItemsBtn;
+    private static Button selectItemsBtn, takePhotoBtn;
     private FloatingActionButton showItemOptionsFab, changeDesignFab, removeItemFab;
     private TextView changeDesignText, removeItemText;
     private Boolean isAllFabsVisible;
@@ -276,6 +276,13 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         hideItemOptionButtons();
 
     }
+
+
+    public static void showMainButtons() {
+        selectItemsBtn.setVisibility(View.VISIBLE);
+        takePhotoBtn.setVisibility(View.VISIBLE);
+    }
+
 
     private void hideItemOptionButtons() {
         showItemOptionsFab.setVisibility(View.GONE);

@@ -3,11 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- Icon made by Freepik from www.flaticon.com -->
     <item
-        android:id="@+id/action_help"
-        android:icon="@drawable/help_icon"
+        android:id="@+id/action_back"
+        android:icon="@drawable/ic_back"
         android:title="@string/item_help"
-        app:showAsAction="ifRoom">
+        app:showAsAction="always">
     </item>
+
 </menu>
