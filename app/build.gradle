@@ -2,10 +2,18 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
+    signingConfigs {
+        config {
+            storeFile file('C:\\Users\\suzmi\\Documents\\University\\COMP3000\\upload-keystore.jks')
+            storePassword 'uploadkey123'
+            keyAlias 'key0'
+            keyPassword 'keyupload123'
+        }
+    }
     compileSdkVersion 30
 
     defaultConfig {
-        applicationId "com.example.horizoninteriordesigner"
+        applicationId "com.project.horizoninteriordesigner"
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
@@ -21,6 +29,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
 
@@ -32,6 +41,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.annotation:annotation:1.2.0'
     implementation 'androidx.appcompat:appcompat'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.fragment:fragment:1.3.2'
