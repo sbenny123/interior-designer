@@ -10,6 +10,11 @@
     <string name="btn_select_items_text">Add</string>
     <string name="btn_show_item_options_text">Edit</string>
 
+    <string name="fab_show_item_options">Show item options</string>
+
+    <string name="text_change_design">Change design</string>
+    <string name="text_remove_item">Remove</string>
+
     <!-- Menu items -->
     <string name="item_change_design">Change design</string>
     <string name="item_remove_item">Remove</string>

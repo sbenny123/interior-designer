@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.project.horizoninteriordesigner.R;
 import com.project.horizoninteriordesigner.activities.main.MainActivity;
 import com.project.horizoninteriordesigner.activities.main.viewModels.ItemViewModel;
@@ -56,9 +58,10 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
     private TransformableNode currentModel;
     private ItemViewModel itemViewModel;
 
-    private Button takePhotoBtn;
-    private Button selectItemsBtn;
-    private Button showItemOptionsBtn;
+    private Button takePhotoBtn, selectItemsBtn;
+    private FloatingActionButton showItemOptionsFab, changeDesignFab, removeItemFab;
+    private TextView changeDesignText, removeItemText;
+    private Boolean isAllFabsVisible;
 
 
     public ArViewFragment() {
@@ -115,12 +118,24 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
 
         takePhotoBtn = view.findViewById(R.id.btn_take_photo);
         selectItemsBtn = view.findViewById(R.id.btn_select_items);
-        showItemOptionsBtn = view.findViewById(R.id.btn_show_item_options);
+
+        showItemOptionsFab = view.findViewById(R.id.fab_show_item_options);
+        changeDesignFab = view.findViewById(R.id.fab_change_item_design);
+        removeItemFab = view.findViewById(R.id.fab_remove_item);
+
+        changeDesignText = view.findViewById(R.id.text_change_item_design);
+        removeItemText = view.findViewById(R.id.text_remove_item);
+
+        isAllFabsVisible = false;
 
 
         takePhotoBtn.setOnClickListener(this);
         selectItemsBtn.setOnClickListener(this);
-        showItemOptionsBtn.setOnClickListener(this);
+        showItemOptionsFab.setOnClickListener(this);
+        changeDesignFab.setOnClickListener(this);
+        removeItemFab.setOnClickListener(this);
+
+        hideItemOptionButtons();
     }
 
 
@@ -139,14 +154,28 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
                 showItemSelectionFragment();
                 break;
 
-             // To show options for a selected model
-            case R.id.btn_show_item_options:
-                showItemOptionsPopup(view);
-                break;
-
             // To take a photo of the camera view
             case R.id.btn_take_photo:
                 takePhoto(view);
+                break;
+
+            // To show options for a selected model
+            case R.id.fab_show_item_options:
+                showItemOptions();
+                break;
+
+            // To change material of an item
+            case R.id.fab_change_item_design:
+                itemViewModel.setSelectedModelNode(currentModel);
+                hideMainButtons();
+                showMaterialSelectionFragment();
+                break;
+
+            // To delete an item
+            case R.id.fab_remove_item:
+                AnchorNode currentAnchorNode = getParentAnchorNode(currentModel);
+                removeAnchorNode(currentAnchorNode);
+                currentModel = null;
                 break;
         }
     }
@@ -160,13 +189,35 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
     }
 
 
+    private void showItemOptions() {
+        if (!isAllFabsVisible) {
+            removeItemFab.show();
+            changeDesignFab.show();
+
+            removeItemText.setVisibility(View.VISIBLE);
+            changeDesignText.setVisibility(View.VISIBLE);
+
+            isAllFabsVisible = true;
+
+        } else {
+            removeItemFab.hide();
+            changeDesignFab.hide();
+
+            removeItemText.setVisibility(View.GONE);
+            changeDesignText.setVisibility(View.GONE);
+
+            isAllFabsVisible = false;
+        }
+    }
+
+
     /**
      * Creates and shows a pop-up menu with all the available options for the model
      * Includes:
      *   Changing model's materials
      *   Model deletion
      */
-    private void showItemOptionsPopup(View view) {
+   /* private void showItemOptionsPopup(View view) {
 
         // Create pop-up menu
         PopupMenu popupMenu = new PopupMenu(getActivity(), view);
@@ -183,6 +234,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
                     // Change model's design
                     case R.id.item_change_design:
                         itemViewModel.setSelectedModelNode(currentModel);
+                        hideMainButtons();
                         showMaterialSelectionFragment();
                         break;
 
@@ -202,7 +254,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         });
 
         popupMenu.show();
-    }
+    }*/
 
 
     /**
@@ -211,7 +263,28 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
     private void showMaterialSelectionFragment() {
         Fragment materialSelectionFragment = new MaterialSelectionFragment();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_materials, materialSelectionFragment).commit();
+        transaction.replace(R.id.fragment_materials, materialSelectionFragment).commitNow();
+    }
+
+    /**
+     * Hides the main buttons - add item, save photo and edit item buttons
+     */
+    private void hideMainButtons() {
+        selectItemsBtn.setVisibility(View.GONE);
+        takePhotoBtn.setVisibility(View.GONE);
+
+        hideItemOptionButtons();
+
+    }
+
+    private void hideItemOptionButtons() {
+        showItemOptionsFab.setVisibility(View.GONE);
+        changeDesignFab.setVisibility(View.GONE);
+        removeItemFab.setVisibility(View.GONE);
+        changeDesignText.setVisibility(View.GONE);
+        removeItemText.setVisibility(View.GONE);
+
+        isAllFabsVisible = false;
     }
 
 
@@ -343,10 +416,10 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         if (selectedModel != null) {
 
             setCurrentModel(selectedModel);
-            showItemOptionsBtn.setVisibility(View.VISIBLE);
+            showItemOptionsFab.setVisibility(View.VISIBLE);
 
         } else {
-            showItemOptionsBtn.setVisibility(View.GONE);
+            hideItemOptionButtons();
         }
     }
 
