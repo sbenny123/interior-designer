@@ -25,7 +25,8 @@ import com.project.horizoninteriordesigner.activities.main.fragments.itemSelecti
 
 
 /**
- * Used to control visibility of fragments and check device is compatible with the app.
+ * Main activity shown and used by the user.
+ * Used to control visibility of fragments, its app bar and check device is compatible with the app.
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
      *   - Sets the layout to show to user.
      *   - Sets top action bar.
      *   - Displays start fragment.
-     * @param savedInstanceState any saved types like string.
+     * @param savedInstanceState any saved types like strings.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
