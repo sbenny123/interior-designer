@@ -22,6 +22,9 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
     <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
   </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
   <component name="AutomaticModuleUnloader">
     <loaded-modules>
       <module name="Horizon_Interior_Designer" />
@@ -52,10 +55,7 @@
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/horizoninteriordesigner/ItemDbApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/horizoninteriordesigner/ItemDbApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/horizoninteriordesigner/activities/ArCamera/ArCameraActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/horizoninteriordesigner/activities/ArCamera/ArCameraActivity.java" afterDir="false" />
-<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout-land/activity_ar_camera.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout-land/activity_ar_camera.xml" afterDir="false" />
-=======
->>>>>>> parent of b7d3931 (Add previous nodes to scene)
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_ar_camera.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_ar_camera.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -66,7 +66,7 @@
   <component name="CodeInsightWorkspaceSettings">
     <option name="optimizeImportsOnTheFly" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[f72d99b]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[VirtualDevicePath@C:\Users\suzmi\.android\avd\Pixel_3a_XL_API_27.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -168,6 +168,7 @@
       <option name="ARTIFACT_NAME" value="" />
       <option name="PM_INSTALL_OPTIONS" value="" />
       <option name="ALL_USERS" value="false" />
+      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
       <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
@@ -218,6 +219,7 @@
       </method>
     </configuration>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -304,7 +306,6 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1615306541139" />
-<<<<<<< HEAD
     <state width="1491" height="360" key="GridCell.Tab.0.bottom" timestamp="1618602870578">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -341,7 +342,6 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1491" height="360" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618602870579" />
-=======
     <state width="1491" height="144" key="GridCell.Tab.0.bottom" timestamp="1618483936943">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -378,7 +378,6 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1491" height="481" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483940406" />
->>>>>>> parent of b7d3931 (Add previous nodes to scene)
     <state x="277" y="57" key="SettingsEditor" timestamp="1614885231782">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -400,7 +399,6 @@
     </state>
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1612527531603" />
   </component>
-<<<<<<< HEAD
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -412,6 +410,4 @@
       </breakpoints>
     </breakpoint-manager>
   </component>
-=======
->>>>>>> parent of b7d3931 (Add previous nodes to scene)
 </project>
