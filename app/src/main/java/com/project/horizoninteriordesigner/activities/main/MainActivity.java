@@ -6,8 +6,11 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -17,6 +20,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.project.horizoninteriordesigner.R;
 import com.project.horizoninteriordesigner.activities.main.fragments.ArViewFragment;
+import com.project.horizoninteriordesigner.activities.main.fragments.helpGuide.HelpGuideViewPagerFragment;
 import com.project.horizoninteriordesigner.activities.main.fragments.itemSelection.ItemViewPagerFragment;
 
 
@@ -28,9 +32,10 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName(); // Used when writing logs and Toast text
     private static final double MIN_OPENGL_VERSION = 3.0;
 
-    // Tag names of main fragments avaiable in this activity
+    // Tag names of main fragments available in this activity
     final public static String AR_VIEW_TAG = "FRAGMENT_AR_VIEW";
     final public static String ITEM_SELECT_TAG = "FRAGMENT_ITEM_SELECTION";
+    final public static String HELP_GUIDE_TAG = "FRAGMENT_HELP_GUIDE";
 
 
     /**
@@ -50,12 +55,41 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar_main);
-        setSupportActionBar(toolbar);
+        setUpToolbar();
 
         manageFragmentTransaction(ITEM_SELECT_TAG);
     }
 
+
+    private void setUpToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar_main);
+
+        //toolbar.inflateMenu(R.menu.menu_main_action_bar);
+        //toolbar.setOnMenuItemClickListener(this::onMenuItemClick);
+
+        setSupportActionBar(toolbar);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main_action_bar, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.action_help:
+                manageFragmentTransaction(HELP_GUIDE_TAG);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     /**
      * Checks if the device is compatible with Sceneform and ARCore.
@@ -100,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Avaiable fragments
         @Nullable Fragment arViewFragment = fragmentManager.findFragmentByTag(AR_VIEW_TAG);
+        @Nullable Fragment helpGuideFragment = fragmentManager.findFragmentByTag(HELP_GUIDE_TAG);
         @Nullable Fragment itemSelectionFragment = fragmentManager.findFragmentByTag(ITEM_SELECT_TAG);
 
         // Each case will:
@@ -109,6 +144,10 @@ public class MainActivity extends AppCompatActivity {
         switch (selectedFragment) {
 
             case AR_VIEW_TAG:
+
+                if (helpGuideFragment != null) {
+                    fragmentTransaction.hide(helpGuideFragment);
+                }
 
                 if (itemSelectionFragment != null) {
                     fragmentTransaction.hide(itemSelectionFragment);
@@ -128,10 +167,33 @@ public class MainActivity extends AppCompatActivity {
                     fragmentTransaction.hide(arViewFragment);
                 }
 
+                if (helpGuideFragment != null) {
+                    fragmentTransaction.hide(helpGuideFragment);
+                }
+
                 if (itemSelectionFragment != null) {
                     fragmentTransaction.show(itemSelectionFragment);
                 } else {
                     fragmentTransaction.add(R.id.fragment_holder, new ItemViewPagerFragment(), ITEM_SELECT_TAG);
+                }
+
+                break;
+
+
+            case HELP_GUIDE_TAG:
+
+                if (arViewFragment != null) {
+                    fragmentTransaction.hide(arViewFragment);
+                }
+
+                if (itemSelectionFragment != null) {
+                    fragmentTransaction.hide(itemSelectionFragment);
+                }
+
+                if (helpGuideFragment != null) {
+                    fragmentTransaction.show(helpGuideFragment);
+                } else {
+                    fragmentTransaction.add(R.id.fragment_holder, new HelpGuideViewPagerFragment(), HELP_GUIDE_TAG);
                 }
 
                 break;
