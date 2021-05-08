@@ -25,14 +25,14 @@ import com.project.horizoninteriordesigner.activities.main.fragments.itemSelecti
 
 
 /**
- * Used to control visibilty of fragments and check device is compatible with the app.
+ * Used to control visibility of fragments and check device is compatible with the app.
  */
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = MainActivity.class.getSimpleName(); // Used when writing logs and Toast text
+    private static final String TAG = MainActivity.class.getSimpleName(); // Used when writing logs and Toast text.
     private static final double MIN_OPENGL_VERSION = 3.0;
 
-    // Tag names of main fragments available in this activity
+    // Tag names of main fragments available in this activity.
     final public static String AR_VIEW_TAG = "FRAGMENT_AR_VIEW";
     final public static String ITEM_SELECT_TAG = "FRAGMENT_ITEM_SELECTION";
     final public static String HELP_GUIDE_TAG = "FRAGMENT_HELP_GUIDE";
@@ -40,10 +40,11 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Actions when activity is first created:
-     *   Checks if the device is supported
-     *   Sets the layout to show to user
-     *   Displays start fragment
-     * @param savedInstanceState any saved types like string
+     *   - Checks if the device is supported.
+     *   - Sets the layout to show to user.
+     *   - Sets top action bar.
+     *   - Displays start fragment.
+     * @param savedInstanceState any saved types like string.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,21 +56,17 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        setUpToolbar();
+        Toolbar toolbar = findViewById(R.id.toolbar_main);
+        setSupportActionBar(toolbar);
 
         manageFragmentTransaction(ITEM_SELECT_TAG);
     }
 
 
-    private void setUpToolbar() {
-        Toolbar toolbar = findViewById(R.id.toolbar_main);
-
-        //toolbar.inflateMenu(R.menu.menu_main_action_bar);
-        //toolbar.setOnMenuItemClickListener(this::onMenuItemClick);
-
-        setSupportActionBar(toolbar);
-    }
-
+    /**
+     * Sets the menu to be used by the action bar.
+     * @param menu: Menu to inflate to.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main_action_bar, menu);
@@ -77,18 +74,21 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+
+    /**
+     * Used to handle actions to take when a user has selected an item in the app bar.
+     * If the method is unrecognised, it invokes the superclass method.
+     * @param item: selected item from menu.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()) {
-
-            case R.id.action_help:
-                manageFragmentTransaction(HELP_GUIDE_TAG);
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.action_help) {
+            manageFragmentTransaction(HELP_GUIDE_TAG);
+            return true;
         }
+
+        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
 
-        // Check Device can work with OpenGL ES version
+        // Check Device can work with OpenGL ES version.
         String openGlVersionString =
                 ((ActivityManager) activity.getSystemService(Context.ACTIVITY_SERVICE))
                         .getDeviceConfigurationInfo()
@@ -123,53 +123,45 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Used to configure the switching of the main fragments in the activity - Ar view and item
      * selection.
-     * @param selectedFragment The tag of the fragment to show
+     * @param selectedFragment The tag of the fragment to show.
      */
     public void manageFragmentTransaction(String selectedFragment) {
 
-        FragmentManager fragmentManager = getSupportFragmentManager(); // to manage fragments
+        FragmentManager fragmentManager = getSupportFragmentManager(); // to manage fragments.
         FragmentTransaction fragmentTransaction =
                 fragmentManager.beginTransaction()
-                        .setReorderingAllowed(true); // group of actions on fragments to perform at a time
+                        .setReorderingAllowed(true); // group of actions on fragments to perform at a time.
 
-        // Avaiable fragments
+        // Available fragments.
         @Nullable Fragment arViewFragment = fragmentManager.findFragmentByTag(AR_VIEW_TAG);
         @Nullable Fragment helpGuideFragment = fragmentManager.findFragmentByTag(HELP_GUIDE_TAG);
         @Nullable Fragment itemSelectionFragment = fragmentManager.findFragmentByTag(ITEM_SELECT_TAG);
 
+
         // Each case will:
-        //   Show the fragment if it already exists
-        //   (or) Add the fragment to the fragment manager if it doesn't
-        //   Any existing fragments being shown will be hidden.
+        //   - Show the fragment if it already exists.
+        //   - (or) Add the fragment to the fragment manager if it doesn't.
+        //   - Any existing fragments being shown will be hidden.
         switch (selectedFragment) {
 
             case AR_VIEW_TAG:
 
-                if (helpGuideFragment != null) {
-                    fragmentTransaction.hide(helpGuideFragment);
-                }
-
-                if (itemSelectionFragment != null) {
-                    fragmentTransaction.hide(itemSelectionFragment);
-                }
+                if (helpGuideFragment != null) { fragmentTransaction.hide(helpGuideFragment); }
+                if (itemSelectionFragment != null) { fragmentTransaction.hide(itemSelectionFragment); }
 
                 if (arViewFragment != null) {
                     fragmentTransaction.show(arViewFragment);
                 } else {
                     fragmentTransaction.add(R.id.fragment_holder, new ArViewFragment(), AR_VIEW_TAG);
                 }
+
                 break;
 
 
             case ITEM_SELECT_TAG:
 
-                if (arViewFragment != null) {
-                    fragmentTransaction.hide(arViewFragment);
-                }
-
-                if (helpGuideFragment != null) {
-                    fragmentTransaction.hide(helpGuideFragment);
-                }
+                if (arViewFragment != null) { fragmentTransaction.hide(arViewFragment); }
+                if (helpGuideFragment != null) { fragmentTransaction.hide(helpGuideFragment); }
 
                 if (itemSelectionFragment != null) {
                     fragmentTransaction.show(itemSelectionFragment);
@@ -182,13 +174,8 @@ public class MainActivity extends AppCompatActivity {
 
             case HELP_GUIDE_TAG:
 
-                if (arViewFragment != null) {
-                    fragmentTransaction.hide(arViewFragment);
-                }
-
-                if (itemSelectionFragment != null) {
-                    fragmentTransaction.hide(itemSelectionFragment);
-                }
+                if (arViewFragment != null) { fragmentTransaction.hide(arViewFragment); }
+                if (itemSelectionFragment != null) { fragmentTransaction.hide(itemSelectionFragment); }
 
                 if (helpGuideFragment != null) {
                     fragmentTransaction.show(helpGuideFragment);
@@ -200,12 +187,11 @@ public class MainActivity extends AppCompatActivity {
 
 
             default:
-                Log.i(TAG, "manageFragmentTransaction: Actions not found for fragment");
                 return;
         }
 
 
-        // Run fragment transactions - show/hide - on the UI thread immediately
+        // Run fragment transactions (show/hide) on the UI thread immediately.
         fragmentTransaction.commitNow();
     }
 }
