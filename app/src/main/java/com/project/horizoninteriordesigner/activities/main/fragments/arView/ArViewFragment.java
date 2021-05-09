@@ -223,7 +223,8 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
      * Show a sliding menu with the available designs the item can be changed to
      */
     private void showMaterialSelectionFragment() {
-        Fragment materialSelectionFragment = new MaterialSelectionFragment();
+        String selectedItemId = currentModel.getName();
+        Fragment materialSelectionFragment = MaterialSelectionFragment.newInstance(selectedItemId);
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_materials, materialSelectionFragment).commitNow();
     }
@@ -338,22 +339,14 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
     private void addModelToScene(Anchor anchor, Renderable modelToRender, String itemId) {
         AnchorNode anchorNode = new AnchorNode(anchor);
         anchorNode.setParent(sceneformFragment.getArSceneView().getScene());
-        anchorNode.setName(itemId);
 
         // Create the transformable model and add it to the anchor.
         TransformableNode renderedModel = new TransformableNode(sceneformFragment.getTransformationSystem());
 
+        renderedModel.setName(itemId);
         renderedModel.setParent(anchorNode);
         renderedModel.setRenderable(modelToRender);
         renderedModel.select();
-        renderedModel.setOnTapListener(new Node.OnTapListener() {
-            @Override
-            public void onTap(HitTestResult hitTestResult, MotionEvent motionEvent) {
-                TransformableNode selectedModel = (TransformableNode) hitTestResult.getNode();
-                AnchorNode selectedAnchorNode = (AnchorNode) selectedModel.getParent();
-                Renderable selectedRenderable = selectedModel.getRenderable();
-            }
-        });
 
         performModelSelectedActions(renderedModel);
     }

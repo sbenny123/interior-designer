@@ -58,7 +58,7 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
     /**
      * Factory method to create a new instance of ItemSelectionFragment.
-     * @param catKey item category key - to be used to retrieve items in category from firestore.
+     * @param catKey: item category key - to be used to retrieve items in category from firestore.
      * @return a new instance of fragment ItemSelectionFragment.
      */
     public static ItemSelectionFragment newInstance(String catKey) {

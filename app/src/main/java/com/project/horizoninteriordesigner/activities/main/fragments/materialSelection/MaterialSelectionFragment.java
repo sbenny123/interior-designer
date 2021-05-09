@@ -44,12 +44,16 @@ import static com.project.horizoninteriordesigner.activities.main.fragments.arVi
  */
 public class MaterialSelectionFragment extends Fragment implements MaterialSelectionAdapter.ItemClickListener {
 
+    // Fragment initialisation parameters.
+    private static final String ITEM_ID_KEY = "itemId";
+
     private MaterialSelectionAdapter adapter;
     private FirebaseFirestore db;
     private ItemViewModel itemViewModel;
     private LoadingDialog loadingDialog;
     private ArrayList<Material> materialArrayList;
     private RecyclerView recyclerView;
+    private String selectedItemId;
 
 
     public MaterialSelectionFragment() {
@@ -58,11 +62,40 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
 
 
     /**
+     * Factory method to create a new instance of MaterialSelectionFragment.
+     * @param itemId: selected model's item id - to be used to retrieve materials for the item.
+     * @return a new instance of fragment MaterialSelectionFragment.
+     */
+    public static MaterialSelectionFragment newInstance(String itemId) {
+        MaterialSelectionFragment fragment = new MaterialSelectionFragment();
+
+        Bundle args = new Bundle();
+        args.putString(ITEM_ID_KEY, itemId);
+
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+
+
+    /**
+     * Initialises variables using the arguments passed in at instance creation.
+     */
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getArguments() != null) {
+            selectedItemId = getArguments().getString(ITEM_ID_KEY);
+        }
+    }
+
+
+    /**
      * Inflates the fragment's layout.
      */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_material_selection, container, false);
     }
 
@@ -103,13 +136,13 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
 
         // Gets itemId to be used to retrieve materials for the item.
         itemViewModel = new ViewModelProvider(getActivity()).get(ItemViewModel.class);
-        String itemId = itemViewModel.getItemId();
+        //String itemId = itemViewModel.getItemId();
 
         // Initialise a Firestore instance.
         db = FirebaseFirestore.getInstance();
 
         // Set material data in array list for a given item and creates adapter.
-        getMaterialsById(itemId);
+        getMaterialsById();
     }
 
 
@@ -142,7 +175,7 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
     }
 
 
-    private void getMaterialsById(String selectedItemId) {
+    private void getMaterialsById() {
 
         DocumentReference docRef = db.collection("models").document(selectedItemId);
 
