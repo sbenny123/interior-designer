@@ -2,25 +2,18 @@ package com.project.horizoninteriordesigner.activities.main.fragments.itemSelect
 
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.project.horizoninteriordesigner.activities.main.MainActivity;
-import com.project.horizoninteriordesigner.activities.main.adapters.itemSelection.ItemSelectionAdapter;
-import com.project.horizoninteriordesigner.R;
-import com.project.horizoninteriordesigner.activities.main.viewModels.ItemViewModel;
-import com.project.horizoninteriordesigner.models.Item;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.ar.sceneform.rendering.ModelRenderable;
@@ -28,10 +21,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import static com.project.horizoninteriordesigner.activities.main.MainActivity.AR_VIEW_TAG;
+import com.project.horizoninteriordesigner.R;
+import com.project.horizoninteriordesigner.activities.main.MainActivity;
+import com.project.horizoninteriordesigner.activities.main.adapters.itemSelection.ItemSelectionAdapter;
+import com.project.horizoninteriordesigner.activities.main.viewModels.ItemViewModel;
+import com.project.horizoninteriordesigner.dialogs.LoadingDialog;
+import com.project.horizoninteriordesigner.models.Item;
 
 import java.util.ArrayList;
+
+import static com.project.horizoninteriordesigner.activities.main.MainActivity.AR_VIEW_TAG;
 
 
 /**
@@ -41,12 +40,12 @@ import java.util.ArrayList;
  */
 public class ItemSelectionFragment extends Fragment implements ItemSelectionAdapter.ItemClickListener {
 
-    private final String catKey; // Item category key. Used to retrieve correct items from database
-    private RecyclerView recyclerView; // Reuses the view to show new items in place of old ones
     private ItemSelectionAdapter adapter; // Specifies how each item card should look like
-    private AlertDialog progressDialog; // For showing loading screen between item selection and ar view
+    private final String catKey; // Item category key. Used to retrieve correct items from database
     private ArrayList<Item> itemArrayList; // List of items available to select and render in AR view
     private ItemViewModel itemViewModel; // Used to retrieve data shared amongst the fragments and activity
+    private LoadingDialog loadingDialog; // For showing loading screen whilst the model is being sorted
+    private RecyclerView recyclerView; // Reuses the view to show new items in place of old ones
 
 
     public ItemSelectionFragment(String catKey) {
@@ -75,7 +74,7 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
         setUpRecyclerView();
 
         // Set up alert dialog for showing loading screen
-        setUpProgressDialog();
+        setUpLoadingDialog();
 
         // Get item as an array list and create adapter for displaying info on a single item
         getItems();
@@ -93,7 +92,7 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
      */
     @Override
     public void onItemClick(View view, int position) {
-        progressDialog.show();
+        loadingDialog.showDialog();
 
         Item selectedItem = itemArrayList.get(position);
         buildModel(selectedItem);
@@ -124,13 +123,15 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
                     ((MainActivity) getActivity()).manageFragmentTransaction(AR_VIEW_TAG);
 
-                    progressDialog.dismiss();
+                    loadingDialog.dismissDialog();
 
                 })
                 .exceptionally(throwable -> {
 
                             Toast.makeText(getActivity(), "Unable to load renderable", Toast.LENGTH_LONG).show();
-                            progressDialog.dismiss();
+
+                            loadingDialog.dismissDialog();
+
                             return null;
                 });
     }
@@ -176,20 +177,18 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
 
     /**
-     * Sets up an alert dialog with the loading icon and text
+     * Sets up an alert dialog with the loading icon and given text.
+     * For use when waiting for the model to be ready to be rendered.
      */
-    private void setUpProgressDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setCancelable(false);
-        builder.setView(R.layout.dialog_item_progress);
-
-        progressDialog = builder.create();
+    private void setUpLoadingDialog() {
+        loadingDialog = new LoadingDialog(getContext());
+        loadingDialog.createDialog("Getting model");
     }
 
 
     /**
      * Sets up configuration for the recycler view:
-     *   Uses grid layout with 2 columns
+     *   - Uses grid layout with 2 columns.
      */
     private void setUpRecyclerView() {
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));

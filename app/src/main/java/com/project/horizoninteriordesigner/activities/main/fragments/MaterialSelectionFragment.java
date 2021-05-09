@@ -2,6 +2,10 @@ package com.project.horizoninteriordesigner.activities.main.fragments;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,16 +15,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.project.horizoninteriordesigner.R;
-import com.project.horizoninteriordesigner.activities.main.MainActivity;
-import com.project.horizoninteriordesigner.activities.main.adapters.MaterialSelectionAdapter;
-import com.project.horizoninteriordesigner.activities.main.viewModels.ItemViewModel;
-import com.project.horizoninteriordesigner.models.Material;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.ar.sceneform.rendering.Texture;
@@ -30,6 +24,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.project.horizoninteriordesigner.R;
+import com.project.horizoninteriordesigner.activities.main.MainActivity;
+import com.project.horizoninteriordesigner.activities.main.adapters.MaterialSelectionAdapter;
+import com.project.horizoninteriordesigner.activities.main.viewModels.ItemViewModel;
+import com.project.horizoninteriordesigner.dialogs.LoadingDialog;
+import com.project.horizoninteriordesigner.models.Material;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -44,19 +44,21 @@ import static com.project.horizoninteriordesigner.activities.main.fragments.ArVi
  */
 public class MaterialSelectionFragment extends Fragment implements MaterialSelectionAdapter.ItemClickListener {
 
-    private RecyclerView recyclerView;
     private MaterialSelectionAdapter adapter;
-    private ArrayList<Material> materialArrayList;
-    private ItemViewModel itemViewModel;
     private FirebaseFirestore db;
+    private ItemViewModel itemViewModel;
+    private LoadingDialog loadingDialog;
+    private ArrayList<Material> materialArrayList;
+    private RecyclerView recyclerView;
+
 
     public MaterialSelectionFragment() {
-        // Required empty public constructor
+        // Required empty public constructor.
     }
 
 
     /**
-     * Inflates the fragment's layout
+     * Inflates the fragment's layout.
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,16 +94,21 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
         });
 
 
-        // Set up configuration for recycler view
+        // Set up configuration for recycler view.
         recyclerView = view.findViewById(R.id.rv_materials);
         setUpRecyclerView();
 
+        // Set up alert dialog for showing loading screen.
+        setUpLoadingDialog();
+
+        // Gets itemId to be used to retrieve materials for the item.
         itemViewModel = new ViewModelProvider(getActivity()).get(ItemViewModel.class);
         String itemId = itemViewModel.getItemId();
 
+        // Initialise a Firestore instance.
         db = FirebaseFirestore.getInstance();
 
-        // Set material data in array list for a given item and creates adapter
+        // Set material data in array list for a given item and creates adapter.
         getMaterialsById(itemId);
     }
 
@@ -110,6 +117,8 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
     public void onItemClick(View view, int position) {
         Material selectedMaterial = materialArrayList.get(position);
         AtomicReference<TransformableNode> selectedModel = new AtomicReference<>();
+
+        loadingDialog.showDialog();
 
         itemViewModel.getSelectedModelNode().observe(getViewLifecycleOwner(), transformableNode -> {
             selectedModel.set(transformableNode);
@@ -127,15 +136,15 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
                     selectedModel.getRenderable().getMaterial().setTexture("baseColorMap", texture);
 
                     ((MainActivity) getActivity()).manageFragmentTransaction(AR_VIEW_TAG);
+
+                    loadingDialog.dismissDialog();
                 });
     }
 
 
     private void getMaterialsById(String selectedItemId) {
 
-
         DocumentReference docRef = db.collection("models").document(selectedItemId);
-
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -153,6 +162,7 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
             }
         });
     }
+
 
     /**
      * Retrieves item documents from Firestore and maps to Item model and adds to array list.
@@ -177,7 +187,7 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
                                 materialArrayList.add(new Material(materialId, materialName, materialUrl));
                             }
 
-                            // Create adapter for materials view - bridges recyclerview and materials (data source)
+                            // Create adapter for materials view - bridges recyclerview and materials (data source).
                             adapter = new MaterialSelectionAdapter(getContext(),
                                     MaterialSelectionFragment.this::onItemClick, materialArrayList);
 
@@ -187,8 +197,20 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
                 });
     }
 
+
     /**
-     *
+     * Sets up an alert dialog with the loading icon and given text.
+     * For use when waiting for a material to be updated.
+     */
+    private void setUpLoadingDialog() {
+        loadingDialog = new LoadingDialog(getContext());
+        loadingDialog.createDialog("Changing the item's design");
+    }
+
+
+    /**
+     * Sets up configuration for the recycler view:
+     *   - Uses a 1 line layout with items going horizontally across the screen.
      */
     private void setUpRecyclerView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));

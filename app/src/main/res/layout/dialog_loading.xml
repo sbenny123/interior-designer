@@ -7,13 +7,14 @@
 
     <ProgressBar
         android:id="@+id/progress_item"
+        style="?android:attr/progressBarStyleLarge"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true" />
     
-    <TextView
+  <!--  <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tv_item_progress" />
+        android:text="@string/tv_item_progress" /> -->
 
 </LinearLayout>

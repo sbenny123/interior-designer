@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     /**
      * Checks if the device is compatible with Sceneform and ARCore.
      * Returns true if compatible and false if not.

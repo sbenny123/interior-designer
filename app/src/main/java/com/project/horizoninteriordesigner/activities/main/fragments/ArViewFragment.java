@@ -2,17 +2,14 @@ package com.project.horizoninteriordesigner.activities.main.fragments;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.PixelCopy;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,9 +20,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.project.horizoninteriordesigner.R;
-import com.project.horizoninteriordesigner.activities.main.MainActivity;
-import com.project.horizoninteriordesigner.activities.main.viewModels.ItemViewModel;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
@@ -38,13 +32,17 @@ import com.google.ar.sceneform.Scene;
 import com.google.ar.sceneform.rendering.Renderable;
 import com.google.ar.sceneform.ux.BaseArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
+import com.project.horizoninteriordesigner.R;
+import com.project.horizoninteriordesigner.activities.main.MainActivity;
+import com.project.horizoninteriordesigner.activities.main.viewModels.ItemViewModel;
 
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static com.project.horizoninteriordesigner.activities.main.MainActivity.ITEM_SELECT_TAG;
-import static com.project.horizoninteriordesigner.utils.CameraUtils.*;
-import static com.project.horizoninteriordesigner.utils.SceneformUtils.*;
+import static com.project.horizoninteriordesigner.utils.CameraUtils.generatePhotoFileName;
+import static com.project.horizoninteriordesigner.utils.CameraUtils.saveBitmapToDisk;
+import static com.project.horizoninteriordesigner.utils.SceneformUtils.getParentAnchorNode;
 
 
 /**
@@ -127,8 +125,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         removeItemText = view.findViewById(R.id.text_remove_item);
 
         isAllFabsVisible = false;
-
-
+        
         takePhotoBtn.setOnClickListener(this);
         selectItemsBtn.setOnClickListener(this);
         showItemOptionsFab.setOnClickListener(this);
