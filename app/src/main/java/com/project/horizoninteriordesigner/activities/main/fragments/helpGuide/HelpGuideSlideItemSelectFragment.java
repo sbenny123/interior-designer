@@ -12,25 +12,25 @@ import androidx.fragment.app.Fragment;
 import com.project.horizoninteriordesigner.R;
 
 
-public class HelpGuideSlideStartFragment extends Fragment {
+public class HelpGuideSlideItemSelectFragment extends Fragment {
 
-    public HelpGuideSlideStartFragment() {
+    public HelpGuideSlideItemSelectFragment() {
         // Required empty public constructor.
     }
 
 
     /**
-     * Factory method to create a new instance of HelpGuideSlideStartFragment.
-     * @return a new instance of fragment HelpGuideSlideStartFragment.
+     * Factory method to create a new instance of HelpGuideSlideItemSelectFragment.
+     * @return a new instance of fragment HelpGuideSlideItemSelectFragment.
      */
-    public static HelpGuideSlideStartFragment newInstance() {
-        return new HelpGuideSlideStartFragment();
+    public static HelpGuideSlideItemSelectFragment newInstance() {
+        return new HelpGuideSlideItemSelectFragment();
     }
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_help_guide_slide_start, container, false);
+        return inflater.inflate(R.layout.fragment_help_guide_slide_item_select, container, false);
     }
 }

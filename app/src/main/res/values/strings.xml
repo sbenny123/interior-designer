@@ -14,6 +14,8 @@
     <string name="text_remove_item">Remove</string>
 
     <!-- Help guide -->
+    <string name="btn_next_page">Next</string>
+    <string name="btn_skip_guide">Skip</string>
     <string name="text_start_title">Welcome to Horizon Interior Design</string>
     <string name="text_start_info">Design your room with augmented reality</string>
     <string name="text_item_select_title">Select an item</string>

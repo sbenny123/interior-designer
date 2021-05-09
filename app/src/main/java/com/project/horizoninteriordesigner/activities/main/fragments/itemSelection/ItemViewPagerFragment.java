@@ -20,7 +20,7 @@ import static com.project.horizoninteriordesigner.constants.itemConstants.getIte
  * Handles tabbed action between the different item categories.
  * Handles provision of tabs for each item category and calling the fragment to show the correct items.
  */
-public class ItemViewPagerFragment extends Fragment {
+public class ItemViewPagerFragment extends Fragment{
 
     private ItemViewPagerAdapter adapter; // Handles calling of itemSelection fragment to get items.
     private TabLayout tabLayout; // For showing the tabs.

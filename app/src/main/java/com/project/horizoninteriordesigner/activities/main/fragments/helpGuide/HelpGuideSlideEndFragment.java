@@ -24,9 +24,7 @@ public class HelpGuideSlideEndFragment extends Fragment {
      * @return a new instance of fragment HelpGuideSlideEndFragment.
      */
     public static HelpGuideSlideEndFragment newInstance() {
-        HelpGuideSlideEndFragment fragment = new HelpGuideSlideEndFragment();
-
-        return fragment;
+        return new HelpGuideSlideEndFragment();
     }
 
 
@@ -34,11 +32,5 @@ public class HelpGuideSlideEndFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_help_guide_slide_end, container, false);
-    }
-
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
     }
 }
