@@ -20,9 +20,7 @@ public class SceneformFragment extends ArFragment {
      * @return a new instance of fragment SceneformFragment.
      */
     public static SceneformFragment newInstance() {
-        SceneformFragment fragment = new SceneformFragment();
-
-        return fragment;
+        return new SceneformFragment();
     }
 
 

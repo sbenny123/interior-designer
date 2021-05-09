@@ -37,9 +37,7 @@ public class ItemViewPagerFragment extends Fragment {
      * @return a new instance of fragment ItemViewPagerFragment.
      */
     public static ItemViewPagerFragment newInstance() {
-        ItemViewPagerFragment fragment = new ItemViewPagerFragment();
-
-        return fragment;
+        return new ItemViewPagerFragment();
     }
 
 

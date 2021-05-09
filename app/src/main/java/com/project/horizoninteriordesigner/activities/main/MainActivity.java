@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
      * selection.
      * @param selectedFragment The tag of the fragment to show.
      */
-    public void manageFragmentTransaction(String selectedFragment) {
+    public void manageFragmentTransaction(@NonNull String selectedFragment) {
 
         FragmentManager fragmentManager = getSupportFragmentManager(); // to manage fragments.
         FragmentTransaction fragmentTransaction =

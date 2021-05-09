@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,7 +37,6 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static com.project.horizoninteriordesigner.activities.main.MainActivity.AR_VIEW_TAG;
-import static com.project.horizoninteriordesigner.activities.main.fragments.arView.ArViewFragment.showMainButtons;
 
 
 /**
@@ -247,5 +247,14 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
      */
     private void setUpRecyclerView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+    }
+
+    private void showMainButtons() {
+        View arViewFragmentView = getParentFragment().getView();
+        Button selectItemsBtn = arViewFragmentView.findViewById(R.id.btn_select_items);
+        Button takePhotoBtn = arViewFragmentView.findViewById(R.id.btn_take_photo);
+
+        selectItemsBtn.setVisibility(View.VISIBLE);
+        takePhotoBtn.setVisibility(View.VISIBLE);
     }
 }
