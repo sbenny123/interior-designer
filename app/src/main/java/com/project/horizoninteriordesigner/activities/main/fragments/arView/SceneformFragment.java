@@ -1,4 +1,4 @@
-package com.project.horizoninteriordesigner.activities.main.fragments;
+package com.project.horizoninteriordesigner.activities.main.fragments.arView;
 
 import android.Manifest;
 import android.os.Bundle;
@@ -11,13 +11,26 @@ import com.google.ar.sceneform.ux.ArFragment;
 public class SceneformFragment extends ArFragment {
 
     public SceneformFragment() {
-        // Required empty public constructor
+        // Required empty public constructor.
     }
+
+
+    /**
+     * Factory method to create a new instance of SceneformFragment.
+     * @return a new instance of fragment SceneformFragment.
+     */
+    public static SceneformFragment newInstance() {
+        SceneformFragment fragment = new SceneformFragment();
+
+        return fragment;
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
 
     /**
      * List of permissions to request from user when AR view is shown e.g. accessing camera and

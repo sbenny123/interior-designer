@@ -1,4 +1,4 @@
-package com.project.horizoninteriordesigner.activities.main.fragments;
+package com.project.horizoninteriordesigner.activities.main.fragments.arView;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -34,6 +34,7 @@ import com.google.ar.sceneform.ux.BaseArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
 import com.project.horizoninteriordesigner.R;
 import com.project.horizoninteriordesigner.activities.main.MainActivity;
+import com.project.horizoninteriordesigner.activities.main.fragments.materialSelection.MaterialSelectionFragment;
 import com.project.horizoninteriordesigner.activities.main.viewModels.ItemViewModel;
 
 import java.io.IOException;
@@ -63,7 +64,18 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
 
 
     public ArViewFragment() {
-        // Required empty public constructor
+        // Required empty public constructor.
+    }
+
+
+    /**
+     * Factory method to create a new instance of ArViewFragment.
+     * @return a new instance of fragment ArViewFragment.
+     */
+    public static ArViewFragment newInstance() {
+        ArViewFragment fragment = new ArViewFragment();
+
+        return fragment;
     }
 
 

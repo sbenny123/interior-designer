@@ -1,4 +1,4 @@
-package com.project.horizoninteriordesigner.activities.main.fragments;
+package com.project.horizoninteriordesigner.activities.main.fragments.materialSelection;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,7 +26,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.project.horizoninteriordesigner.R;
 import com.project.horizoninteriordesigner.activities.main.MainActivity;
-import com.project.horizoninteriordesigner.activities.main.adapters.MaterialSelectionAdapter;
+import com.project.horizoninteriordesigner.activities.main.adapters.materialSelection.MaterialSelectionAdapter;
 import com.project.horizoninteriordesigner.activities.main.viewModels.ItemViewModel;
 import com.project.horizoninteriordesigner.dialogs.LoadingDialog;
 import com.project.horizoninteriordesigner.models.Material;
@@ -36,7 +36,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static com.project.horizoninteriordesigner.activities.main.MainActivity.AR_VIEW_TAG;
-import static com.project.horizoninteriordesigner.activities.main.fragments.ArViewFragment.showMainButtons;
+import static com.project.horizoninteriordesigner.activities.main.fragments.arView.ArViewFragment.showMainButtons;
 
 
 /**

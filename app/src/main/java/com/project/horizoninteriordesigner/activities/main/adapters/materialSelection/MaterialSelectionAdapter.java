@@ -1,4 +1,4 @@
-package com.project.horizoninteriordesigner.activities.main.adapters;
+package com.project.horizoninteriordesigner.activities.main.adapters.materialSelection;
 
 import android.content.Context;
 import android.view.LayoutInflater;

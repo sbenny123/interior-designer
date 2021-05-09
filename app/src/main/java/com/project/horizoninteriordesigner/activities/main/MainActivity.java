@@ -19,7 +19,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.project.horizoninteriordesigner.R;
-import com.project.horizoninteriordesigner.activities.main.fragments.ArViewFragment;
+import com.project.horizoninteriordesigner.activities.main.fragments.arView.ArViewFragment;
 import com.project.horizoninteriordesigner.activities.main.fragments.helpGuide.HelpGuideViewPagerFragment;
 import com.project.horizoninteriordesigner.activities.main.fragments.itemSelection.ItemViewPagerFragment;
 
@@ -147,7 +147,6 @@ public class MainActivity extends AppCompatActivity {
         switch (selectedFragment) {
 
             case AR_VIEW_TAG:
-
                 if (helpGuideFragment != null) { fragmentTransaction.hide(helpGuideFragment); }
                 if (itemSelectionFragment != null) { fragmentTransaction.hide(itemSelectionFragment); }
 
@@ -156,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     fragmentTransaction.add(
                             R.id.fragment_holder,
-                            new ArViewFragment(),
+                            ArViewFragment.newInstance(),
                             AR_VIEW_TAG);
                 }
 
@@ -164,7 +163,6 @@ public class MainActivity extends AppCompatActivity {
 
 
             case ITEM_SELECT_TAG:
-
                 if (arViewFragment != null) { fragmentTransaction.hide(arViewFragment); }
                 if (helpGuideFragment != null) { fragmentTransaction.hide(helpGuideFragment); }
 
@@ -181,7 +179,6 @@ public class MainActivity extends AppCompatActivity {
 
 
             case HELP_GUIDE_TAG:
-
                 if (arViewFragment != null) { fragmentTransaction.hide(arViewFragment); }
                 if (itemSelectionFragment != null) { fragmentTransaction.hide(itemSelectionFragment); }
 
@@ -200,7 +197,6 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return;
         }
-
 
         // Run fragment transactions (show/hide) on the UI thread immediately.
         fragmentTransaction.commitNow();
