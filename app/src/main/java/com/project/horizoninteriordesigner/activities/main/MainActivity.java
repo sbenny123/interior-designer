@@ -154,7 +154,10 @@ public class MainActivity extends AppCompatActivity {
                 if (arViewFragment != null) {
                     fragmentTransaction.show(arViewFragment);
                 } else {
-                    fragmentTransaction.add(R.id.fragment_holder, new ArViewFragment(), AR_VIEW_TAG);
+                    fragmentTransaction.add(
+                            R.id.fragment_holder,
+                            new ArViewFragment(),
+                            AR_VIEW_TAG);
                 }
 
                 break;
@@ -168,7 +171,10 @@ public class MainActivity extends AppCompatActivity {
                 if (itemSelectionFragment != null) {
                     fragmentTransaction.show(itemSelectionFragment);
                 } else {
-                    fragmentTransaction.add(R.id.fragment_holder, new ItemViewPagerFragment(), ITEM_SELECT_TAG);
+                    fragmentTransaction.add(
+                            R.id.fragment_holder,
+                            ItemViewPagerFragment.newInstance(),
+                            ITEM_SELECT_TAG);
                 }
 
                 break;
@@ -182,7 +188,10 @@ public class MainActivity extends AppCompatActivity {
                 if (helpGuideFragment != null) {
                     fragmentTransaction.show(helpGuideFragment);
                 } else {
-                    fragmentTransaction.add(R.id.fragment_holder, new HelpGuideViewPagerFragment(), HELP_GUIDE_TAG);
+                    fragmentTransaction.add(
+                            R.id.fragment_holder,
+                            HelpGuideViewPagerFragment.newInstance(),
+                            HELP_GUIDE_TAG);
                 }
 
                 break;

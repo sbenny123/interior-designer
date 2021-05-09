@@ -34,27 +34,60 @@ import static com.project.horizoninteriordesigner.activities.main.MainActivity.A
 
 
 /**
- * Item selection fragment
- * All selectable items for a particular category are shown and the renderable for sceneform is
- * created, once selected.
+ * Item selection page actions.
+ * All selectable items for a particular category are shown and once an item has been selected, its
+ * Sceneform renderable is created ready to be used in the AR view.
  */
 public class ItemSelectionFragment extends Fragment implements ItemSelectionAdapter.ItemClickListener {
 
-    private ItemSelectionAdapter adapter; // Specifies how each item card should look like
-    private final String catKey; // Item category key. Used to retrieve correct items from database
-    private ArrayList<Item> itemArrayList; // List of items available to select and render in AR view
-    private ItemViewModel itemViewModel; // Used to retrieve data shared amongst the fragments and activity
-    private LoadingDialog loadingDialog; // For showing loading screen whilst the model is being sorted
-    private RecyclerView recyclerView; // Reuses the view to show new items in place of old ones
+    // Fragment initialisation parameters.
+    private static final String CAT_KEY = "catKey";
+
+    private ItemSelectionAdapter adapter; // Specifies how each item's card layout should look like.
+    private String catKey; // Item category key; Used to retrieve the items with that category from firestore.
+    private ArrayList<Item> itemArrayList; // List of items available to select and render in AR view.
+    private ItemViewModel itemViewModel; // Used to retrieve data shared amongst the fragments and activity.
+    private LoadingDialog loadingDialog; // For showing loading screen whilst the model is built.
+    private RecyclerView recyclerView; // Reuses the view to show new items in place of old ones.
 
 
-    public ItemSelectionFragment(String catKey) {
-        this.catKey = catKey;
+    public ItemSelectionFragment() {
+        // Required empty public constructor.
     }
 
 
     /**
-     * Inflates the fragment's layout
+     * Factory method to create a new instance of ItemSelectionFragment.
+     * @param catKey item category key - to be used to retrieve items in category from firestore.
+     * @return a new instance of fragment ItemSelectionFragment.
+     */
+    public static ItemSelectionFragment newInstance(String catKey) {
+        ItemSelectionFragment fragment = new ItemSelectionFragment();
+
+        Bundle args = new Bundle();
+        args.putString(CAT_KEY, catKey);
+
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+
+
+    /**
+     * Initialises variables using the arguments passed in at instance creation.
+     */
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getArguments() != null) {
+            catKey = getArguments().getString(CAT_KEY);
+        }
+    }
+
+
+    /**
+     * Inflates the fragment's layout.
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,7 +96,7 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
 
     /**
-     * Inflates sub-views
+     * Inflates sub-views and sorts retrieval of items.
      */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -86,9 +119,9 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
     /**
      * Once an item has been selected:
-     *   The loading screen is shown
-     *   The model for the item is built
-     *   ArView fragment is added/shown
+     *   - The loading screen is shown.
+     *   - The model for the item is built.
+     *   - ArView fragment is added/shown.
      */
     @Override
     public void onItemClick(View view, int position) {
@@ -110,8 +143,8 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
         String itemId = selectedItem.getItemId();
 
 
-        // Build .glb file as a renderable object
-        // Go to ArView fragment once complete
+        // Build .glb file as a renderable object.
+        // Go to ArView fragment once complete.
         ModelRenderable.builder()
                 .setSource(getActivity(), itemUri)
                 .setIsFilamentGltf(true)
@@ -128,11 +161,11 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
                 })
                 .exceptionally(throwable -> {
 
-                            Toast.makeText(getActivity(), "Unable to load renderable", Toast.LENGTH_LONG).show();
+                    loadingDialog.dismissDialog();
 
-                            loadingDialog.dismissDialog();
+                    Toast.makeText(getActivity(), "Unable to load renderable", Toast.LENGTH_LONG).show();
 
-                            return null;
+                    return null;
                 });
     }
 
@@ -145,20 +178,24 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
         itemArrayList = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Query query;
+        Query query; // A firebase query to perform.
 
 
+        // Get the items with the specific category key or get all items.
         if (catKey != "") {
             query = db.collection("models").whereEqualTo("itemCategory", catKey);
         } else {
             query = db.collection("models");
         }
 
+        // Perform the query.
         query.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+
+                            // Create an Item instance using the document's data and add to the arrayList.
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 String itemId = document.getId();
                                 String imageName = document.get("imageName") + "";
@@ -168,6 +205,7 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
                                 itemArrayList.add(new Item(itemId, imageName, imageUrl, modelUrl));
                             }
 
+                            // Create a grid view of the items.
                             adapter = new ItemSelectionAdapter(getActivity(), ItemSelectionFragment.this::onItemClick, itemArrayList);
                             recyclerView.setAdapter(adapter);
                         }
@@ -178,7 +216,7 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
     /**
      * Sets up an alert dialog with the loading icon and given text.
-     * For use when waiting for the model to be ready to be rendered.
+     * For use when waiting for the model to be ready for rendering.
      */
     private void setUpLoadingDialog() {
         loadingDialog = new LoadingDialog(getContext());

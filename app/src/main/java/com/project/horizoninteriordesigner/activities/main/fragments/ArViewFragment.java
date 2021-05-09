@@ -125,7 +125,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         removeItemText = view.findViewById(R.id.text_remove_item);
 
         isAllFabsVisible = false;
-        
+
         takePhotoBtn.setOnClickListener(this);
         selectItemsBtn.setOnClickListener(this);
         showItemOptionsFab.setOnClickListener(this);
@@ -206,53 +206,6 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
             isAllFabsVisible = false;
         }
     }
-
-
-    /**
-     * Creates and shows a pop-up menu with all the available options for the model
-     * Includes:
-     *   Changing model's materials
-     *   Model deletion
-     */
-   /* private void showItemOptionsPopup(View view) {
-
-        // Create pop-up menu
-        PopupMenu popupMenu = new PopupMenu(getActivity(), view);
-        popupMenu.getMenuInflater().inflate(R.menu.menu_model_options, popupMenu.getMenu());
-
-        // onClick listener for when an option has been selected
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-
-                switch (item.getItemId()) {
-
-                    // Change model's design
-                    case R.id.item_change_design:
-                        itemViewModel.setSelectedModelNode(currentModel);
-                        hideMainButtons();
-                        showMaterialSelectionFragment();
-                        break;
-
-                    // Remove model from scene
-                    case R.id.item_remove_item:
-                        AnchorNode currentAnchorNode = getParentAnchorNode(currentModel);
-                        removeAnchorNode(currentAnchorNode);
-                        currentModel = null;
-                        break;
-
-                    default:
-                        return false;
-                }
-
-                return true;
-            }
-        });
-
-        popupMenu.show();
-    }*/
-
 
     /**
      * Show a sliding menu with the available designs the item can be changed to

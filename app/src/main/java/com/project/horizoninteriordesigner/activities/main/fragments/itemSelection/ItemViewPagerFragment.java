@@ -8,27 +8,43 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.project.horizoninteriordesigner.R;
-import com.project.horizoninteriordesigner.activities.main.adapters.itemSelection.ItemViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.project.horizoninteriordesigner.R;
+import com.project.horizoninteriordesigner.activities.main.adapters.itemSelection.ItemViewPagerAdapter;
 
 import static com.project.horizoninteriordesigner.constants.itemConstants.getItemCategories;
 
 
 /**
- * Tabbed item selection fragment
+ * Handles tabbed action between the different item categories.
  * Handles provision of tabs for each item category and calling the fragment to show the correct items.
  */
 public class ItemViewPagerFragment extends Fragment {
 
-    private ItemViewPagerAdapter adapter; // Handles calling of itemSelection fragment to get items
-    private TabLayout tabLayout; // For tabs
-    private ViewPager2 viewPager; // For section showing the items
+    private ItemViewPagerAdapter adapter; // Handles calling of itemSelection fragment to get items.
+    private TabLayout tabLayout; // For showing the tabs.
+    private ViewPager2 viewPager; // For showing the items.
+
+
+    public ItemViewPagerFragment() {
+        // Required empty public constructor.
+    }
 
 
     /**
-     * Inflates the fragment's layout
+     * Factory method to create a new instance of ItemViewPagerFragment.
+     * @return a new instance of fragment ItemViewPagerFragment.
+     */
+    public static ItemViewPagerFragment newInstance() {
+        ItemViewPagerFragment fragment = new ItemViewPagerFragment();
+
+        return fragment;
+    }
+
+
+    /**
+     * Inflates the fragment's layout.
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,8 +66,8 @@ public class ItemViewPagerFragment extends Fragment {
         adapter = new ItemViewPagerAdapter(this);
         viewPager.setAdapter(adapter);
 
-        // Creates tab for each item category and gives it a title
-        // Each category is of model ItemCategory
+        // Creates tab for each item category and gives it a title.
+        // Each category is of model ItemCategory.
         new TabLayoutMediator(tabLayout, viewPager,
                 (tab, position) -> tab.setText(getItemCategories().get(position).getCatTitle())
         ).attach();

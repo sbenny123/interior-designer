@@ -14,6 +14,15 @@ import com.project.horizoninteriordesigner.R;
 
 public class HelpGuideSlideEndFragment extends Fragment {
 
+    public HelpGuideSlideEndFragment() {
+        // Required empty public constructor.
+    }
+
+
+    /**
+     * Factory method to create a new instance of HelpGuideSlideEndFragment.
+     * @return a new instance of fragment HelpGuideSlideEndFragment.
+     */
     public static HelpGuideSlideEndFragment newInstance() {
         HelpGuideSlideEndFragment fragment = new HelpGuideSlideEndFragment();
 

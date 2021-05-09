@@ -20,6 +20,22 @@ public class HelpGuideViewPagerFragment extends Fragment {
     private ViewPager2 viewPager;
 
 
+    public HelpGuideViewPagerFragment() {
+        // Required empty public constructor.
+    }
+
+
+    /**
+     * Factory method to create a new instance of HelpGuideViewPagerFragment.
+     * @return a new instance of fragment HelpGuideViewPagerFragment
+     */
+    public static HelpGuideViewPagerFragment newInstance() {
+        HelpGuideViewPagerFragment fragment = new HelpGuideViewPagerFragment();
+
+        return fragment;
+    }
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
