@@ -5,6 +5,7 @@
 
     <!-- Action bar items -->
     <string name="item_help">Help</string>
+    <string name="item_action_back">Back</string>
 
     <!-- ArView -->
     <string name="btn_select_items_text">Add</string>
