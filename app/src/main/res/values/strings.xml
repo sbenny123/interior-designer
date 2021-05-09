@@ -6,21 +6,24 @@
     <!-- Action bar items -->
     <string name="item_help">Help</string>
 
-    <!-- Buttons -->
+    <!-- ArView -->
     <string name="btn_select_items_text">Add</string>
     <string name="btn_show_item_options_text">Edit</string>
-
     <string name="fab_show_item_options">Show item options</string>
-
     <string name="text_change_design">Change design</string>
     <string name="text_remove_item">Remove</string>
 
-    <!-- Menu items -->
-    <string name="item_change_design">Change design</string>
-    <string name="item_remove_item">Remove</string>
-
-    <!-- Textviews -->
-    <string name="tv_item_progress">Loading</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Help guide -->
+    <string name="text_start_title">Welcome to Horizon Interior Design</string>
+    <string name="text_start_info">Design your room with augmented reality</string>
+    <string name="text_item_select_title">Select an item</string>
+    <string name="text_item_select_info">Select an item from the menu to start designing your room.</string>
+    <string name="text_ar_view_1_title">Scan the floor</string>
+    <string name="text_ar_view_1_info">Move your phone across the floor to help detect the surfaces.</string>
+    <string name="text_ar_view_2_title">Place your item</string>
+    <string name="text_ar_view_2_info">Select a space in the dotted area to place your item.</string>
+    <string name="text_ar_view_3_title">Experiment</string>
+    <string name="text_ar_view_3_info">Use the buttons to add more items, take a photo and edit or delete your item.</string>
+    <string name="text_end_title">Ready?</string>
+    <string name="text_end_info">Press the button to start designing.</string>
 </resources>

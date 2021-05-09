@@ -6,11 +6,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/text_end_title" />
+        android:text="@string/text_ar_view_1_title" />
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/text_end_info" />
+        android:text="@string/text_ar_view_1_info" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
