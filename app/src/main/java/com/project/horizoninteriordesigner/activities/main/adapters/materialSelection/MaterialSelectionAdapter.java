@@ -23,8 +23,8 @@ public class MaterialSelectionAdapter extends RecyclerView.Adapter<MaterialSelec
 
     private Context context;
     private ArrayList<Material> materialArrayList; // List of materials that could be selected
-
     private final ItemClickListener onItemClickListener; // onClick listener for when a material has been selected
+
 
     /**
      * Interface to handle onClick event for each material.
