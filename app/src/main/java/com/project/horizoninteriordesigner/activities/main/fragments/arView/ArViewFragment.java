@@ -259,15 +259,15 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
      */
     private void performModelSelectedActions(@Nullable TransformableNode selectedModel) {
 
-        // If model selected, set is as the current selected one and show item options
-        // Else hide the item options - model has not been selected.
-        if (selectedModel != null) {
+        // If model selected, set as the current selected one
+        // Show item options only if the materials fragment isn't showing
+        // For all other cases, hide the item options - assumes model has not been selected.
+        if (selectedModel != null && !isShowingMaterials) {
             setCurrentModel(selectedModel);
+            showItemOptionsFab.setVisibility(View.VISIBLE);
 
-            // Only show item options button if materials fragment isn't showing
-            if (!isShowingMaterials) {
-                showItemOptionsFab.setVisibility(View.VISIBLE);
-            }
+        } else if (selectedModel != null) {
+            setCurrentModel(selectedModel);
 
         } else {
             hideAllItemOptionBtns();
@@ -323,7 +323,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
     private void toggleItemOptionVisibility() {
 
         // If options visible, hide the options.
-        if (isAllFabsVisible == true) {
+        if (isAllFabsVisible) {
             removeItemFab.hide();
             changeDesignFab.hide();
 
@@ -363,15 +363,6 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         showItemOptionsFab.setVisibility(View.GONE);
 
         toggleItemOptionVisibility();
-    }
-
-
-    /**
-     * Shows the main buttons.
-     */
-    private void showMainButtons() {
-        selectItemsBtn.setVisibility(View.VISIBLE);
-        takePhotoBtn.setVisibility(View.VISIBLE);
     }
 
 
