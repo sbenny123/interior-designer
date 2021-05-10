@@ -37,6 +37,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static com.project.horizoninteriordesigner.activities.main.MainActivity.AR_VIEW_TAG;
+import static com.project.horizoninteriordesigner.activities.main.fragments.arView.ArViewFragment.setIsShowingMaterials;
 
 
 /**
@@ -115,6 +116,7 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
                         getParentFragmentManager().beginTransaction()
                                 .remove(MaterialSelectionFragment.this).commit();
 
+                        setIsShowingMaterials(false);
                         showMainButtons();
                         break;
 

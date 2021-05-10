@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +24,7 @@ import com.project.horizoninteriordesigner.R;
 import com.project.horizoninteriordesigner.activities.main.MainActivity;
 import com.project.horizoninteriordesigner.activities.main.adapters.itemSelection.ItemSelectionAdapter;
 import com.project.horizoninteriordesigner.activities.main.viewModels.ItemViewModel;
+import com.project.horizoninteriordesigner.dialogs.ErrorDialog;
 import com.project.horizoninteriordesigner.dialogs.LoadingDialog;
 import com.project.horizoninteriordesigner.models.Item;
 
@@ -45,6 +45,7 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
     private ItemSelectionAdapter adapter; // Specifies how each item's card layout should look like.
     private String catKey; // Item category key; Used to retrieve the items with that category from firestore.
+    private ErrorDialog errorDialog; // For showing errors if any.
     private ArrayList<Item> itemArrayList; // List of items available to select and render in AR view.
     private ItemViewModel itemViewModel; // Used to retrieve data shared amongst the fragments and activity.
     private LoadingDialog loadingDialog; // For showing loading screen whilst the model is built.
@@ -163,7 +164,7 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
                     loadingDialog.dismissDialog();
 
-                    Toast.makeText(getActivity(), "Unable to load renderable", Toast.LENGTH_LONG).show();
+                    setUpErrorDialog();
 
                     return null;
                 });
@@ -213,6 +214,17 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
                 });
     }
 
+
+    /**
+     * Sets up an alert dialog with the loading icon and given text.
+     * For use when waiting for the model to be ready for rendering.
+     */
+    private void setUpErrorDialog() {
+        errorDialog = new ErrorDialog(getContext());
+        errorDialog.createDialog("Error loading model",
+                "The application could not load the selected model. Please try again later.");
+        errorDialog.showDialog();
+    }
 
     /**
      * Sets up an alert dialog with the loading icon and given text.

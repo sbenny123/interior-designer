@@ -52,8 +52,9 @@ import static com.project.horizoninteriordesigner.utils.SceneformUtils.getParent
 public class ArViewFragment extends Fragment implements View.OnClickListener,
         BaseArFragment.OnTapArPlaneListener, BaseArFragment.OnSessionInitializationListener {
 
-    private Boolean isAllFabsVisible; // True when the item option buttons are visible.
     private TransformableNode currentModel; // The current model that has been selected/manipulated.
+    private Boolean isAllFabsVisible; // True when the item option buttons are visible.
+    private static Boolean isShowingMaterials; // True when the material fragment is visible.
     private ItemViewModel itemViewModel; // View model containing the shared data amongst the fragments.
     private SceneformFragment sceneformFragment; // Inner fragment which utilises Sceneform to
                                                  // manipulate 3D models and scenes.
@@ -116,6 +117,9 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         // Adds on click listeners to the buttons and manages which ones are visible.
         initialiseButtons(view);
 
+        // Set boolean indicator intial values
+        isShowingMaterials = false;
+
         itemViewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
     }
 
@@ -157,6 +161,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
             AnchorNode currentAnchorNode = getParentAnchorNode(currentModel);
             removeAnchorNode(currentAnchorNode);
             currentModel = null;
+            hideAllItemOptionBtns();
         }
     }
 
@@ -258,10 +263,14 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         // Else hide the item options - model has not been selected.
         if (selectedModel != null) {
             setCurrentModel(selectedModel);
-            showItemOptionsFab.setVisibility(View.VISIBLE);
+
+            // Only show item options button if materials fragment isn't showing
+            if (!isShowingMaterials) {
+                showItemOptionsFab.setVisibility(View.VISIBLE);
+            }
 
         } else {
-            hideItemOptionButtons();
+            hideAllItemOptionBtns();
         }
     }
 
@@ -300,8 +309,11 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         changeDesignFab.setOnClickListener(this);
         removeItemFab.setOnClickListener(this);
 
+        // Set to true so that the items can be hidden
+        isAllFabsVisible = true;
+
         // Hide item options and main button.
-        hideItemOptionButtons();
+        hideAllItemOptionBtns();
     }
 
 
@@ -311,7 +323,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
     private void toggleItemOptionVisibility() {
 
         // If options visible, hide the options.
-        if (isAllFabsVisible) {
+        if (isAllFabsVisible == true) {
             removeItemFab.hide();
             changeDesignFab.hide();
 
@@ -340,21 +352,17 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         selectItemsBtn.setVisibility(View.GONE);
         takePhotoBtn.setVisibility(View.GONE);
 
-        hideItemOptionButtons();
+        hideAllItemOptionBtns();
     }
 
 
     /**
      * Hides the item options buttons.
      */
-    private void hideItemOptionButtons() {
+    private void hideAllItemOptionBtns() {
         showItemOptionsFab.setVisibility(View.GONE);
-        changeDesignFab.setVisibility(View.GONE);
-        removeItemFab.setVisibility(View.GONE);
-        changeDesignText.setVisibility(View.GONE);
-        removeItemText.setVisibility(View.GONE);
 
-        isAllFabsVisible = false;
+        toggleItemOptionVisibility();
     }
 
 
@@ -371,6 +379,11 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
     //                             Other Fragment Visibility methods                              //
     //********************************************************************************************//
 
+    public static void setIsShowingMaterials(Boolean isShowing) {
+        isShowingMaterials = isShowing;
+    }
+
+
     /**
      * Show a sliding menu with the available designs the item can be changed to
      */
@@ -379,6 +392,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         Fragment materialSelectionFragment = MaterialSelectionFragment.newInstance(selectedItemId);
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_materials, materialSelectionFragment).commitNow();
+        isShowingMaterials = true;
     }
 
 
