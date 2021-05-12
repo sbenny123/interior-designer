@@ -24,13 +24,6 @@ public final class CameraUtils {
         SimpleDateFormat formatter = new SimpleDateFormat("yyMMddhhmmss");
         String dateStr = formatter.format(date);
 
-        /*return Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES) + File.separator + "HorizonInterior/" + dateStr + "_screenshot.jpg";*/
-
-        //File sdCard = Environment.getExternalStorageDirectory();
-
-        //return sdCard.getAbsolutePath();
-
         return dateStr + "_screenshot.jpg";
     }
 

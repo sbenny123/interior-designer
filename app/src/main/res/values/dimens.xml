@@ -18,4 +18,7 @@
     <dimen name="card_item_rl_layout_margin">5dp</dimen>
     <dimen name="card_item_cv_elevation">5dp</dimen>
     <dimen name="card_item_cv_radius">4dp</dimen>
+
+    <dimen name="textview_elevation">10dp</dimen>
+    <dimen name="textview_marginStart">10dp</dimen>
 </resources>

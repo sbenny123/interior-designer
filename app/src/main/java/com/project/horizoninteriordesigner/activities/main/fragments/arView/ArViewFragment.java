@@ -9,7 +9,6 @@ import android.view.MotionEvent;
 import android.view.PixelCopy;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,9 +59,9 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
                                                  // manipulate 3D models and scenes.
 
     // View types including buttons and text.
-    private Button selectItemsBtn, takePhotoBtn;
+    private FloatingActionButton selectItemsBtn, takePhotoBtn;
     private FloatingActionButton showItemOptionsFab, changeDesignFab, removeItemFab;
-    private TextView changeDesignText, removeItemText;
+    private TextView changeDesignText, removeItemText, selectItemsText, showItemOptionsText;
 
 
     public ArViewFragment() {
@@ -264,7 +263,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         // For all other cases, hide the item options - assumes model has not been selected.
         if (selectedModel != null && !isShowingMaterials) {
             setCurrentModel(selectedModel);
-            showItemOptionsFab.setVisibility(View.VISIBLE);
+            showItemOptionsBtn();
 
         } else if (selectedModel != null) {
             setCurrentModel(selectedModel);
@@ -292,6 +291,10 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         // Main buttons.
         takePhotoBtn = view.findViewById(R.id.btn_take_photo);
         selectItemsBtn = view.findViewById(R.id.btn_select_items);
+
+        // Labels for main buttons.
+        selectItemsText = view.findViewById(R.id.text_select_items);
+        showItemOptionsText = view.findViewById(R.id.text_show_item_options);
 
         // Item option buttons.
         showItemOptionsFab = view.findViewById(R.id.fab_show_item_options);
@@ -352,6 +355,8 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         selectItemsBtn.setVisibility(View.GONE);
         takePhotoBtn.setVisibility(View.GONE);
 
+        selectItemsText.setVisibility(View.GONE);
+
         hideAllItemOptionBtns();
     }
 
@@ -361,8 +366,18 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
      */
     private void hideAllItemOptionBtns() {
         showItemOptionsFab.setVisibility(View.GONE);
+        showItemOptionsText.setVisibility(View.GONE);
 
         toggleItemOptionVisibility();
+    }
+
+    /**
+     *
+     * Shows the item options button only - not its options.
+     */
+    private void showItemOptionsBtn() {
+        showItemOptionsFab.setVisibility(View.VISIBLE);
+        showItemOptionsText.setVisibility(View.VISIBLE);
     }
 
 

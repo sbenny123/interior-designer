@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -255,8 +256,10 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
         View arViewFragmentView = getParentFragment().getView();
         Button selectItemsBtn = arViewFragmentView.findViewById(R.id.btn_select_items);
         Button takePhotoBtn = arViewFragmentView.findViewById(R.id.btn_take_photo);
+        TextView selectItemsText = arViewFragmentView.findViewById(R.id.text_select_items);
 
         selectItemsBtn.setVisibility(View.VISIBLE);
         takePhotoBtn.setVisibility(View.VISIBLE);
+        selectItemsText.setVisibility(View.VISIBLE);
     }
 }

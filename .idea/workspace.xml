@@ -51,7 +51,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e279938-3916-4ccf-933c-f31040dcd49d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/project/horizoninteriordesigner/ExampleInstrumentedTest.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/fragments/arView/ArViewFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/fragments/arView/ArViewFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/fragments/materialSelection/MaterialSelectionFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/fragments/materialSelection/MaterialSelectionFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/utils/CameraUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/utils/CameraUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_ar_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_ar_view.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-night/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-night/themes.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/project/horizoninteriordesigner/ExampleUnitTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,8 +97,8 @@
       <list>
         <option value="layoutResourceFile_vertical" />
         <option value="resourceFile" />
-        <option value="Class" />
         <option value="layoutResourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -120,13 +133,15 @@
     <property name="multi-representation-previewC:/Users/suzmi/Documents/GitHub/interior-designer/sceneformsrc/sceneform/src/main/java/com/google/ar/sceneform/ArSceneView.java_selected" value="Custom views" />
     <property name="multi-representation-previewC:/Users/suzmi/Documents/GitHub/interior-designer/sceneformsrc/sceneform/src/main/java/com/google/ar/sceneform/SceneView.java_selected" value="Custom views" />
     <property name="multi-representation-previewC:/Users/suzmi/Documents/GitHub/interior-designer/sceneformux/ux/src/main/java/com/google/ar/sceneform/ux/HandMotionView.java_selected" value="Custom views" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Build Variants" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.3362944" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="PsdUISettings">
-    <option name="MODULE_TAB" value="Signing Configs" />
+    <option name="MODULE_TAB" value="Properties" />
+    <option name="BUILD_VARIANTS_TAB" value="Build Types" />
+    <option name="LAST_EDITED_SIGNING_CONFIG" value="debug" />
     <option name="LAST_EDITED_BUILD_TYPE" value="release" />
   </component>
   <component name="RecentsManager">
@@ -148,6 +163,7 @@
       <recent name="com.example.horizoninteriordesigner.activities" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.project.horizoninteriordesigner" />
       <recent name="com.project.horizoninteriordesigner.activities.main.fragments.helpGuide" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -155,10 +171,44 @@
       <recent name="C:\Users\suzmi\Documents\GitHub\interior-designer\HorizonInteriorDesigner\app\sampledata" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+  <component name="RunManager" selected="Android App.app">
+    <configuration name="CameraUtilsUnitTest" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Horizon_Interior_Designer.app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.project.horizoninteriordesigner.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.project.horizoninteriordesigner" />
+      <option name="MAIN_CLASS_NAME" value="com.project.horizoninteriordesigner.CameraUtilsUnitTest" />
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <shortenClasspath name="CLASSPATH_FILE" />
+      <useClassPathOnly />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="horizoninteriordesigner in Horizon_Interior_Designer.app" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Horizon_Interior_Designer.app" />
+      <useClassPathOnly />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="directory" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <dir value="$PROJECT_DIR$/app/src/test/java/com/project/horizoninteriordesigner" />
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
@@ -221,6 +271,71 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ItemSelectionFragmen..." type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests" temporary="true" nameIsGenerated="true">
+      <module name="Horizon_Interior_Designer.app" />
+      <option name="TESTING_TYPE" value="2" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="com.project.horizoninteriordesigner.ItemSelectionFragmentTest" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="EXTRA_OPTIONS" value="" />
+      <option name="INCLUDE_GRADLE_EXTRA_OPTIONS" value="true" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Android App.app" />
+      <item itemvalue="Android Instrumented Tests.ItemSelectionFragmen..." />
+      <item itemvalue="Android JUnit." />
+      <item itemvalue="Android JUnit.CameraUtilsUnitTest" />
+      <item itemvalue="Android JUnit.horizoninteriordesigner in Horizon_Interior_Designer.app" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Android JUnit.horizoninteriordesigner in Horizon_Interior_Designer.app" />
+        <item itemvalue="Android Instrumented Tests.ItemSelectionFragmen..." />
+        <item itemvalue="Android JUnit.CameraUtilsUnitTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -254,10 +369,19 @@
     </ignored-roots>
   </component>
   <component name="WindowStateProjectService">
-    <state x="277" y="94" key="#PSD" timestamp="1614883011021">
+    <state x="364" y="0" key="#&lt;template&gt;_of_Android_JUnit" timestamp="1620847336415">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="364" y="0" key="#&lt;template&gt;_of_Android_JUnit/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1620847336415" />
+    <state x="277" y="94" key="#PSD" timestamp="1620746349232">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="94" key="#PSD/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1614883011021" />
+    <state x="277" y="94" key="#PSD/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1620746349232" />
+    <state x="223" y="67" width="1089" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1620847477792">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="223" y="67" width="1089" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1620847477792" />
     <state x="508" y="214" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1617607922059">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -282,11 +406,15 @@
     </state>
     <state x="521" y="281" width="754" height="270" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1612702483821" />
     <state x="341" y="281" width="1195" height="270" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1620566258088" />
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1620575914703">
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1620853581282">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1617608074641" />
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1620575914703" />
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1620853581282" />
+    <state x="364" y="31" key="#horizoninteriordesigner_in_Horizon_Interior_Designer.app" timestamp="1620768651467">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="364" y="31" key="#horizoninteriordesigner_in_Horizon_Interior_Designer.app/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1620768651467" />
     <state x="349" y="167" key="AndroidCreateResourceFileDialog" timestamp="1620678281824">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -300,34 +428,35 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="565" y="158" key="AndroidProcessChooserDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1614337098923" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1615306541139">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1620851197598">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1615306541139" />
-    <state width="1493" height="160" key="GridCell.Tab.0.bottom" timestamp="1620681254751">
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1620851197598" />
+    <state width="1493" height="389" key="GridCell.Tab.0.bottom" timestamp="1620849618992">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1491" height="144" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483936943" />
     <state width="1875" height="280" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612970359640" />
-    <state width="1493" height="160" key="GridCell.Tab.0.bottom/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1620681254751" />
-    <state width="1493" height="160" key="GridCell.Tab.0.center" timestamp="1620681254750">
+    <state width="1493" height="389" key="GridCell.Tab.0.bottom/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1620849618992" />
+    <state width="1493" height="389" key="GridCell.Tab.0.center" timestamp="1620849618992">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1491" height="144" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483936943" />
     <state width="1875" height="280" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612970359640" />
-    <state width="1493" height="160" key="GridCell.Tab.0.center/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1620681254750" />
-    <state width="1493" height="160" key="GridCell.Tab.0.left" timestamp="1620681254750">
+    <state width="1493" height="389" key="GridCell.Tab.0.center/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1620849618992" />
+    <state width="1493" height="389" key="GridCell.Tab.0.left" timestamp="1620849618991">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1491" height="144" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483936943" />
     <state width="1875" height="280" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612970359639" />
-    <state width="1493" height="160" key="GridCell.Tab.0.left/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1620681254750" />
-    <state width="1493" height="160" key="GridCell.Tab.0.right" timestamp="1620681254751">
+    <state width="1493" height="389" key="GridCell.Tab.0.left/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1620849618991" />
+    <state width="1493" height="389" key="GridCell.Tab.0.right" timestamp="1620849618992">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1491" height="144" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483936943" />
     <state width="1875" height="280" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612970359640" />
-    <state width="1493" height="160" key="GridCell.Tab.0.right/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1620681254751" />
+    <state width="1493" height="389" key="GridCell.Tab.0.right/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1620849618992" />
     <state width="1491" height="481" key="GridCell.Tab.1.bottom" timestamp="1618483940406">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -344,10 +473,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1491" height="481" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483940406" />
-    <state x="277" y="57" key="SettingsEditor" timestamp="1614885231782">
+    <state x="277" y="57" key="SettingsEditor" timestamp="1620745794790">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="57" key="SettingsEditor/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1614885231782" />
+    <state x="277" y="57" key="SettingsEditor/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1620745794790" />
     <state x="584" y="190" key="chooseDestDirectoryDialog" timestamp="1612534419590">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

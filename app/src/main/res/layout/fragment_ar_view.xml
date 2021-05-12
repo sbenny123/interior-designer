@@ -13,35 +13,48 @@
         android:id="@+id/fab_show_item_options"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:contentDescription="@string/fab_show_item_options"
-        android:src="@drawable/edit_vector"
-        android:visibility="gone"
-        app:fabSize="normal"
+        android:contentDescription="@string/fab_show_item_options_desc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/btn_take_photo"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.905" />
+        app:layout_constraintVertical_bias="0.905"
+        app:srcCompat="@drawable/edit_vector"
+        style="@style/Button.Fab" />
+
+    <TextView
+        android:id="@+id/text_show_item_options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/textview_elevation"
+        android:text="@string/fab_show_item_options_text"
+        android:textColor="@color/yellow_700"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/fab_show_item_options"
+        app:layout_constraintStart_toStartOf="@+id/fab_show_item_options"
+        app:layout_constraintTop_toBottomOf="@id/fab_show_item_options"
+        />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_change_item_design"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/text_change_design"
         android:layout_marginBottom="24dp"
-        app:fabSize="normal"
         app:layout_constraintBottom_toTopOf="@+id/fab_show_item_options"
         app:layout_constraintEnd_toEndOf="@+id/fab_show_item_options"
         app:layout_constraintStart_toStartOf="@+id/fab_show_item_options"
         app:srcCompat="@drawable/ic_format_paint"
-        android:contentDescription="@string/text_change_design" />
+        style="@style/Button.Fab" />
 
     <TextView
         android:id="@+id/text_change_item_design"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="@dimen/textview_marginStart"
+        android:elevation="@dimen/textview_elevation"
         android:text="@string/text_change_design"
+        android:textColor="@color/yellow_700"
         app:layout_constraintBottom_toBottomOf="@+id/fab_change_item_design"
         app:layout_constraintStart_toEndOf="@+id/fab_change_item_design"
         app:layout_constraintTop_toTopOf="@+id/fab_change_item_design" />
@@ -51,30 +64,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        app:fabSize="normal"
+        android:contentDescription="@string/text_remove_item"
         app:layout_constraintBottom_toTopOf="@+id/fab_change_item_design"
         app:layout_constraintEnd_toEndOf="@+id/fab_change_item_design"
         app:layout_constraintStart_toStartOf="@+id/fab_change_item_design"
         app:srcCompat="@drawable/ic_delete"
-        android:contentDescription="@string/text_remove_item" />
+        style="@style/Button.Fab" />
 
     <TextView
         android:id="@+id/text_remove_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="@dimen/textview_marginStart"
+        android:elevation="@dimen/textview_elevation"
         android:text="@string/text_remove_item"
+        android:textColor="@color/yellow_700"
         app:layout_constraintBottom_toBottomOf="@+id/fab_remove_item"
         app:layout_constraintStart_toEndOf="@+id/fab_remove_item"
         app:layout_constraintTop_toTopOf="@+id/fab_remove_item" />
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_take_photo"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:background="@drawable/round_button"
-        android:clickable="true"
-        android:drawableTop="@android:drawable/ic_menu_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,24 +95,34 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.905"
         app:layout_constraintRight_toLeftOf="@id/btn_select_items"
-        app:useCompatPadding="false" />
+        app:srcCompat="@drawable/ic_camera"
+        style="@style/Button.Fab" />
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_select_items"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:background="@drawable/round_button"
-        android:drawableTop="@drawable/couch_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:focusable="true"
-        android:gravity="center"
-        android:text="@string/btn_select_items_text"
-        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toEndOf="@+id/btn_take_photo"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.905" />
+        app:layout_constraintVertical_bias="0.905"
+        app:srcCompat="@drawable/ic_couch"
+        style="@style/Button.Fab" />
+
+    <TextView
+        android:id="@+id/text_select_items"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/textview_elevation"
+        android:text="@string/btn_select_items_text"
+        android:textColor="@color/yellow_700"
+        app:layout_constraintStart_toStartOf="@id/btn_select_items"
+        app:layout_constraintEnd_toEndOf="@id/btn_select_items"
+        app:layout_constraintTop_toBottomOf="@id/btn_select_items"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <FrameLayout
         android:id="@+id/fragment_ar"
@@ -108,10 +130,10 @@
         android:layout_height="878dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintHorizontal_bias="0.142"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.21" />
+        app:layout_constraintVertical_bias="0.795" />
 
     <FrameLayout
         android:id="@+id/fragment_materials"
