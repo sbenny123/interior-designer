@@ -17,11 +17,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.project.horizoninteriordesigner.R;
 import com.project.horizoninteriordesigner.activities.main.fragments.arView.ArViewFragment;
 import com.project.horizoninteriordesigner.activities.main.fragments.helpGuide.HelpGuideViewPagerFragment;
 import com.project.horizoninteriordesigner.activities.main.fragments.itemSelection.ItemViewPagerFragment;
+import com.project.horizoninteriordesigner.activities.main.viewModels.ItemViewModel;
 
 
 /**
@@ -29,6 +31,8 @@ import com.project.horizoninteriordesigner.activities.main.fragments.itemSelecti
  * Used to control visibility of fragments, its app bar and check device is compatible with the app.
  */
 public class MainActivity extends AppCompatActivity {
+
+    private ItemViewModel itemViewModel; // Used to retrieve data shared amongst the fragments and activity.
 
     private static final String TAG = MainActivity.class.getSimpleName(); // Used when writing logs and Toast text.
     private static final double MIN_OPENGL_VERSION = 3.0;
@@ -61,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         manageFragmentTransaction(ITEM_SELECT_TAG);
+
+        // Set up view model for retrieving shared data amongst the fragments and activity
+        itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
     }
 
 
@@ -147,8 +154,15 @@ public class MainActivity extends AppCompatActivity {
         switch (selectedFragment) {
 
             case AR_VIEW_TAG:
-                if (helpGuideFragment != null) { fragmentTransaction.hide(helpGuideFragment); }
-                if (itemSelectionFragment != null) { fragmentTransaction.hide(itemSelectionFragment); }
+                if (helpGuideFragment != null) {
+                    fragmentTransaction.hide(helpGuideFragment);
+                    itemViewModel.setPreviousFragment(helpGuideFragment.getTag());
+                }
+
+                if (itemSelectionFragment != null) {
+                    fragmentTransaction.hide(itemSelectionFragment);
+                    itemViewModel.setPreviousFragment(itemSelectionFragment.getTag());
+                }
 
                 if (arViewFragment != null) {
                     fragmentTransaction.show(arViewFragment);
@@ -163,8 +177,15 @@ public class MainActivity extends AppCompatActivity {
 
 
             case ITEM_SELECT_TAG:
-                if (arViewFragment != null) { fragmentTransaction.hide(arViewFragment); }
-                if (helpGuideFragment != null) { fragmentTransaction.hide(helpGuideFragment); }
+                if (arViewFragment != null) {
+                    fragmentTransaction.hide(arViewFragment);
+                    itemViewModel.setPreviousFragment(arViewFragment.getTag());
+                }
+
+                if (helpGuideFragment != null) {
+                    fragmentTransaction.hide(helpGuideFragment);
+                    itemViewModel.setPreviousFragment(helpGuideFragment.getTag());
+                }
 
                 if (itemSelectionFragment != null) {
                     fragmentTransaction.show(itemSelectionFragment);
@@ -179,15 +200,22 @@ public class MainActivity extends AppCompatActivity {
 
 
             case HELP_GUIDE_TAG:
-                if (arViewFragment != null) { fragmentTransaction.hide(arViewFragment); }
-                if (itemSelectionFragment != null) { fragmentTransaction.hide(itemSelectionFragment); }
+                if (itemSelectionFragment != null) {
+                    fragmentTransaction.hide(itemSelectionFragment);
+                    itemViewModel.setPreviousFragment(itemSelectionFragment.getTag());
+                }
+
+                if (arViewFragment != null) {
+                    fragmentTransaction.hide(arViewFragment);
+                    itemViewModel.setPreviousFragment(arViewFragment.getTag());
+                }
 
                 if (helpGuideFragment != null) {
                     fragmentTransaction.show(helpGuideFragment);
                 } else {
                     fragmentTransaction.add(
                             R.id.fragment_holder,
-                            HelpGuideViewPagerFragment.newInstance(),
+                            HelpGuideViewPagerFragment.newInstance(itemViewModel.getPreviousFragment()),
                             HELP_GUIDE_TAG);
                 }
 

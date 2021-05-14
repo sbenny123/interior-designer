@@ -1,8 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.main.fragments.arView.ArViewFragment">
 
-</FrameLayout>
+    <!-- Icons made by Freepik from www.flaticon.com -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_show_item_options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/fab_show_item_options_desc"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btn_take_photo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.905"
+        app:srcCompat="@drawable/edit_vector"
+        style="@style/Button.Fab" />
+
+    <TextView
+        android:id="@+id/text_show_item_options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/textview_elevation"
+        android:text="@string/fab_show_item_options_text"
+        android:textColor="@color/yellow_700"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/fab_show_item_options"
+        app:layout_constraintStart_toStartOf="@+id/fab_show_item_options"
+        app:layout_constraintTop_toBottomOf="@id/fab_show_item_options"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_change_item_design"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/text_change_design"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/fab_show_item_options"
+        app:layout_constraintEnd_toEndOf="@+id/fab_show_item_options"
+        app:layout_constraintStart_toStartOf="@+id/fab_show_item_options"
+        app:srcCompat="@drawable/ic_format_paint"
+        style="@style/Button.Fab" />
+
+    <TextView
+        android:id="@+id/text_change_item_design"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/textview_marginStart"
+        android:elevation="@dimen/textview_elevation"
+        android:text="@string/text_change_design"
+        android:textColor="@color/yellow_700"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_change_item_design"
+        app:layout_constraintStart_toEndOf="@+id/fab_change_item_design"
+        app:layout_constraintTop_toTopOf="@+id/fab_change_item_design" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_remove_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:contentDescription="@string/text_remove_item"
+        app:layout_constraintBottom_toTopOf="@+id/fab_change_item_design"
+        app:layout_constraintEnd_toEndOf="@+id/fab_change_item_design"
+        app:layout_constraintStart_toStartOf="@+id/fab_change_item_design"
+        app:srcCompat="@drawable/ic_delete"
+        style="@style/Button.Fab" />
+
+    <TextView
+        android:id="@+id/text_remove_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/textview_marginStart"
+        android:elevation="@dimen/textview_elevation"
+        android:text="@string/text_remove_item"
+        android:textColor="@color/yellow_700"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_remove_item"
+        app:layout_constraintStart_toEndOf="@+id/fab_remove_item"
+        app:layout_constraintTop_toTopOf="@+id/fab_remove_item" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_take_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.905"
+        app:layout_constraintRight_toLeftOf="@id/btn_select_items"
+        app:srcCompat="@drawable/ic_camera"
+        style="@style/Button.Fab" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_select_items"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toEndOf="@+id/btn_take_photo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.905"
+        app:srcCompat="@drawable/ic_couch"
+        style="@style/Button.Fab" />
+
+    <TextView
+        android:id="@+id/text_select_items"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/textview_elevation"
+        android:text="@string/btn_select_items_text"
+        android:textColor="@color/yellow_700"
+        app:layout_constraintStart_toStartOf="@id/btn_select_items"
+        app:layout_constraintEnd_toEndOf="@id/btn_select_items"
+        app:layout_constraintTop_toBottomOf="@id/btn_select_items"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/fragment_ar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/fragment_materials"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

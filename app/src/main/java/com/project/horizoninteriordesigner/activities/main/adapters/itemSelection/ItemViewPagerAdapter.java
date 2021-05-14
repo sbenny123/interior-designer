@@ -31,7 +31,6 @@ public class ItemViewPagerAdapter extends FragmentStateAdapter {
 
         String catKey = getItemCategories().get(position).getCatKey();
 
-        //return new ItemSelectionFragment(catKey);
         return ItemSelectionFragment.newInstance(catKey);
     }
 

@@ -8,7 +8,6 @@
     tools:context=".activities.main.fragments.arView.ArViewFragment">
 
     <!-- Icons made by Freepik from www.flaticon.com -->
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_show_item_options"
         android:layout_width="wrap_content"
@@ -126,14 +125,12 @@
 
     <FrameLayout
         android:id="@+id/fragment_ar"
-        android:layout_width="530dp"
-        android:layout_height="878dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.142"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.795" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
         android:id="@+id/fragment_materials"

@@ -14,6 +14,7 @@ import com.google.ar.sceneform.ux.TransformableNode;
  */
 public class ItemViewModel extends ViewModel {
     private String itemId;
+    private String previousFragment;
     private MutableLiveData<Renderable> renderableToAdd = new MutableLiveData<Renderable>();
     private MutableLiveData<TransformableNode> selectedModelNode = new MutableLiveData<TransformableNode>();
 
@@ -24,6 +25,14 @@ public class ItemViewModel extends ViewModel {
     public String getItemId() { return itemId; }
 
     public void setItemId(String itemId) { this.itemId = itemId; }
+
+
+    /**
+     * previousFragment methods - get and set
+     */
+    public String getPreviousFragment() { return previousFragment; }
+
+    public void setPreviousFragment(String previousFragment) { this.previousFragment = previousFragment; }
 
 
     /**
