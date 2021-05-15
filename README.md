@@ -21,6 +21,9 @@ asset: [koral--/-android-gif-drawable](https://github.com/koral--/android-gif-dr
 asset: [Sceneform v1.16.0](https://github.com/ThomasGorisse/sceneform-android-sdk) 
 --- 
 
-
+---
+permalink: /making-readmes-readable/
+title: Making READMEs readable
+---
 
 # User Guide
