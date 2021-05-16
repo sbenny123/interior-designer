@@ -140,7 +140,8 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
 
         // Open item selection fragment.
         if (id == R.id.btn_select_items) {
-            currentModel = null;
+            setCurrentModel(null);
+            performModelSelectedActions(null);
             showItemSelectionFragment();
 
         // Take a photo of the camera view.
