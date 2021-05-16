@@ -1,13 +1,14 @@
 {
   "project_info": {
     "project_number": "915972657310",
+    "firebase_url": "https://horizon-interior-design-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "horizon-interior-design",
     "storage_bucket": "horizon-interior-design.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:915972657310:android:784a57cf4a85f9fed4ab8f",
+        "mobilesdk_app_id": "1:915972657310:android:a581adc5f205fd45d4ab8f",
         "android_client_info": {
           "package_name": "com.horizonid.horizoninteriordesigner"
         }

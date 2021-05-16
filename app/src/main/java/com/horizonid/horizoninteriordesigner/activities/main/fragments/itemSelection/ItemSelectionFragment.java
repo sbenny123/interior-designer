@@ -2,7 +2,6 @@ package com.horizonid.horizoninteriordesigner.activities.main.fragments.itemSele
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -176,8 +175,6 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
                     loadingDialog.dismissDialog();
 
-                    Log.i("ItemSelection", throwable.getMessage());
-
                     setUpModelErrorDialog();
 
                     return null;
@@ -219,7 +216,7 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
                                 itemArrayList.add(new Item(itemId, imageName, imageUrl, modelUrl));
                             }
-
+                            
                             // Create a grid view of the items.
                             adapter = new ItemSelectionAdapter(getActivity(), ItemSelectionFragment.this::onItemClick, itemArrayList);
                             recyclerView.setAdapter(adapter);
