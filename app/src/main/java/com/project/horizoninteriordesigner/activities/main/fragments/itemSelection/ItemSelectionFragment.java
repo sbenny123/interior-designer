@@ -2,6 +2,7 @@ package com.project.horizoninteriordesigner.activities.main.fragments.itemSelect
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -174,6 +175,8 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
                 .exceptionally(throwable -> {
 
                     loadingDialog.dismissDialog();
+
+                    Log.i("ItemSelection", throwable.getMessage());
 
                     setUpModelErrorDialog();
 

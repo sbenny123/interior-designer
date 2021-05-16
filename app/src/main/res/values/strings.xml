@@ -13,6 +13,7 @@
     <string name="fab_show_item_options_desc">Show item options</string>
     <string name="text_change_design">Change design</string>
     <string name="text_remove_item">Remove</string>
+    <string name="text_instruction">Move your phone around to detect the floor</string>
 
     <!-- Help guide -->
     <string name="btn_next_page">Next</string>

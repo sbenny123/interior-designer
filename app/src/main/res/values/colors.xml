@@ -15,5 +15,6 @@
     <color name="blue_500">#D5EEFD</color>
     <color name="brown_200">#A70416</color>
     <color name="brown_500">#860614</color>
+    <color name="silver">#70000000</color>
 
 </resources>

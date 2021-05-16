@@ -6,6 +6,13 @@
         <option name="logLevel" value="info" />
         <option name="logMessagePattern" value="" />
         <option name="logTagIsRegex" value="false" />
+        <option name="logTagPattern" value="ItemSelection" />
+        <option name="name" value="ItemSelection" />
+        <option name="packageNamePattern" value="" />
+      </filter>
+      <filter>
+        <option name="logLevel" value="info" />
+        <option name="logMessagePattern" value="" />
         <option name="logTagPattern" value="Sceneform" />
         <option name="name" value="Sceneform" />
         <option name="packageNamePattern" value="" />
@@ -18,8 +25,8 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="info" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Sceneform" />
     <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
   </component>
   <component name="AutoImportSettings">
@@ -51,9 +58,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e279938-3916-4ccf-933c-f31040dcd49d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/fragments/arView/ArViewFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/fragments/arView/ArViewFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/fragments/itemSelection/ItemSelectionFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/fragments/itemSelection/ItemSelectionFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout-land/fragment_ar_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout-land/fragment_ar_view.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_ar_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_ar_view.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_material_selection.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_material_selection.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,9 +98,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="layoutResourceFile_vertical" />
-        <option value="resourceFile" />
-        <option value="layoutResourceFile" />
         <option value="Class" />
+        <option value="layoutResourceFile" />
+        <option value="resourceFile" />
       </list>
     </option>
   </component>
@@ -137,10 +150,10 @@
     <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="PsdUISettings">
-    <option name="MODULE_TAB" value="Properties" />
+    <option name="MODULE_TAB" value="Signing Configs" />
     <option name="BUILD_VARIANTS_TAB" value="Build Types" />
-    <option name="LAST_EDITED_SIGNING_CONFIG" value="debug" />
-    <option name="LAST_EDITED_BUILD_TYPE" value="release" />
+    <option name="LAST_EDITED_SIGNING_CONFIG" value="config" />
+    <option name="LAST_EDITED_BUILD_TYPE" value="customDebugType" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -370,11 +383,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="364" y="0" key="#&lt;template&gt;_of_Android_JUnit/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1620847336415" />
-    <state x="277" y="94" key="#PSD" timestamp="1620746349232">
+    <state x="277" y="94" key="#PSD" timestamp="1621166385463">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="94" key="#PSD/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1614883011021" />
-    <state x="277" y="94" key="#PSD/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1620746349232" />
+    <state x="277" y="94" key="#PSD/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621166385463" />
     <state x="223" y="67" width="1089" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1620847477792">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -412,11 +425,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="364" y="31" key="#horizoninteriordesigner_in_Horizon_Interior_Designer.app/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1620768651467" />
-    <state x="349" y="167" key="AndroidCreateResourceFileDialog" timestamp="1620678281824">
+    <state x="349" y="167" key="AndroidCreateResourceFileDialog" timestamp="1621171816196">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="349" y="167" key="AndroidCreateResourceFileDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1612609244495" />
-    <state x="349" y="167" key="AndroidCreateResourceFileDialog/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1620678281824" />
+    <state x="349" y="167" key="AndroidCreateResourceFileDialog/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621171816196" />
     <state x="553" y="198" key="AndroidCreateXmlResourceDialog" timestamp="1618315236316">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -430,46 +443,50 @@
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1615306541139" />
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621161063794" />
-    <state width="1493" height="538" key="GridCell.Tab.0.bottom" timestamp="1621158313347">
+    <state width="1493" height="104" key="GridCell.Tab.0.bottom" timestamp="1621168298876">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1491" height="144" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483936943" />
     <state width="1875" height="280" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612970359640" />
-    <state width="1493" height="538" key="GridCell.Tab.0.bottom/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621158313347" />
-    <state width="1493" height="538" key="GridCell.Tab.0.center" timestamp="1621158313346">
+    <state width="1493" height="104" key="GridCell.Tab.0.bottom/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621168298876" />
+    <state width="1493" height="104" key="GridCell.Tab.0.center" timestamp="1621168298876">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1491" height="144" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483936943" />
     <state width="1875" height="280" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612970359640" />
-    <state width="1493" height="538" key="GridCell.Tab.0.center/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621158313346" />
-    <state width="1493" height="538" key="GridCell.Tab.0.left" timestamp="1621158313346">
+    <state width="1493" height="104" key="GridCell.Tab.0.center/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621168298876" />
+    <state width="1493" height="104" key="GridCell.Tab.0.left" timestamp="1621168298875">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1491" height="144" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483936943" />
     <state width="1875" height="280" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612970359639" />
-    <state width="1493" height="538" key="GridCell.Tab.0.left/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621158313346" />
-    <state width="1493" height="538" key="GridCell.Tab.0.right" timestamp="1621158313347">
+    <state width="1493" height="104" key="GridCell.Tab.0.left/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621168298875" />
+    <state width="1493" height="104" key="GridCell.Tab.0.right" timestamp="1621168298876">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1491" height="144" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483936943" />
     <state width="1875" height="280" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612970359640" />
-    <state width="1493" height="538" key="GridCell.Tab.0.right/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621158313347" />
-    <state width="1491" height="481" key="GridCell.Tab.1.bottom" timestamp="1618483940406">
+    <state width="1493" height="104" key="GridCell.Tab.0.right/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621168298876" />
+    <state width="1493" height="104" key="GridCell.Tab.1.bottom" timestamp="1621168298877">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1491" height="481" key="GridCell.Tab.1.bottom/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483940406" />
-    <state width="1491" height="481" key="GridCell.Tab.1.center" timestamp="1618483940406">
+    <state width="1493" height="104" key="GridCell.Tab.1.bottom/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621168298877" />
+    <state width="1493" height="104" key="GridCell.Tab.1.center" timestamp="1621168298876">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1491" height="481" key="GridCell.Tab.1.center/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483940406" />
-    <state width="1491" height="481" key="GridCell.Tab.1.left" timestamp="1618483940406">
+    <state width="1493" height="104" key="GridCell.Tab.1.center/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621168298876" />
+    <state width="1493" height="104" key="GridCell.Tab.1.left" timestamp="1621168298876">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1491" height="481" key="GridCell.Tab.1.left/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483940406" />
-    <state width="1491" height="481" key="GridCell.Tab.1.right" timestamp="1618483940406">
+    <state width="1493" height="104" key="GridCell.Tab.1.left/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621168298876" />
+    <state width="1493" height="104" key="GridCell.Tab.1.right" timestamp="1621168298876">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1491" height="481" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483940406" />
+    <state width="1493" height="104" key="GridCell.Tab.1.right/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621168298876" />
     <state x="277" y="57" key="SettingsEditor" timestamp="1621157011745">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -479,10 +496,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="584" y="190" key="chooseDestDirectoryDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1612534419590" />
-    <state x="482" y="256" key="edit.logcat.filter.dialog.dimensions" timestamp="1621157214701">
+    <state x="399" y="406" key="edit.logcat.filter.dialog.dimensions" timestamp="1621168868816">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="482" y="256" key="edit.logcat.filter.dialog.dimensions/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621157214701" />
+    <state x="399" y="406" key="edit.logcat.filter.dialog.dimensions/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621168868816" />
     <state x="306" y="0" width="718" height="824" key="find.popup" timestamp="1615299390229">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -502,5 +519,12 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="app">
+        <watch expression="sceneformFragment" language="JAVA" />
+        <watch expression="" />
+        <watch expression="controller" language="JAVA" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

@@ -20,11 +20,15 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.ar.core.Anchor;
+import com.google.ar.core.Config;
+import com.google.ar.core.Frame;
 import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
 import com.google.ar.core.Session;
+import com.google.ar.core.TrackingState;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.ArSceneView;
+import com.google.ar.sceneform.FrameTime;
 import com.google.ar.sceneform.Scene;
 import com.google.ar.sceneform.rendering.Renderable;
 import com.google.ar.sceneform.ux.BaseArFragment;
@@ -36,6 +40,7 @@ import com.project.horizoninteriordesigner.activities.main.viewModels.ItemViewMo
 import com.project.horizoninteriordesigner.dialogs.ErrorDialog;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static com.project.horizoninteriordesigner.activities.main.MainActivity.ITEM_SELECT_TAG;
@@ -63,7 +68,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
     // View types including buttons and text.
     private FloatingActionButton selectItemsBtn, takePhotoBtn;
     private FloatingActionButton showItemOptionsFab, changeDesignFab, removeItemFab;
-    private TextView changeDesignText, removeItemText, selectItemsText, showItemOptionsText;
+    private TextView changeDesignText, removeItemText, selectItemsText, showItemOptionsText, instructionText;
 
 
     public ArViewFragment() {
@@ -95,6 +100,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         // Create transaction to add the fragment to ArViewFragment.
         FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.fragment_ar, sceneformFragment).commit();
+
     }
 
 
@@ -103,7 +109,9 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_ar_view, container, false);
+        View view = inflater.inflate(R.layout.fragment_ar_view, container, false);
+
+        return view;
     }
 
 
@@ -214,10 +222,14 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
      */
     @Override
     public void onSessionInitialization(Session session) {
+        session.getConfig().setPlaneFindingMode(Config.PlaneFindingMode.HORIZONTAL);
+
         Scene scene = sceneformFragment.getArSceneView().getScene();
 
         scene.addOnPeekTouchListener((hitTestResult, motionEvent) ->
                 performModelSelectedActions((TransformableNode) hitTestResult.getNode()));
+
+        scene.addOnUpdateListener(this::onUpdate);
     }
 
 
@@ -237,6 +249,8 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         AnchorNode anchorNode = new AnchorNode(anchor);
         anchorNode.setParent(sceneformFragment.getArSceneView().getScene());
 
+        modelToRender.setShadowCaster(false);
+        modelToRender.setShadowReceiver(false);
 
         // Create the transformable model and add it to the anchor.
         TransformableNode renderedModel = new TransformableNode(sceneformFragment.getTransformationSystem());
@@ -245,6 +259,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         renderedModel.setParent(anchorNode);
         renderedModel.setRenderable(modelToRender);
         renderedModel.select();
+
 
 
         // Show item options button.
@@ -307,6 +322,9 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         // Labels for item options.
         changeDesignText = view.findViewById(R.id.text_change_item_design);
         removeItemText = view.findViewById(R.id.text_remove_item);
+
+        // Instruction seen at the start when detecting planes.
+        instructionText = view.findViewById(R.id.text_instruction);
 
         // All the buttons use the same onClick method.
         takePhotoBtn.setOnClickListener(this);
@@ -428,6 +446,29 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
     //********************************************************************************************//
     //                                              Other methods                                 //
     //********************************************************************************************//
+
+    /**
+     * Actions to take at each frame update.
+     * Hides the instruction text when a plane is found.
+     * @param frameTime
+     */
+    private void onUpdate(FrameTime frameTime) {
+        Frame frame = sceneformFragment.getArSceneView().getArFrame();
+
+        if (frame == null) {
+            return;
+        }
+
+        Collection<Plane> planes = frame.getUpdatedTrackables(Plane.class);
+
+        for (Plane plane : planes) {
+            if (plane.getTrackingState() == TrackingState.TRACKING) {
+                instructionText.setVisibility(View.GONE);
+                break;
+            }
+        }
+    }
+
 
     /**
      * Removes a renderable and its nodes from the scene.

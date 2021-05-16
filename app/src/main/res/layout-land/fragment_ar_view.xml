@@ -7,6 +7,23 @@
     android:layout_height="match_parent"
     tools:context=".activities.main.fragments.arView.ArViewFragment">
 
+    <TextView
+        android:id="@+id/text_instruction"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/textview_marginStart"
+        android:elevation="@dimen/textview_elevation"
+        android:text="Move your phone to help detect the surface"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:background="@drawable/bg_curved_rectangle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35" />
+
     <!-- Icons made by Freepik from www.flaticon.com -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_show_item_options"
