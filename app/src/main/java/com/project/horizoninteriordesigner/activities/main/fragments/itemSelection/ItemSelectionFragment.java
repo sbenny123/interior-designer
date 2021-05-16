@@ -1,7 +1,5 @@
 package com.project.horizoninteriordesigner.activities.main.fragments.itemSelection;
 
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -32,7 +30,6 @@ import com.project.horizoninteriordesigner.models.Item;
 
 import java.util.ArrayList;
 
-import static android.content.Context.CONNECTIVITY_SERVICE;
 import static com.project.horizoninteriordesigner.activities.main.MainActivity.AR_VIEW_TAG;
 
 
@@ -133,9 +130,12 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
         Item selectedItem = itemArrayList.get(position);
 
+
         // Build the model only if the device is connected to the internet.
         // Else, return an error message.
-        if (isOnline()) {
+        Boolean isOnline = ((MainActivity) getActivity()).isOnline();
+
+        if (isOnline) {
             buildModel(selectedItem);
 
         } else {
@@ -181,16 +181,6 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
                 });
     }
 
-
-    /**
-     * Checks whether the device is connected to an active network.
-     */
-    private Boolean isOnline() {
-        ConnectivityManager manager = (ConnectivityManager) getContext().getSystemService(CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = manager.getActiveNetworkInfo();
-
-        return (netInfo != null && netInfo.isConnected() && netInfo.isAvailable());
-    }
 
     /**
      * Retrieves item documents from Firestore and maps to Item model and adds to array list.

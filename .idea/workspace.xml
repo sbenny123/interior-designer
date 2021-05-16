@@ -51,19 +51,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e279938-3916-4ccf-933c-f31040dcd49d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/assets/models/test_chair1.glb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/assets/models/test_sofa.glb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/assets/models/test_sofa1.glb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/assets/models/test_sofa2.glb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/assets/models/test_wardrobe1.glb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/fragments/arView/ArViewFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/fragments/arView/ArViewFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/fragments/itemSelection/ItemSelectionFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/fragments/itemSelection/ItemSelectionFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/fragments/materialSelection/MaterialSelectionFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/fragments/materialSelection/MaterialSelectionFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/dialogs/ErrorDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/dialogs/ErrorDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

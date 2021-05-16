@@ -33,6 +33,7 @@ import com.project.horizoninteriordesigner.R;
 import com.project.horizoninteriordesigner.activities.main.MainActivity;
 import com.project.horizoninteriordesigner.activities.main.fragments.materialSelection.MaterialSelectionFragment;
 import com.project.horizoninteriordesigner.activities.main.viewModels.ItemViewModel;
+import com.project.horizoninteriordesigner.dialogs.ErrorDialog;
 
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
@@ -53,6 +54,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
 
     private TransformableNode currentModel; // The current model that has been selected/manipulated.
     private Boolean canShowItemFabs; // True when the item option buttons should be visible.
+    private ErrorDialog errorDialog; // For showing errors if any.
     private static Boolean isShowingMaterials; // True when the material fragment is visible.
     private ItemViewModel itemViewModel; // View model containing the shared data amongst the fragments.
     private SceneformFragment sceneformFragment; // Inner fragment which utilises Sceneform to
@@ -152,7 +154,6 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         // Show materials to change for item.
         } else if (id == R.id.fab_change_item_design) {
             itemViewModel.setSelectedModelNode(currentModel);
-            hideMainButtons();
             showMaterialSelectionFragment();
 
         // Delete an item.
@@ -397,10 +398,21 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
      */
     private void showMaterialSelectionFragment() {
         String selectedItemId = currentModel.getName();
-        Fragment materialSelectionFragment = MaterialSelectionFragment.newInstance(selectedItemId);
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_materials, materialSelectionFragment).commitNow();
-        isShowingMaterials = true;
+        Boolean isOnline = ((MainActivity) getActivity()).isOnline();
+
+        // Get the materials only if the device is connected to the internet.
+        // Else, show the error dialog.
+        if (isOnline) {
+            hideMainButtons();
+
+            Fragment materialSelectionFragment = MaterialSelectionFragment.newInstance(selectedItemId);
+            FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_materials, materialSelectionFragment).commitNow();
+            isShowingMaterials = true;
+
+        } else {
+            setUpInternetErrorDialog();
+        }
     }
 
 
@@ -426,6 +438,18 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
             nodeToRemove.getAnchor().detach();
             nodeToRemove.setParent(null);
         }
+    }
+
+
+    /**
+     * Sets up an error dialog when there is no internet connected.
+     * The internet is needed to load the materials from Firebase storage.
+     */
+    private void setUpInternetErrorDialog() {
+        errorDialog = new ErrorDialog(getContext());
+        errorDialog.createDialog(R.drawable.ic_no_wifi, "No internet connection",
+                "Please turn on your internet connection and try again.");
+        errorDialog.showDialog();
     }
 
 

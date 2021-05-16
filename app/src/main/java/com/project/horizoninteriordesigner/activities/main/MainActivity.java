@@ -3,6 +3,8 @@ package com.project.horizoninteriordesigner.activities.main;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -126,6 +128,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+
+    /**
+     * Checks whether the device is connected to an active network.
+     */
+    public Boolean isOnline() {
+        ConnectivityManager manager = (ConnectivityManager) this.getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = manager.getActiveNetworkInfo();
+
+        return (netInfo != null && netInfo.isConnected() && netInfo.isAvailable());
     }
 
 
