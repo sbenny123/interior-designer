@@ -13,7 +13,7 @@ android {
     compileSdkVersion 30
 
     defaultConfig {
-        applicationId "com.project.horizoninteriordesigner"
+        applicationId "com.horizonid.horizoninteriordesigner"
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 2
