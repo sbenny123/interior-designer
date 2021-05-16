@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
+import com.project.horizoninteriordesigner.R;
+
 public class ErrorDialog {
     private Context context;
     private AlertDialog dialog;
@@ -15,16 +17,19 @@ public class ErrorDialog {
         this.context = context;
     }
 
-    public void createDialog(@Nullable String title, @Nullable String message) {
+    public void createDialog(int icon, @Nullable String title, @Nullable String message) {
 
+        int alertIcon = icon != 0 ? icon : R.drawable.ic_error;
         String alertTitle = title != null ? title : "Error";
         String alertMsg = message != null ? message :
                 "The application was unable to perform the action.";
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setCancelable(false);
+        builder.setIcon(alertIcon);
+        builder.setTitle(alertTitle);
         builder.setMessage(alertMsg);
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dismissDialog();

@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.ar.sceneform.rendering.Texture;
 import com.google.ar.sceneform.ux.TransformableNode;
 import com.google.firebase.firestore.DocumentReference;
@@ -254,8 +254,8 @@ public class MaterialSelectionFragment extends Fragment implements MaterialSelec
 
     private void showMainButtons() {
         View arViewFragmentView = getParentFragment().getView();
-        Button selectItemsBtn = arViewFragmentView.findViewById(R.id.btn_select_items);
-        Button takePhotoBtn = arViewFragmentView.findViewById(R.id.btn_take_photo);
+        FloatingActionButton selectItemsBtn = arViewFragmentView.findViewById(R.id.btn_select_items);
+        FloatingActionButton takePhotoBtn = arViewFragmentView.findViewById(R.id.btn_take_photo);
         TextView selectItemsText = arViewFragmentView.findViewById(R.id.text_select_items);
 
         selectItemsBtn.setVisibility(View.VISIBLE);

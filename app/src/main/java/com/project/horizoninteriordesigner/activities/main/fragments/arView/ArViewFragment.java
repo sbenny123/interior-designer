@@ -52,7 +52,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         BaseArFragment.OnTapArPlaneListener, BaseArFragment.OnSessionInitializationListener {
 
     private TransformableNode currentModel; // The current model that has been selected/manipulated.
-    private Boolean isAllFabsVisible; // True when the item option buttons are visible.
+    private Boolean canShowItemFabs; // True when the item option buttons should be visible.
     private static Boolean isShowingMaterials; // True when the material fragment is visible.
     private ItemViewModel itemViewModel; // View model containing the shared data amongst the fragments.
     private SceneformFragment sceneformFragment; // Inner fragment which utilises Sceneform to
@@ -269,6 +269,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
             setCurrentModel(selectedModel);
 
         } else {
+            canShowItemFabs = false;
             hideAllItemOptionBtns();
         }
     }
@@ -312,8 +313,8 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
         changeDesignFab.setOnClickListener(this);
         removeItemFab.setOnClickListener(this);
 
-        // Set to true so that the items can be hidden
-        isAllFabsVisible = true;
+        // Set to false so that the items can be hidden
+        canShowItemFabs = false;
 
         // Hide item options and main button.
         hideAllItemOptionBtns();
@@ -325,25 +326,25 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
      */
     private void toggleItemOptionVisibility() {
 
-        // If options visible, hide the options.
-        if (isAllFabsVisible) {
-            removeItemFab.hide();
-            changeDesignFab.hide();
-
-            removeItemText.setVisibility(View.GONE);
-            changeDesignText.setVisibility(View.GONE);
-
-            isAllFabsVisible = false;
-
-        // Assume options not visible then and show the options.
-        } else {
+        // Show item options
+        if (canShowItemFabs) {
             removeItemFab.show();
             changeDesignFab.show();
 
             removeItemText.setVisibility(View.VISIBLE);
             changeDesignText.setVisibility(View.VISIBLE);
 
-            isAllFabsVisible = true;
+            canShowItemFabs = false; // Already showing so should hide them if method called again.
+
+        // Assume options can't be visible and hide them.
+        } else {
+            removeItemFab.hide();
+            changeDesignFab.hide();
+
+            removeItemText.setVisibility(View.GONE);
+            changeDesignText.setVisibility(View.GONE);
+
+            canShowItemFabs = true; // Not shown so should show them if method called again.
         }
     }
 
@@ -370,6 +371,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
 
         toggleItemOptionVisibility();
     }
+
 
     /**
      *

@@ -1,5 +1,7 @@
 package com.project.horizoninteriordesigner.activities.main.fragments.itemSelection;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -30,6 +32,7 @@ import com.project.horizoninteriordesigner.models.Item;
 
 import java.util.ArrayList;
 
+import static android.content.Context.CONNECTIVITY_SERVICE;
 import static com.project.horizoninteriordesigner.activities.main.MainActivity.AR_VIEW_TAG;
 
 
@@ -129,7 +132,16 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
         loadingDialog.showDialog();
 
         Item selectedItem = itemArrayList.get(position);
-        buildModel(selectedItem);
+
+        // Build the model only if the device is connected to the internet.
+        // Else, return an error message.
+        if (isOnline()) {
+            buildModel(selectedItem);
+
+        } else {
+            setUpInternetErrorDialog();
+            loadingDialog.dismissDialog();
+        }
     }
 
 
@@ -142,7 +154,6 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
         Uri itemUri = Uri.parse(selectedItem.getModelUrl()); // model's url from Firebase storage as a Uri
         String itemId = selectedItem.getItemId();
-
 
         // Build .glb file as a renderable object.
         // Go to ArView fragment once complete.
@@ -164,12 +175,22 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
                     loadingDialog.dismissDialog();
 
-                    setUpErrorDialog();
+                    setUpModelErrorDialog();
 
                     return null;
                 });
     }
 
+
+    /**
+     * Checks whether the device is connected to an active network.
+     */
+    private Boolean isOnline() {
+        ConnectivityManager manager = (ConnectivityManager) getContext().getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = manager.getActiveNetworkInfo();
+
+        return (netInfo != null && netInfo.isConnected() && netInfo.isAvailable());
+    }
 
     /**
      * Retrieves item documents from Firestore and maps to Item model and adds to array list.
@@ -216,13 +237,23 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
 
     /**
-     * Sets up an alert dialog with the loading icon and given text.
-     * For use when waiting for the model to be ready for rendering.
+     * Sets up an error dialog when there is a problem with getting to model.
      */
-    private void setUpErrorDialog() {
+    private void setUpModelErrorDialog() {
         errorDialog = new ErrorDialog(getContext());
-        errorDialog.createDialog("Error loading model",
-                "The application could not load the selected model. Please try again later.");
+        errorDialog.createDialog(R.drawable.ic_error, "Could not get this model",
+                "The selected model could not be loaded. Please try again later.");
+        errorDialog.showDialog();
+    }
+
+    /**
+     * Sets up an error dialog when there is no internet connected.
+     * The internet is needed to load the model from Firebase storage.
+     */
+    private void setUpInternetErrorDialog() {
+        errorDialog = new ErrorDialog(getContext());
+        errorDialog.createDialog(R.drawable.ic_no_wifi, "No internet connection",
+                "Please turn on your internet connection and try again.");
         errorDialog.showDialog();
     }
 
@@ -232,7 +263,7 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
      */
     private void setUpLoadingDialog() {
         loadingDialog = new LoadingDialog(getContext());
-        loadingDialog.createDialog("Getting model");
+        loadingDialog.createDialog("Getting your item, please wait...");
     }
 
 

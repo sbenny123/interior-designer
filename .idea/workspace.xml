@@ -3,11 +3,11 @@
   <component name="AndroidConfiguredLogFilters">
     <filters>
       <filter>
-        <option name="logLevel" value="verbose" />
+        <option name="logLevel" value="info" />
         <option name="logMessagePattern" value="" />
         <option name="logTagIsRegex" value="false" />
-        <option name="logTagPattern" value="Viro" />
-        <option name="name" value="Main system" />
+        <option name="logTagPattern" value="Sceneform" />
+        <option name="name" value="Sceneform" />
         <option name="packageNamePattern" value="" />
       </filter>
     </filters>
@@ -52,21 +52,18 @@
   <component name="ChangeListManager">
     <list default="true" id="2e279938-3916-4ccf-933c-f31040dcd49d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/adapters/itemSelection/ItemViewPagerAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/adapters/itemSelection/ItemViewPagerAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/fragments/helpGuide/HelpGuideViewPagerFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/fragments/helpGuide/HelpGuideViewPagerFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/viewModels/ItemViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/viewModels/ItemViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout-land/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout-land/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout-land/fragment_ar_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout-land/fragment_ar_view.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_ar_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_ar_view.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_help_guide_slide_ar_view_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_help_guide_slide_ar_view_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_help_guide_slide_ar_view_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_help_guide_slide_ar_view_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_help_guide_slide_ar_view_3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_help_guide_slide_ar_view_3.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_help_guide_slide_end.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_help_guide_slide_end.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_help_guide_slide_item_select.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_help_guide_slide_item_select.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_help_guide_slide_start.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_help_guide_slide_start.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/models/test_chair1.glb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/models/test_sofa.glb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/models/test_sofa1.glb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/models/test_sofa2.glb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/models/test_wardrobe1.glb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/fragments/arView/ArViewFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/fragments/arView/ArViewFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/fragments/itemSelection/ItemSelectionFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/fragments/itemSelection/ItemSelectionFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/fragments/materialSelection/MaterialSelectionFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/activities/main/fragments/materialSelection/MaterialSelectionFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/dialogs/ErrorDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/project/horizoninteriordesigner/dialogs/ErrorDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,6 +101,12 @@
       </list>
     </option>
   </component>
+  <component name="GenerateSignedApkSettings">
+    <option name="EXPORT_PRIVATE_KEY" value="false" />
+    <option name="KEY_STORE_PATH" value="C:\Users\suzmi\Documents\University\COMP3000\upload-keystore.jks" />
+    <option name="KEY_ALIAS" value="key0" />
+    <option name="REMEMBER_PASSWORDS" value="true" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -119,11 +122,14 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_MARK_IGNORED_FILES_AS_EXCLUDED" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="BundleExportedModule" value="Horizon_Interior_Designer.app" />
     <property name="DEBUGGABLE_DEVICE" value="xiaomi-redmi_note_7-f72d99b" />
     <property name="DEBUGGABLE_PROCESS" value="com.example.horizoninteriordesigner" />
     <property name="DEBUGGER_ID" value="Auto" />
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="f72d99b" />
     <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-02-07T12:56:11.976Z" />
+    <property name="ExportApk.ApkPath" value="C:\Users\suzmi\Documents\GitHub\interior-designer\app" />
+    <property name="ExportApk.BuildVariants" value="release" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHOW_ALL_PROCESSES" value="true" />
@@ -131,14 +137,14 @@
     <property name="android-custom-viewC:/Users/suzmi/Documents/GitHub/interior-designer/sceneformsrc/sceneform/src/main/java/com/google/ar/sceneform/SceneView.java_SELECTED" value="SceneView" />
     <property name="android-custom-viewC:/Users/suzmi/Documents/GitHub/interior-designer/sceneformux/ux/src/main/java/com/google/ar/sceneform/ux/HandMotionView.java_SELECTED" value="HandMotionView" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/layout" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../University/COMP3000" />
     <property name="multi-representation-previewC:/Users/suzmi/Documents/GitHub/interior-designer/sceneformsrc/sceneform/src/main/java/com/google/ar/sceneform/ArSceneView.java_selected" value="Custom views" />
     <property name="multi-representation-previewC:/Users/suzmi/Documents/GitHub/interior-designer/sceneformsrc/sceneform/src/main/java/com/google/ar/sceneform/SceneView.java_selected" value="Custom views" />
     <property name="multi-representation-previewC:/Users/suzmi/Documents/GitHub/interior-designer/sceneformux/ux/src/main/java/com/google/ar/sceneform/ux/HandMotionView.java_selected" value="Custom views" />
     <property name="project.structure.last.edited" value="Build Variants" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.3362944" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="PsdUISettings">
     <option name="MODULE_TAB" value="Properties" />
@@ -429,35 +435,35 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="565" y="158" key="AndroidProcessChooserDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1614337098923" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1620851197598">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1621161063794">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1615306541139" />
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1620851197598" />
-    <state width="1493" height="389" key="GridCell.Tab.0.bottom" timestamp="1621027327778">
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621161063794" />
+    <state width="1493" height="538" key="GridCell.Tab.0.bottom" timestamp="1621158313347">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1491" height="144" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483936943" />
     <state width="1875" height="280" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612970359640" />
-    <state width="1493" height="389" key="GridCell.Tab.0.bottom/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621027327778" />
-    <state width="1493" height="389" key="GridCell.Tab.0.center" timestamp="1621027327778">
+    <state width="1493" height="538" key="GridCell.Tab.0.bottom/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621158313347" />
+    <state width="1493" height="538" key="GridCell.Tab.0.center" timestamp="1621158313346">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1491" height="144" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483936943" />
     <state width="1875" height="280" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612970359640" />
-    <state width="1493" height="389" key="GridCell.Tab.0.center/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621027327778" />
-    <state width="1493" height="389" key="GridCell.Tab.0.left" timestamp="1621027327777">
+    <state width="1493" height="538" key="GridCell.Tab.0.center/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621158313346" />
+    <state width="1493" height="538" key="GridCell.Tab.0.left" timestamp="1621158313346">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1491" height="144" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483936943" />
     <state width="1875" height="280" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612970359639" />
-    <state width="1493" height="389" key="GridCell.Tab.0.left/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621027327777" />
-    <state width="1493" height="389" key="GridCell.Tab.0.right" timestamp="1621027327778">
+    <state width="1493" height="538" key="GridCell.Tab.0.left/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621158313346" />
+    <state width="1493" height="538" key="GridCell.Tab.0.right" timestamp="1621158313347">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1491" height="144" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483936943" />
     <state width="1875" height="280" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1612970359640" />
-    <state width="1493" height="389" key="GridCell.Tab.0.right/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621027327778" />
+    <state width="1493" height="538" key="GridCell.Tab.0.right/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621158313347" />
     <state width="1491" height="481" key="GridCell.Tab.1.bottom" timestamp="1618483940406">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -474,15 +480,19 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1491" height="481" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1618483940406" />
-    <state x="277" y="57" key="SettingsEditor" timestamp="1620745794790">
+    <state x="277" y="57" key="SettingsEditor" timestamp="1621157011745">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="57" key="SettingsEditor/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1614885231782" />
-    <state x="277" y="57" key="SettingsEditor/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1620745794790" />
+    <state x="277" y="57" key="SettingsEditor/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621157011745" />
     <state x="584" y="190" key="chooseDestDirectoryDialog" timestamp="1612534419590">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="584" y="190" key="chooseDestDirectoryDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1612534419590" />
+    <state x="482" y="256" key="edit.logcat.filter.dialog.dimensions" timestamp="1621157214701">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="482" y="256" key="edit.logcat.filter.dialog.dimensions/0.0.1536.824/2400.0.1920.1040@0.0.1536.824" timestamp="1621157214701" />
     <state x="306" y="0" width="718" height="824" key="find.popup" timestamp="1615299390229">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
