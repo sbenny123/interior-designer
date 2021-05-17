@@ -11,16 +11,16 @@ The application uses Sceneform to configure and detect areas where items could b
   - Device must be compatible with ARCore. Please check [here](https://developers.google.com/ar/devices).
   
 # Third-party libraries used:
-- [koral--/-android-gif-drawable](https://github.com/koral--/android-gif-drawable)
-- [Sceneform v1.16.0](https://github.com/ThomasGorisse/sceneform-android-sdk) 
+- [koral--/-android-gif-drawable](https://github.com/koral--/android-gif-drawable) - Provides views and drawables to add animated GIFs to android applications.
+- [Sceneform v1.16.0](https://github.com/ThomasGorisse/sceneform-android-sdk) - This is a fork, maintained by Thomas Gorisse, of the Sceneform project. It is used to render 3D scenes and create augmented reality applications.
 
 
 # Third-part assets:
 3D Models credited to:
-•	Danny Bitman (Divan)
-•	Momo iStaging (Sofas, recliner chair, bench sofa)
-•	Rodrigo Moya (Brown sofa)
-•	Ryan Donaldson (Office chair)
+- Danny Bitman (Divan)
+- Momo iStaging (Sofas, recliner chair, bench sofa)
+- Rodrigo Moya (Brown sofa)
+- Ryan Donaldson (Office chair)
 
 Icons:
 Made by Freepik from www.flaticon.com
@@ -46,3 +46,7 @@ The sofa icon goes to the item selection page again where you can select another
 
 When an item is moved or selected, a button appears on the left which will include options to change the design of the model or delete it.
 
+# Change Item's design
+When the change design button is pressed, a view is shown with the designs that the items can be customised to.
+
+Select one to change its designa and press the back icon when you have finished.
