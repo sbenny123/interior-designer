@@ -29,5 +29,5 @@
     <string name="text_ar_view_3_title">Experiment</string>
     <string name="text_ar_view_3_info">Use the buttons to add more items, take a photo and edit or delete your item.</string>
     <string name="text_end_title">Ready?</string>
-    <string name="text_end_info">Press the button to start designing.</string>
+    <string name="text_end_info">Press next to start designing.</string>
 </resources>

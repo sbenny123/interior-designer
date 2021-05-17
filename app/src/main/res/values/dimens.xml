@@ -21,4 +21,6 @@
 
     <dimen name="textview_elevation">10dp</dimen>
     <dimen name="textview_marginStart">10dp</dimen>
+    <dimen name="guide_title_size">30sp</dimen>
+    <dimen name="guide_text_size">20sp</dimen>
 </resources>

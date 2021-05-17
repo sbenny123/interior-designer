@@ -216,7 +216,7 @@ public class ItemSelectionFragment extends Fragment implements ItemSelectionAdap
 
                                 itemArrayList.add(new Item(itemId, imageName, imageUrl, modelUrl));
                             }
-                            
+
                             // Create a grid view of the items.
                             adapter = new ItemSelectionAdapter(getActivity(), ItemSelectionFragment.this::onItemClick, itemArrayList);
                             recyclerView.setAdapter(adapter);

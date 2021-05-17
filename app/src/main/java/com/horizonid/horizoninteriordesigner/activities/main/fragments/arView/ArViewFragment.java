@@ -20,7 +20,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.ar.core.Anchor;
-import com.google.ar.core.Config;
 import com.google.ar.core.Frame;
 import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
@@ -222,8 +221,6 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
      */
     @Override
     public void onSessionInitialization(Session session) {
-        session.getConfig().setPlaneFindingMode(Config.PlaneFindingMode.HORIZONTAL);
-
         Scene scene = sceneformFragment.getArSceneView().getScene();
 
         scene.addOnPeekTouchListener((hitTestResult, motionEvent) ->
@@ -515,6 +512,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
            if (copyResult == PixelCopy.SUCCESS) {
                try {
                    saveBitmapToDisk(bitmap, filename);
+                   Toast.makeText(getContext(), "Successfully saved a photo!", Toast.LENGTH_LONG).show();
                } catch (IOException e) {
                    e.printStackTrace();
                    return;
@@ -522,7 +520,7 @@ public class ArViewFragment extends Fragment implements View.OnClickListener,
 
             } else {
                 Toast toast = Toast.makeText(getContext(),
-                        "Failed to copyPixels: " + copyResult, Toast.LENGTH_LONG);
+                        "Could not save a photo. Please try again later", Toast.LENGTH_LONG);
                 toast.show();
             }
             handlerThread.quitSafely();
